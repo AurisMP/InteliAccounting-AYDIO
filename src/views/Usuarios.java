@@ -97,11 +97,11 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel7.setText("Opcional -------------------------------------------------------------------");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 400, 30));
         jPanel1.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 220, 30));
-        jPanel1.add(textEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, 220, 30));
+        jPanel1.add(textEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 220, 30));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
         jLabel8.setText("Confirmar Contraseña :");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 160, 30));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, 160, 30));
 
         buscarButton.setText("Buscar");
         buscarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +197,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
         jLabel11.setText(" Email :");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 60, 30));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 60, 30));
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
         jLabel6.setText("Nombre Usuario :");
