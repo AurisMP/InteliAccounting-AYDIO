@@ -6,3 +6,4 @@
 {"loginUsr":"aURIS","passUsr":"Aurismatos1","nivelAccs":"Admin","nombreUs":"mATOS","emailUsr":"Desconocido","apellidosUsr":"WDWQ"}
 {"loginUsr":"AP","passUsr":"Jancarlos027","nivelAccs":"Normal","nombreUs":"Auris","emailUsr":"Desconocido","apellidosUsr":"Matos"}
 {"loginUsr":"ASAAS","passUsr":"jANCARLOS027","nivelAccs":"Normal","nombreUs":"SASASC","emailUsr":"Desconocido","apellidosUsr":"XZCSC"}
+{"loginUsr":"Auris","passUsr":"Jancarlos027","nivelAccs":"Normal","nombreUs":"Auris","emailUsr":"Desconocido","apellidosUsr":"Matos"}

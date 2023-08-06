@@ -27,6 +27,9 @@ public class Usuarios extends javax.swing.JFrame {
         setResizable(false);
         cargarDatosEnJTable();
         jLabel4.setVisible(false);
+        this.setLocationRelativeTo(null);
+       jLabel1.setText("<html><u>Usuario</u></html>");
+
     }
     
     @SuppressWarnings("unchecked")
@@ -64,7 +67,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         jTextField1.setText("jTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -123,9 +126,16 @@ public class Usuarios extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -365,6 +375,7 @@ private void filtrarTablaPorUsuario(String searchTerm) {
     }//GEN-LAST:event_opcNormalActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+
     }//GEN-LAST:event_formWindowClosing
 
 

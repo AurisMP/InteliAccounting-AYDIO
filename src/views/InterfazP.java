@@ -37,6 +37,7 @@ public class InterfazP extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         AgregarUsBTN = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,11 +60,16 @@ public class InterfazP extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(137, 137, 137)
                 .addComponent(jLabel1)
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/mantenimiento.png"))); // NOI18N
         jMenu1.setText("Mantenimientos");
+        jMenu1.setContentAreaFilled(false);
+        jMenu1.setFont(new java.awt.Font("Gentium Basic", 3, 14)); // NOI18N
 
+        AgregarUsBTN.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
+        AgregarUsBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/usuario2.png"))); // NOI18N
         AgregarUsBTN.setText("Usuarios");
         AgregarUsBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +77,11 @@ public class InterfazP extends javax.swing.JFrame {
             }
         });
         jMenu1.add(AgregarUsBTN);
+
+        jMenuItem1.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/desarrollo-de-producto.png"))); // NOI18N
+        jMenuItem1.setText("Catalogo de Cuentas");
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -101,6 +112,7 @@ public class InterfazP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
