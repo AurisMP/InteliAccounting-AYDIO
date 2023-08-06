@@ -5,10 +5,6 @@
 package views;
 
 import controlador.CrudArchivos;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -55,6 +51,7 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         textApellidos = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -65,33 +62,29 @@ public class Usuarios extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/LOGO IA.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 40, 398, 172));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 50, 390, 172));
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 16)); // NOI18N
-        jLabel3.setText("Apellidos");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 80, 70));
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel3.setText("Apellidos :");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 80, 30));
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 16)); // NOI18N
-        jLabel4.setText("Nombre Usuario");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 130, 50));
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel4.setText("Nombre Usuario :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 120, 30));
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 16)); // NOI18N
-        jLabel5.setText("Nombre ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 130, 70));
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel5.setText("Nombre :");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 70, 30));
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 16)); // NOI18N
-        jLabel7.setText("Email");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 160, 70));
-
-        txtNom.setText("jTextField2");
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel7.setText("Opcional -------------------------------------------------------------------");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 400, 30));
         jPanel1.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 220, 30));
+        jPanel1.add(textEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, 220, 30));
 
-        textEmail.setText("jTextField2");
-        jPanel1.add(textEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 220, 30));
-
-        jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 16)); // NOI18N
-        jLabel8.setText("Confirmar Contraseña");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 200, 70));
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel8.setText("Confirmar Contraseña :");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 160, 30));
 
         buscarButton.setText("Buscar");
         buscarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,9 +92,7 @@ public class Usuarios extends javax.swing.JFrame {
                 buscarButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(buscarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 80, 30));
-
-        textLoginUsr.setText("jTextField2");
+        jPanel1.add(buscarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 100, 30));
         jPanel1.add(textLoginUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 220, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -137,7 +128,7 @@ public class Usuarios extends javax.swing.JFrame {
                 btAnadirActionPerformed(evt);
             }
         });
-        jPanel1.add(btAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, 30));
+        jPanel1.add(btAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 90, 30));
 
         buscarButton2.setText("Eliminar");
         buscarButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +136,7 @@ public class Usuarios extends javax.swing.JFrame {
                 buscarButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(buscarButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, -1, 30));
+        jPanel1.add(buscarButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 90, 30));
 
         buscarButton4.setText("Modificar");
         buscarButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -153,30 +144,40 @@ public class Usuarios extends javax.swing.JFrame {
                 buscarButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(buscarButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 80, 30));
-
-        textPass.setText("jPasswordField1");
+        jPanel1.add(buscarButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 100, 30));
         jPanel1.add(textPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 220, 30));
 
         buttonGroup1.add(opcNormal);
         opcNormal.setText("Normal");
-        jPanel1.add(opcNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, -1, -1));
+        opcNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcNormalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(opcNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, -1, 30));
 
         buttonGroup1.add(opcAdmin);
         opcAdmin.setText("Admin");
-        jPanel1.add(opcAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, -1, -1));
+        opcAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcAdminActionPerformed(evt);
+            }
+        });
+        jPanel1.add(opcAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 70, 30));
         jPanel1.add(textPass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 220, 30));
 
-        jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 16)); // NOI18N
-        jLabel9.setText("Contraseña");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 90, 70));
+        jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel9.setText("Contraseña :");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 90, 30));
 
-        jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 16)); // NOI18N
-        jLabel10.setText("Tipo de Usuario");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 130, 70));
-
-        textApellidos.setText("jTextField2");
+        jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel10.setText("Tipo de Acceso :");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, 110, 30));
         jPanel1.add(textApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 220, 30));
+
+        jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel11.setText(" Email :");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 60, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,26 +199,32 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void btAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnadirActionPerformed
-                String opcRadio1="";
+        String opcRadio1="";
+        boolean val=false;
+        
         
         //Funciones del nivel de acceso
         if(opcNormal.isSelected()){
             opcRadio1=opcNormal.getText();
+            val=true;
         }
         else if (opcAdmin.isSelected()){
             opcRadio1=opcAdmin.getText();
+            val=true;
         }
         
-        
-        if(textLoginUsr.getText().isBlank() || txtNom.getText().isBlank() || textEmail.getText().isBlank() || textPass.getPassword().length == 0 || textPass2.getPassword().length == 0 || opcRadio1.isBlank() ){
-            JOptionPane.showMessageDialog(null,"Has dejado un campo vacio :o");
-            
-        }
         String loginUsr = textLoginUsr.getText().trim();
-        
         String nombreUsr = txtNom.getText().trim();
         String apellidos = textApellidos.getText().trim();
         String email ="";
+        
+        String Password="a" ;  
+        
+        char[] Password1 =textPass.getPassword();
+        char[] Password2=textPass2.getPassword();
+        
+        boolean tieneMayus=false;
+        boolean tieneDig=false;
         
         if(textEmail.getText().isBlank()){
             email="Desconocido";
@@ -226,41 +233,42 @@ public class Usuarios extends javax.swing.JFrame {
              email = textEmail.getText();
         }
         
-       
+        if(textLoginUsr.getText().isBlank() || txtNom.getText().isBlank() || textPass.getPassword().length == 0 || textPass2.getPassword().length == 0 || opcRadio1.isBlank() ){
+            JOptionPane.showMessageDialog(null,"Has dejado un campo vacio :o");
+            val=false;
+        }
         
-        
-        
-               
-        char[] Password1 =textPass.getPassword();
-        String Password="a" ;
-        char[] Password2=textPass2.getPassword();
-        boolean tieneMayus=false;
-        boolean tieneDig=false;
-        
-        /*Con este for recorremos Password para saber si tiene alguna mayuscula ,
-        si tiene la variable tieneMayus sera verdadera o true*/
-        for(int a=0; a<Password1.length;a++){
-            char letra=Password1[a];
-            if(Character.isUpperCase(letra)){
-                tieneMayus=true;
-                break;
+      
+        if(val==true){
+            
+            /*Con este for recorremos Password para saber si tiene alguna mayuscula ,
+            si tiene la variable tieneMayus sera verdadera o true*/
+            for(int a=0; a<Password1.length;a++){
+                char letra=Password1[a];
+                if(Character.isUpperCase(letra)){
+                    tieneMayus=true;
+                    break;
+                }
             }
-        }
         
-        /*Con este for recorremos Password para saber si tiene algun Digito ,
-        si tiene, la variable tieneDig sera verdadera o true*/
-        for(int a=0; a<Password1.length;a++){
-            char letra=Password1[a];
-            if(Character.isDigit(letra)){
-                tieneDig=true;
-                break;
+            /*Con este for recorremos Password para saber si tiene algun Digito ,
+            si tiene, la variable tieneDig sera verdadera o true*/
+            for(int a=0; a<Password1.length;a++){
+                char letra=Password1[a];
+                if(Character.isDigit(letra)){
+                    tieneDig=true;
+                    break;
+                }
             }
-        }
         
         
-        if(Password1.length < 8 || tieneMayus == false || tieneDig == false){
-            JOptionPane.showMessageDialog(null,"La constrasena debe tener al menos 8 caracteeres, una mayuscula y un numero");
-        }
+            if(Password1.length < 8 || tieneMayus == false || tieneDig == false){
+                JOptionPane.showMessageDialog(null,"La constrasena debe tener al menos 8 caracteeres, una mayuscula y un numero");
+                val=false;
+            }
+         }
+        
+        
         
         //Confirmar contrasena NOTA: Las contrasena son arreglos de caracteres no pueden ser string por tema de seguridad
         
@@ -272,18 +280,23 @@ public class Usuarios extends javax.swing.JFrame {
             }
         else{
             JOptionPane.showMessageDialog(null ,"Contrasena invalida");
+            val=false;
         }
         
-        modelo.Usuarios usuario = new modelo.Usuarios();
-        usuario.setLoginUsr(loginUsr);
-        usuario.setNombreUs(nombreUsr);
-        usuario.setApellidosUsr(apellidos);
-        usuario.setNivelAccs(opcRadio1);
-        usuario.setEmailUsr(email);
-        usuario.setPassUsr(Password);
-
-    // Guardar el usuario en el archivo de texto
-    CrudArchivos.guardarUsuarioEnArchivo(usuario);
+         modelo.Usuarios usuario = new modelo.Usuarios();
+         
+        if(val==true){
+            usuario.setLoginUsr(loginUsr);
+            usuario.setNombreUs(nombreUsr);
+            usuario.setApellidosUsr(apellidos);
+            usuario.setNivelAccs(opcRadio1);
+            usuario.setEmailUsr(email);
+            usuario.setPassUsr(Password);
+            
+            // Guardar el usuario en el archivo de texto
+            CrudArchivos.guardarUsuarioEnArchivo(usuario);
+        }
+    
         
     }                                        
 
@@ -302,6 +315,14 @@ public class Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarButton4ActionPerformed
 
+    private void opcAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opcAdminActionPerformed
+
+    private void opcNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcNormalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opcNormalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnadir;
@@ -312,6 +333,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

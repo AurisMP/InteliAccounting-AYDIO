@@ -2,4 +2,3 @@
 {"loginUsr":"AM","passUsr":"1234","nivelAccs":"Admin","nombreUs":"Auris","emailUsr":"Desconocido","apellidosUsr":"Matos Perez"}
 {"loginUsr":"Ezq","passUsr":"1234","nivelAccs":"Admin","nombreUs":"Ezequiel","emailUsr":"Desconocido","apellidosUsr":"La para"}
 {"loginUsr":"AM","passUsr":"1234","nivelAccs":"Admin","nombreUs":"ADRIAN","emailUsr":"Desconocido","apellidosUsr":""}
-{"loginUsr":"EZEQUIEL","passUsr":"1234","nivelAccs":"","nombreUs":"EZEQUIEL","emailUsr":"Desconocido","apellidosUsr":"EL MAS DURO"}

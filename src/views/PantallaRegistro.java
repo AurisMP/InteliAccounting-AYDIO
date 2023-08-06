@@ -293,7 +293,7 @@ public class PantallaRegistro extends javax.swing.JFrame {
         usuario.setPassUsr(Password);
 
     // Guardar el usuario en el archivo de texto
-    CrudArchivos.guardarUsuarioEnArchivo(usuario);
+    //CrudArchivos.guardarUsuarioEnArchivo(usuario);
         
     }//GEN-LAST:event_btAnadirActionPerformed
 
