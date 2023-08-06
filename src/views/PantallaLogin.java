@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import static controlador.InicioSesion.iniciarSesion;
 
 
 /**
@@ -230,7 +229,7 @@ public class PantallaLogin extends javax.swing.JFrame {
             val = false;
         }
         
-        if(val){
+        /*if(val){
             if(iniciarSesion(usuario,contra)){
                 InterfazP ip = new InterfazP();
                 dispose();
@@ -240,7 +239,7 @@ public class PantallaLogin extends javax.swing.JFrame {
             }
         
         }
-        
+        */
   
 
     }//GEN-LAST:event_btIniSesActionPerformed

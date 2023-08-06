@@ -346,7 +346,7 @@ private void filtrarTablaPorUsuario(String searchTerm) {
             usuario.setPassUsr(Password);
             
             // Guardar el usuario en el archivo de texto
-            CrudArchivos.guardarUsuarioEnArchivo(usuario);
+            
         }
         cargarDatosEnJTable();
 
