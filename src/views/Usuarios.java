@@ -4,9 +4,16 @@
  */
 package views;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import controlador.CrudArchivos;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -18,7 +25,8 @@ public class Usuarios extends javax.swing.JFrame {
         initComponents();
         setTitle("InteliAccounting   Usuarios");
         setResizable(false);
-
+        cargarDatosEnJTable();
+        jLabel4.setVisible(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -42,8 +50,8 @@ public class Usuarios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btAnadir = new javax.swing.JButton();
-        buscarButton2 = new javax.swing.JButton();
-        buscarButton4 = new javax.swing.JButton();
+        eliminarBtn = new javax.swing.JButton();
+        modifybtn = new javax.swing.JButton();
         textPass = new javax.swing.JPasswordField();
         opcNormal = new javax.swing.JRadioButton();
         opcAdmin = new javax.swing.JRadioButton();
@@ -52,10 +60,16 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         textApellidos = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(203, 229, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -69,8 +83,8 @@ public class Usuarios extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
-        jLabel4.setText("Nombre Usuario :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 120, 30));
+        jLabel4.setText("Buscar por");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
         jLabel5.setText("Nombre :");
@@ -107,7 +121,7 @@ public class Usuarios extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -115,10 +129,6 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 970, 270));
 
@@ -130,21 +140,21 @@ public class Usuarios extends javax.swing.JFrame {
         });
         jPanel1.add(btAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 90, 30));
 
-        buscarButton2.setText("Eliminar");
-        buscarButton2.addActionListener(new java.awt.event.ActionListener() {
+        eliminarBtn.setText("Eliminar");
+        eliminarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButton2ActionPerformed(evt);
+                eliminarBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(buscarButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 90, 30));
+        jPanel1.add(eliminarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 90, 30));
 
-        buscarButton4.setText("Modificar");
-        buscarButton4.addActionListener(new java.awt.event.ActionListener() {
+        modifybtn.setText("Modificar");
+        modifybtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButton4ActionPerformed(evt);
+                modifybtnActionPerformed(evt);
             }
         });
-        jPanel1.add(buscarButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 100, 30));
+        jPanel1.add(modifybtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 100, 30));
         jPanel1.add(textPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 220, 30));
 
         buttonGroup1.add(opcNormal);
@@ -179,21 +189,53 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel11.setText(" Email :");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 60, 30));
 
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
+        jLabel6.setText("Nombre Usuario :");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 120, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
+    
+    txtNom.setEnabled(false);
+    textApellidos.setEnabled(false);
+    textPass.setEnabled(false);
+    textPass2.setEnabled(false);
+    opcNormal.setEnabled(false);
+    opcAdmin.setEnabled(false);
+    textEmail.setEnabled(false);
+    btAnadir.setEnabled(false);
+    jLabel4.setVisible(true);
+    final String textoPredeterminado = "Buscar por Usuario";
+    String searchTerm = textLoginUsr.getText().trim();
+    
+    if (searchTerm.isEmpty() || searchTerm.equals(textoPredeterminado)) {
+        cargarDatosEnJTable(); // Mostrar todos los datos si el campo de búsqueda está vacío o contiene el texto predeterminado
+    } else {
+        filtrarTablaPorUsuario(searchTerm);
+    }
+}
+
+private void filtrarTablaPorUsuario(String searchTerm) {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+    jTable1.setRowSorter(sorter);
+
+    RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchTerm, 2); // Filtrar por columna de nombre de usuario (índice 2)
+    sorter.setRowFilter(rowFilter);
+
 
 
     }//GEN-LAST:event_buscarButtonActionPerformed
@@ -296,24 +338,23 @@ public class Usuarios extends javax.swing.JFrame {
             // Guardar el usuario en el archivo de texto
             CrudArchivos.guardarUsuarioEnArchivo(usuario);
         }
-    
-        
-    }                                        
+        cargarDatosEnJTable();
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
-    dispose(); // Cierra la ventana secundaria sin afectar la ventana principal
+        
+                                           
+
                                       
 
 
     }//GEN-LAST:event_btAnadirActionPerformed
 
-    private void buscarButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarButton2ActionPerformed
+    private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
+       
+    }//GEN-LAST:event_eliminarBtnActionPerformed
 
-    private void buscarButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButton4ActionPerformed
+    private void modifybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifybtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscarButton4ActionPerformed
+    }//GEN-LAST:event_modifybtnActionPerformed
 
     private void opcAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcAdminActionPerformed
         // TODO add your handling code here:
@@ -323,20 +364,51 @@ public class Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_opcNormalActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    }//GEN-LAST:event_formWindowClosing
 
+
+private void cargarDatosEnJTable() {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); // Limpiar filas existentes
+
+    try {
+        BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"));
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(line);
+
+            String login = (String) jsonObject.get("loginUsr");
+            String contraseña = (String) jsonObject.get("passUsr");
+            String nivelAcceso = (String) jsonObject.get("nivelAccs");
+            String nombre = (String) jsonObject.get("nombreUs");
+            String email = (String) jsonObject.get("emailUsr");
+            String apellidos = (String) jsonObject.get("apellidosUsr");
+
+            model.addRow(new Object[]{nombre, apellidos, login, contraseña, email, nivelAcceso});
+        }
+
+        br.close();
+
+        model.fireTableDataChanged(); // Notificar a la tabla que los datos han cambiado
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnadir;
     private javax.swing.JButton buscarButton;
-    private javax.swing.JButton buscarButton2;
-    private javax.swing.JButton buscarButton4;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton eliminarBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -344,6 +416,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton modifybtn;
     private javax.swing.JRadioButton opcAdmin;
     private javax.swing.JRadioButton opcNormal;
     private javax.swing.JTextField textApellidos;
