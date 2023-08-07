@@ -5,15 +5,12 @@
  */
 package views;
 
-import modelo.Usuarios;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
 import javax.swing.JOptionPane;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Color;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 
 /**
  *
@@ -220,42 +217,30 @@ public class PantallaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btIniSesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIniSesActionPerformed
+        boolean val =true;
         String usuario = textName.getText();
-        String contrasena = textPass.getText();
+        char[] contrasena = textPass.getPassword();
+        String contra = new String(contrasena);
+        
+        
 
-        if (usuario.isBlank() || contrasena.isBlank()) {
+        if (usuario.isBlank() || contra.isBlank()) {
             JOptionPane.showMessageDialog(null, "Debes ingresar un usuario y contraseña.");
+            val = false;
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        try ( BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"))) {
-            String line;
-
-            boolean usuarioEncontrado = false;
-
-            while ((line = reader.readLine()) != null) {
-
-                Usuarios existeUsr = objectMapper.readValue(line, Usuarios.class);
-                if (existeUsr.getLoginUsr().equals(usuario) && existeUsr.getPassUsr().equals(contrasena)) {
-
-                    usuarioEncontrado = true;
-                    break;
-                }
+        
+        /*if(val){
+            if(iniciarSesion(usuario,contra)){
+                InterfazP ip = new InterfazP();
+                dispose();
+                ip.setVisible(true);
+                
+            
             }
-
-            if (usuarioEncontrado) {
-                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso.");
-                InterfazP IP = new InterfazP();
-                IP.setVisible(true);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Credenciales inválidas. Inténtalo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
+        
         }
-
+        */
+  
 
     }//GEN-LAST:event_btIniSesActionPerformed
 

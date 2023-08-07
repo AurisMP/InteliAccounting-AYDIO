@@ -1,38 +1,60 @@
 package controlador;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.swing.JOptionPane;
-import modelo.Usuarios;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+
 
 public class CrudArchivos {
-    // ...
-
     
-    public static void guardarUsuarioEnArchivo(Usuarios usuario) {
-        // Convertir el objeto Usuario a formato JSON
-        ObjectMapper objectMapper = new ObjectMapper();
-        String usuarioJson;
-        try {
-            usuarioJson = objectMapper.writeValueAsString(usuario);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al convertir el objeto Usuario a JSON.");
-            e.printStackTrace();
-            return;
-        }
 
-        // Guardar el JSON en un archivo de texto
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true))) {
-            writer.write(usuarioJson + "\n");
-            writer.close();
-            JOptionPane.showMessageDialog(null, "Registro guardado exitosamente.");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al guardar el registro en el archivo de texto.");
+    public static void crearDBUsuarios(){
+        File crearArc = new File("usuarios.txt");
+        
+        try{
+            
+            if (crearArc.createNewFile()){
+                System.out.println("La DB de usuarios crear con exito :D");
+                
+            }
+            else{
+                System.out.println("La DB de usuarios ya EXISTE D:");
+            }
+            
+            
+        }catch(IOException e){
+            System.out.println("Ocurrio un arror al crear la base de datos usuarios :c");
             e.printStackTrace();
         }
     }
+    
+    
+    public static void guardarUsuarios(String[] crear) throws FileNotFoundException, UnsupportedEncodingException {
+        File Arc = new File("Usuarios.txt");
+        BufferedWriter escribir = null;
+        escribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Arc,
+                true), "utf-8"));
 
+        try {
+            if (!Arc.exists()) {
+                Arc.createNewFile();
+            }
+            for (int x = 0; x < crear.length; x++) {
+                escribir.write(crear[x]);
+                if (x != crear.length - 1) {
+                    escribir.write(";");
+                } else {
+                    escribir.write("\n");
+                }
+            }
+            escribir.close();
+        } catch (IOException ex) {
+            System.out.println("Error al grabar Archivo " + ex);
+        }
 
+    }
+    
 }
