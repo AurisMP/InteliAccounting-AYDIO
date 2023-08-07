@@ -1,9 +1,0 @@
-{"loginUsr":"PHP","passUsr":"1234567A","nivelAccs":"Admin","nombreUs":"Adrian","emailUsr":"Desconocido","apellidosUsr":"Mejia Castro"}
-{"loginUsr":"AM","passUsr":"1234","nivelAccs":"Admin","nombreUs":"Auris","emailUsr":"Desconocido","apellidosUsr":"Matos Perez"}
-{"loginUsr":"Ezq","passUsr":"1234","nivelAccs":"Admin","nombreUs":"Ezequiel","emailUsr":"Desconocido","apellidosUsr":"La para"}
-{"loginUsr":"AM","passUsr":"1234","nivelAccs":"Admin","nombreUs":"ADRIAN","emailUsr":"Desconocido","apellidosUsr":""}
-{"loginUsr":"Am","passUsr":"Jancarlos027","nivelAccs":"Admin","nombreUs":"AURIS","emailUsr":"Desconocido","apellidosUsr":"MATOS"}
-{"loginUsr":"aURIS","passUsr":"Aurismatos1","nivelAccs":"Admin","nombreUs":"mATOS","emailUsr":"Desconocido","apellidosUsr":"WDWQ"}
-{"loginUsr":"AP","passUsr":"Jancarlos027","nivelAccs":"Normal","nombreUs":"Auris","emailUsr":"Desconocido","apellidosUsr":"Matos"}
-{"loginUsr":"ASAAS","passUsr":"jANCARLOS027","nivelAccs":"Normal","nombreUs":"SASASC","emailUsr":"Desconocido","apellidosUsr":"XZCSC"}
-{"loginUsr":"Auris","passUsr":"Jancarlos027","nivelAccs":"Normal","nombreUs":"Auris","emailUsr":"Desconocido","apellidosUsr":"Matos"}

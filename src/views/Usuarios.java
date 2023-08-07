@@ -6,10 +6,14 @@ package views;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import controlador.CrudArchivos;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Arrays;
+import static controlador.CrudArchivos.guardarUsuarios;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +41,7 @@ public class Usuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        tipoAcc = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -167,7 +171,7 @@ public class Usuarios extends javax.swing.JFrame {
         jPanel1.add(modifybtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 100, 30));
         jPanel1.add(textPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 220, 30));
 
-        buttonGroup1.add(opcNormal);
+        tipoAcc.add(opcNormal);
         opcNormal.setText("Normal");
         opcNormal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,7 +180,7 @@ public class Usuarios extends javax.swing.JFrame {
         });
         jPanel1.add(opcNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, -1, 30));
 
-        buttonGroup1.add(opcAdmin);
+        tipoAcc.add(opcAdmin);
         opcAdmin.setText("Admin");
         opcAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,6 +242,7 @@ public class Usuarios extends javax.swing.JFrame {
     }
 }
 
+    
 private void filtrarTablaPorUsuario(String searchTerm) {
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
     TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
@@ -248,116 +253,168 @@ private void filtrarTablaPorUsuario(String searchTerm) {
 
 
 
+    
     }//GEN-LAST:event_buscarButtonActionPerformed
+    public void limpiar(){
+        
+        /*
+            Borra todos los campos y radios atraves de set
+        */
+        
+        textLoginUsr.setText(null);
+        txtNom.setText(null);
+        textApellidos.setText(null);
+        textPass.setText(null);
+        textPass2.setText(null);
+        textEmail.setText(null);
+        tipoAcc.clearSelection();
+    }
 
     private void btAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnadirActionPerformed
-        String opcRadio1="";
-        boolean val=false;
+        String email="";
+        boolean val = false;
+        /*
+            Las contrasena se guardan en un arreglo de caracteres char[]
+            asi que convertimos los valores de todo el arreglo a String de esta forma 
+        */
         
+        String pass1 = new String(textPass.getPassword());
+        String pass2 = new String(textPass2.getPassword());
         
-        //Funciones del nivel de acceso
+        /*
+            De esta forma guardamo el tipo de acceso en una variable dependiendo de que se elija 
+        */
+        
+        String tipoAcc="";        
         if(opcNormal.isSelected()){
-            opcRadio1=opcNormal.getText();
-            val=true;
+            
+            tipoAcc = opcNormal.getText();
         }
-        else if (opcAdmin.isSelected()){
-            opcRadio1=opcAdmin.getText();
-            val=true;
-        }
+        else if(opcAdmin.isSelected()){
         
-        String loginUsr = textLoginUsr.getText().trim();
-        String nombreUsr = txtNom.getText().trim();
-        String apellidos = textApellidos.getText().trim();
-        String email ="";
-        
-        String Password="a" ;  
-        
-        char[] Password1 =textPass.getPassword();
-        char[] Password2=textPass2.getPassword();
-        
-        boolean tieneMayus=false;
-        boolean tieneDig=false;
-        
-        if(textEmail.getText().isBlank()){
-            email="Desconocido";
-        }
-        else {
-             email = textEmail.getText();
+            tipoAcc=opcAdmin.getText();
         }
         
-        if(textLoginUsr.getText().isBlank() || txtNom.getText().isBlank() || textPass.getPassword().length == 0 || textPass2.getPassword().length == 0 || opcRadio1.isBlank() ){
-            JOptionPane.showMessageDialog(null,"Has dejado un campo vacio :o");
+        /*
+            Aqui guardamos los valores en un arreglo
+        */
+        
+        String[] listaUsr = new String[6];
+        listaUsr[0] = textLoginUsr.getText().trim();
+        listaUsr[1] = pass1;
+        listaUsr[2] = pass2;
+        listaUsr[3] = txtNom.getText().trim();
+        listaUsr[4] = textApellidos.getText().trim();
+        listaUsr[5] = tipoAcc;
+        
+        
+        /*
+            Aqui confirmamos si un campo esta vacio si lo esta lanzara un jopcionpane 
+            y la variable val sera false
+        */
+        
+        for (int i = 0; i < listaUsr.length; i++) {
+            
+            if(listaUsr[i].isBlank()){
+                
+                JOptionPane.showMessageDialog(null, "Dejo un campo vacio :c");
+                
+                val=false;
+                limpiar();
+                break;
+            }
+            else{
+                val=true;
+            }
+            
+            
+        }
+        String contra="";
+        if(!pass1.equals(pass2 )&& val){
+            
+            JOptionPane.showMessageDialog(null, "Contrasena no coinciden >:v");
             val=false;
         }
-        
-      
-        if(val==true){
-            
-            /*Con este for recorremos Password para saber si tiene alguna mayuscula ,
-            si tiene la variable tieneMayus sera verdadera o true*/
-            for(int a=0; a<Password1.length;a++){
-                char letra=Password1[a];
-                if(Character.isUpperCase(letra)){
-                    tieneMayus=true;
-                    break;
-                }
-            }
-        
-            /*Con este for recorremos Password para saber si tiene algun Digito ,
-            si tiene, la variable tieneDig sera verdadera o true*/
-            for(int a=0; a<Password1.length;a++){
-                char letra=Password1[a];
-                if(Character.isDigit(letra)){
-                    tieneDig=true;
-                    break;
-                }
-            }
-        
-        
-            if(Password1.length < 8 || tieneMayus == false || tieneDig == false){
-                JOptionPane.showMessageDialog(null,"La constrasena debe tener al menos 8 caracteeres, una mayuscula y un numero");
-                val=false;
-            }
-         }
-        
-        
-        
-        //Confirmar contrasena NOTA: Las contrasena son arreglos de caracteres no pueden ser string por tema de seguridad
-        
-        if (Arrays.equals(Password1, Password2)) {
-            Password = new String(Password2);
+        else{
            
             
-            
+            contra=pass1;
+            boolean tieneM=false;
+            boolean tieneD=false;
+           
+            for (int i = 0; i < contra.length(); i++) {
+                
+                if(Character.isUpperCase(contra.charAt(i))){
+                    
+                    tieneM=true;
+                    val=true;
+                    break;
+                }
+                
             }
-        else{
-            JOptionPane.showMessageDialog(null ,"Contrasena invalida");
-            val=false;
+            
+            for (int i = 0; i < contra.length(); i++) {
+                
+                if(Character.isDigit(contra.charAt(i))){
+                    
+                    tieneD=true;
+                    val=true;
+                    break;
+                }
+                
+            }
+            
+            
+            
+            
+            
+            if((contra.length()< 8 || tieneM == false || tieneD == false) && val==true){
+                
+                JOptionPane.showMessageDialog(null,"La contrasena debe tener como minimo 8 caracteres , una mayuscula y un numero como minimo :c");
+                limpiar();
+                val=false;
+                
+            }
+            
+            if(textEmail.getText().isBlank()){
+                email="Desconocido";
+            }
+            else{
+                email=textEmail.getText();
+            }
+          
+    }   
+        if(val){
+           
+            String[] crudUsr = new String[6];
+            crudUsr[0]=textLoginUsr.getText();
+            crudUsr[1]=contra;
+            crudUsr[2]=txtNom.getText();
+            crudUsr[3]=textApellidos.getText();
+            crudUsr[4]=tipoAcc;
+            crudUsr[5]=email;
+            
+            for (int i = 0; i < crudUsr.length; i++) {
+                System.out.println(crudUsr[i]);
+                
+            }
+            
+            JOptionPane.showMessageDialog(null,"El usuario ha sido creado exitosamente :D ");
+            limpiar();
+            
+            try {
+                guardarUsuarios(crudUsr);
+                
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
-         modelo.Usuarios usuario = new modelo.Usuarios();
-         
-        if(val==true){
-            usuario.setLoginUsr(loginUsr);
-            usuario.setNombreUs(nombreUsr);
-            usuario.setApellidosUsr(apellidos);
-            usuario.setNivelAccs(opcRadio1);
-            usuario.setEmailUsr(email);
-            usuario.setPassUsr(Password);
-            
-            // Guardar el usuario en el archivo de texto
-            
-        }
-        cargarDatosEnJTable();
-
         
-                                           
-
-                                      
-
-
     }//GEN-LAST:event_btAnadirActionPerformed
-
+    
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
        
     }//GEN-LAST:event_eliminarBtnActionPerformed
@@ -410,7 +467,6 @@ private void cargarDatosEnJTable() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnadir;
     private javax.swing.JButton buscarButton;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton eliminarBtn;
     private javax.swing.JLabel jLabel1;
@@ -435,6 +491,7 @@ private void cargarDatosEnJTable() {
     private javax.swing.JTextField textLoginUsr;
     private javax.swing.JPasswordField textPass;
     private javax.swing.JPasswordField textPass2;
+    private javax.swing.ButtonGroup tipoAcc;
     private javax.swing.JTextField txtNom;
     // End of variables declaration//GEN-END:variables
 

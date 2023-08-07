@@ -1,6 +1,7 @@
 package controlador;
 
 import views.PantallaLogin;
+import views.Usuarios;
 
 
 
@@ -8,8 +9,8 @@ public class Main {
     
     public static void main(String[] args) {
         
-        PantallaLogin pt = new PantallaLogin();
-        pt.setVisible(true);
+       Usuarios u = new Usuarios();
+       u.setVisible(true);
              
           
         
