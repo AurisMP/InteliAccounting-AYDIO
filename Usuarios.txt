@@ -1,1 +1,10 @@
 PHP;1234567A;Adrian;Mejia;Admin;Desconocido
+Auris;Jancarlos027;Auris;Matos;Admin;Desconocido
+Prueba;Jancarlos027;Juan;Perez;Normal;Desconocido
+Prueba;Jancarlos027;Juan;Rod;Normal;Desconocido
+Auris;Jancarlos027;Auirs;Matos;Admin;Desconocido
+Auris;Jancarlos027;Auris;matos;Normal;Desconocido
+sdfsdfsdffds;12345678J;fsdfsd;fsdfsdfsds;Normal;Desconocido
+PHP;J12345678;sadasd;asdasd;Normal;Desconocido
+Auris;1234567A;dadasd;dasdasd;Normal;Desconocido
+Auris;1234567A;asdasd;dasdsa;Normal;Desconocido
