@@ -4,23 +4,19 @@
  */
 package views;
 
+import static controlador.CrudArchivos.eliminarUsuario;
 import static controlador.CrudArchivos.guardarUsuarios;
 import static controlador.CrudArchivos.buscarUsuarios;
 import static controlador.CrudArchivos.cantidadRegistros;
 import java.util.List;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
-import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -511,7 +507,15 @@ public class Usuarios extends javax.swing.JFrame {
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
         jLabel4.setVisible(false);
         jLabel12.setVisible(false);
-
+    
+    // Mostrar cuadro de diálogo para confirmar la eliminación
+    int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este usuario?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+    
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        eliminarUsuario(textLoginUsr.getText());
+        cargarDatosDesdeArchivo();
+        limpiar();
+    }
     }//GEN-LAST:event_eliminarBtnActionPerformed
 
     private void modifybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifybtnActionPerformed
@@ -608,7 +612,7 @@ public class Usuarios extends javax.swing.JFrame {
             }
         JOptionPane.showMessageDialog(null, "El usuario ha sido creado exitosamente");
         limpiar();
-        cargarDatosDesdeArchivo();
+        
     }
         
         
@@ -675,7 +679,7 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void filtrarDatos(String filtroUsuario, String filtroNombre, String filtroTipoAcceso) {
      bloquearCampos(true); // Bloquear los campos al realizar el filtrado
-
+     
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
     TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
     jTable1.setRowSorter(sorter);
@@ -701,7 +705,9 @@ public class Usuarios extends javax.swing.JFrame {
         bloquearCampos(false);
     } else {
         bloquearCampos(true);
+        
     }
+        cargarDatosDesdeArchivo();
     }
     
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                    

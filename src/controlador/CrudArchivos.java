@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CrudArchivos {
@@ -215,5 +216,46 @@ public class CrudArchivos {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        
+        
+    }
+    
+    
+    
+    public static void eliminarUsuario(String LoginUsr) {
+        List<String> lineas = new ArrayList<>();
+        File archivo = new File("Usuarios.txt");
+        
+        try {
+            if (!archivo.exists()) {
+                System.out.println("El archivo no existe.");
+                return;
+            }
+            
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    String[] partes = linea.split(";"); // Asumiendo que los campos están separados por ;
+                    if (!partes[0].equals(LoginUsr)) {
+                        lineas.add(linea);
+                    }
+                }
+            }
+            
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+                for (String nuevaLinea : lineas) {
+                    bw.write(nuevaLinea);
+                    bw.newLine();
+                }
+            }
+            
+            System.out.println("Usuario eliminado exitosamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+
+       
     }
 }

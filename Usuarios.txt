@@ -1,6 +1,2 @@
 PHP;1234567A;Adrian;Mejia;Admin;Desconocido
 Potacxia;1234567A;Adrian;Mejia;Admin;Desconocido
-Prueba3;1234567A;pruba;a;Admin;Desconocido
-potaxia;1234567A;po;a;Admin;Desconocido
-Prueba;1234567A;pruba;a;Admin;Desconocido
-Prueba34534;1234567A;pruba;a;Admin;Desconocido
