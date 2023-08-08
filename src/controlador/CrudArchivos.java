@@ -178,46 +178,41 @@ public class CrudArchivos {
         }
     
     public static void actualizarUsuario(String nombreUsuario, String[] nuevosDatos) {
-        ArrayList<String> lineas = new ArrayList<>();
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("Usuarios.txt"));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                lineas.add(line);
-            }
-
-            br.close();
-
-            BufferedWriter bw = new BufferedWriter(new FileWriter("Usuarios.txt"));
-
-            for (String linea : lineas) {
-                String[] datosUsuario = linea.split(";");
-                if (datosUsuario[0].equals(nombreUsuario)) {
-                    
-                    for (int i = 0; i < nuevosDatos.length; i++) {
-                        datosUsuario[i] = nuevosDatos[i];
-                    }
-                }
-
-                //
-                for (int i = 0; i < datosUsuario.length; i++) {
-                    bw.write(datosUsuario[i]);
-                    if (i != datosUsuario.length - 1) {
-                        bw.write(";");
-                    } else {
-                        bw.write("\n");
-                    }
-                }
-            }
-
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            
+         File archivo = new File("Usuarios.txt");
+    List<String> lineas = new ArrayList<>();
+    
+    try {
+        if (!archivo.exists()) {
+            System.out.println("El archivo no existe.");
+            return;
         }
         
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes[0].equals(nombreUsuario)) {
+                    // Actualizar los campos con los nuevos datos
+                    lineas.add(String.join(";", nuevosDatos));
+                } else {
+                    lineas.add(linea);
+                }
+            }
+        }
         
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+            for (String nuevaLinea : lineas) {
+                bw.write(nuevaLinea);
+                bw.newLine();
+            }
+        }
+        
+        System.out.println("Usuario actualizado con éxito.");
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
         
     }
     
@@ -250,7 +245,7 @@ public class CrudArchivos {
                 }
             }
             
-            System.out.println("Usuario eliminado exitosamente.");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
