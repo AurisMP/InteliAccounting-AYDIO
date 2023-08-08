@@ -11,6 +11,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class CrudArchivos {
@@ -220,37 +221,41 @@ public class CrudArchivos {
     
     public static void eliminarUsuario(String LoginUsr) {
         List<String> lineas = new ArrayList<>();
-        File archivo = new File("Usuarios.txt");
-        
-        try {
-            if (!archivo.exists()) {
-                System.out.println("El archivo no existe.");
-                return;
-            }
-            
-            try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-                String linea;
-                while ((linea = br.readLine()) != null) {
-                    String[] partes = linea.split(";"); // Asumiendo que los campos están separados por ;
-                    if (!partes[0].equals(LoginUsr)) {
-                        lineas.add(linea);
-                    }
-                }
-            }
-            
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
-                for (String nuevaLinea : lineas) {
-                    bw.write(nuevaLinea);
-                    bw.newLine();
-                }
-            }
-            
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    File archivo = new File("Usuarios.txt");
+    boolean usuarioEncontrado = false;
     
-
-       
+    try {
+        if (!archivo.exists()) {
+            System.out.println("El archivo no existe.");
+            return;
+        }
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (!partes[0].equals(LoginUsr)) {
+                    lineas.add(linea);
+                } else {
+                    usuarioEncontrado = true;
+                }
+            }
+        }
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+            for (String nuevaLinea : lineas) {
+                bw.write(nuevaLinea);
+                bw.newLine();
+            }
+        }
+        
+        if (usuarioEncontrado) {
+            System.out.println("Usuario eliminado con éxito.");
+        } else {
+            JOptionPane.showMessageDialog(null, "El usuario no se encontró en la base de datos.");
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 }

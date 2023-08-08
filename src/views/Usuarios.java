@@ -4,6 +4,7 @@
  */
 package views;
 
+import controlador.CrudArchivos;
 import static controlador.CrudArchivos.actualizarUsuario;
 import static controlador.CrudArchivos.eliminarUsuario;
 import static controlador.CrudArchivos.guardarUsuarios;
@@ -25,7 +26,7 @@ import javax.swing.table.TableRowSorter;
  * @author matos
  */
 public class Usuarios extends javax.swing.JFrame {
-
+    private String loginSeleccionado;
     public Usuarios() {
         initComponents();
         setTitle("InteliAccounting   Usuarios");
@@ -449,7 +450,7 @@ public class Usuarios extends javax.swing.JFrame {
 
                     JOptionPane.showMessageDialog(null, "La contrasena debe tener como minimo 8 caracteres , una mayuscula y un numero como minimo :c");
                     limpiar();
-                    
+                    val=false;
 
                     }
                 
@@ -520,15 +521,17 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarBtnActionPerformed
 
     private void modifybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifybtnActionPerformed
-        jLabel4.setVisible(false);
+       jLabel4.setVisible(false);
         jLabel12.setVisible(false);
+        
+        
+
+    // Obtener el valor actual de Loginusr
+    String loginUsuarioOriginal = loginSeleccionado;
 
     int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas modificar los datos de este usuario?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
 
     if (confirmacion == JOptionPane.YES_OPTION) {
-            // Guardar el valor actual de Loginusr
-            String loginUsuarioOriginal = textLoginUsr.getText();
-
         // Permitir la edición de todos los campos
         textLoginUsr.setEnabled(true);
         textPass.setEnabled(true);
@@ -537,26 +540,72 @@ public class Usuarios extends javax.swing.JFrame {
         textApellidos.setEnabled(true);
         opcNormal.setEnabled(true);
         opcAdmin.setEnabled(true);
-       
+
+        // Obtén los nuevos datos del usuario (por ejemplo, de los campos de entrada)
+        String[] nuevoUsuarioData = new String[6];
+        nuevoUsuarioData[0] = textLoginUsr.getText().trim();
+        nuevoUsuarioData[1] = new String(textPass.getPassword());
+        nuevoUsuarioData[2] = txtNom.getText().trim();
+        nuevoUsuarioData[3] = textApellidos.getText().trim();
+        nuevoUsuarioData[4] = (opcNormal.isSelected()) ? opcNormal.getText() : opcAdmin.getText();
+        nuevoUsuarioData[5] = textEmail.getText().isEmpty() ? "Desconocido" : textEmail.getText();
+        
+        for (String dato : nuevoUsuarioData) {
+        if (dato.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+            return; // Detener la actualización si hay campos vacíos
+        }
+        }
+        
+         String nuevaContrasena = nuevoUsuarioData[1];
+            String confirmarContrasena = textPass2.getText();
+        if (!nuevaContrasena.equals(confirmarContrasena)) {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+            return; // Detener la actualización si las contraseñas no coinciden
+    }
+        
+        // Validar contraseña
+    if (nuevaContrasena.length() < 8 || !tieneMayusculaYNumeros(nuevaContrasena)) {
+        JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
+        return; // Detener la actualización si la contraseña no cumple los requisitos
+    }
     
-    // Obtén los nuevos datos del usuario (por ejemplo, de los campos de entrada)
-    String[] nuevoUsuarioData = new String[6];
-    nuevoUsuarioData[0] = textLoginUsr.getText().trim();
-    nuevoUsuarioData[1] = new String(textPass.getPassword());
-    nuevoUsuarioData[2] = txtNom.getText().trim();
-    nuevoUsuarioData[3] = textApellidos.getText().trim();
-    nuevoUsuarioData[4] = (opcNormal.isSelected()) ? opcNormal.getText() : opcAdmin.getText();
-    nuevoUsuarioData[5] = textEmail.getText().isEmpty() ? "Desconocido" : textEmail.getText();
-    
-    // Llama al método de actualización
-    actualizarUsuario(loginUsuarioOriginal, nuevoUsuarioData);
-    
-    JOptionPane.showMessageDialog(null, "El usuario ha sido actualizado exitosamente");
-    limpiar();
-    cargarDatosDesdeArchivo();    
+    // Validar si el nuevo loginusr ya existe
+    String nuevoLoginUsr = nuevoUsuarioData[0];
+    if (!nuevoLoginUsr.equals(loginUsuarioOriginal) && CrudArchivos.buscarUsuarios(nuevoLoginUsr)) {
+        JOptionPane.showMessageDialog(null, "El nuevo Loginusr ya existe en la base de datos.");
+        return; // Detener la actualización si el nuevo Loginusr ya existe
+    }
+        // Llama al método de actualización
+        actualizarUsuario(loginUsuarioOriginal, nuevoUsuarioData);
+
+        JOptionPane.showMessageDialog(null, "El usuario ha sido actualizado exitosamente");
+        limpiar();
+        cargarDatosDesdeArchivo();
+        filtrarDatos("", "", "");
         
     }
     }//GEN-LAST:event_modifybtnActionPerformed
+
+    private boolean tieneMayusculaYNumeros(String texto) {
+    boolean tieneMayuscula = false;
+    boolean tieneNumero = false;
+    
+    for (char c : texto.toCharArray()) {
+        if (Character.isUpperCase(c)) {
+            tieneMayuscula = true;
+        } else if (Character.isDigit(c)) {
+            tieneNumero = true;
+        }
+        
+        if (tieneMayuscula && tieneNumero) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 
     private void opcAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcAdminActionPerformed
 
@@ -671,8 +720,14 @@ public class Usuarios extends javax.swing.JFrame {
             opcNormal.setSelected(false);
             opcAdmin.setSelected(true);
         }
+
+        // Almacenar el valor de loginusr en la variable global
+        loginSeleccionado = loginUsuario;
     }
-        }
+    
+}
+    
+
     
     
 
