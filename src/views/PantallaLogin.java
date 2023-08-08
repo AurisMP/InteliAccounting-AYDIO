@@ -6,6 +6,7 @@
 package views;
 
 
+import static controlador.CrudArchivos.buscarUsuarios;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import javax.swing.event.DocumentEvent;
@@ -217,31 +218,32 @@ public class PantallaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btIniSesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIniSesActionPerformed
-        boolean val =true;
+        boolean val =false;
         String usuario = textName.getText();
         char[] contrasena = textPass.getPassword();
         String contra = new String(contrasena);
         
-        
+        System.out.println(textPass.getPassword());
 
-        if (usuario.isBlank() || contra.isBlank()) {
+        if (usuario.isBlank() || contra.isBlank()|| textName.getText().equals("Ingrese su nombre de usuario") || contra.equals("Ingrese su contraseña")) {
             JOptionPane.showMessageDialog(null, "Debes ingresar un usuario y contraseña.");
             val = false;
         }
-        
-        /*if(val){
-            if(iniciarSesion(usuario,contra)){
+        else{
+            
+            if(buscarUsuarios(usuario,contra)){
+                
                 InterfazP ip = new InterfazP();
                 dispose();
                 ip.setVisible(true);
                 
-            
             }
-        
+            else{
+                
+                JOptionPane.showMessageDialog(rootPane, "Nombre o Contrasena no coinciden");
+            }
         }
-        */
-  
-
+       
     }//GEN-LAST:event_btIniSesActionPerformed
 
     private void textNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNameActionPerformed

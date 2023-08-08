@@ -9,8 +9,8 @@ public class Main {
     
     public static void main(String[] args) {
         
-       Usuarios u = new Usuarios();
-       u.setVisible(true);
+       PantallaLogin pl = new PantallaLogin();
+       pl.setVisible(true);
              
           
         
