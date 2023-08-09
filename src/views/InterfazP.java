@@ -4,6 +4,8 @@
  */
 package views;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 /**
@@ -20,7 +22,12 @@ public class InterfazP extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setTitle("InteliAccounting");
         
-
+        
+        manteniminetoCatalogo.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            manteniminetoCatalogoActionPerformed(evt);
+        }
+    });
     }
 
     /**
@@ -38,7 +45,7 @@ public class InterfazP extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         AgregarUsBTN = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        manteniminetoCatalogo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -82,10 +89,10 @@ public class InterfazP extends javax.swing.JFrame {
         });
         jMenu1.add(AgregarUsBTN);
 
-        jMenuItem1.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/desarrollo-de-producto.png"))); // NOI18N
-        jMenuItem1.setText("Catalogo de Cuentas");
-        jMenu1.add(jMenuItem1);
+        manteniminetoCatalogo.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
+        manteniminetoCatalogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/desarrollo-de-producto.png"))); // NOI18N
+        manteniminetoCatalogo.setText("Catalogo de Cuentas");
+        jMenu1.add(manteniminetoCatalogo);
 
         jMenuBar1.add(jMenu1);
 
@@ -199,7 +206,14 @@ public class InterfazP extends javax.swing.JFrame {
         Usuarios user = new Usuarios();
         user.setVisible(true);
     }//GEN-LAST:event_AgregarUsBTNActionPerformed
-
+    private void manteniminetoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {                                             
+         Catalogo_cuenta catalogo = new Catalogo_cuenta();
+        catalogo.setVisible(true);
+    }  
+    
+    public void ocultarMenu() {
+    jMenu1.setVisible(false); // Reemplaza jMenu1 con el nombre real de tu JMenu
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AgregarUsBTN;
@@ -221,8 +235,8 @@ public class InterfazP extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem manteniminetoCatalogo;
     // End of variables declaration//GEN-END:variables
 }

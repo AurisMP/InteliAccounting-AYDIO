@@ -6,7 +6,9 @@
 package views;
 
 
+import controlador.CrudArchivos;
 import static controlador.CrudArchivos.buscarUsuarios;
+import static controlador.CrudArchivos.permisosUsuarios;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import javax.swing.event.DocumentEvent;
@@ -18,12 +20,13 @@ import javax.swing.event.DocumentListener;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class PantallaLogin extends javax.swing.JFrame {
-
+        private InterfazP interfazP;
     /**
      * Creates new form NewJFrame
      */
     public PantallaLogin() {
         initComponents();
+        this.interfazP = interfazP;
         setTitle("InteliAccounting");
         setResizable(false);
 
@@ -218,31 +221,33 @@ public class PantallaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btIniSesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIniSesActionPerformed
-        boolean val =false;
-        String usuario = textName.getText();
-        char[] contrasena = textPass.getPassword();
-        String contra = new String(contrasena);
-        
-        System.out.println(textPass.getPassword());
+            boolean val = false;
+    String usuario = textName.getText();
+    char[] contrasena = textPass.getPassword();
+    String contra = new String(contrasena);
 
-        if (usuario.isBlank() || contra.isBlank()|| textName.getText().equals("Ingrese su nombre de usuario") || contra.equals("Ingrese su contraseña")) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar un usuario y contraseña.");
-            val = false;
-        }
-        else{
-            
-            if(buscarUsuarios(usuario,contra)){
-                
-                InterfazP ip = new InterfazP();
-                dispose();
-                ip.setVisible(true);
-                
+    if (usuario.isBlank() || contra.isBlank() || textName.getText().equals("Ingrese su nombre de usuario") || contra.equals("Ingrese su contraseña")) {
+        JOptionPane.showMessageDialog(null, "Debes ingresar un usuario y contraseña.");
+        val = false;
+    } else {
+
+        // Verificar si el usuario tiene permisos normales
+        boolean permisosNormales = CrudArchivos.permisosUsuarios(usuario);
+
+        if (CrudArchivos.buscarUsuarios(usuario, contra)) {
+            InterfazP ip = new InterfazP();
+
+            if (!permisosNormales) {
+                ip.ocultarMenu(); // Llamar al método para ocultar el JMenu en InterfazP
             }
-            else{
-                
-                JOptionPane.showMessageDialog(rootPane, "Nombre o Contrasena no coinciden");
-            }
+
+            dispose();
+            ip.setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Nombre o Contraseña no coinciden");
         }
+    }
        
     }//GEN-LAST:event_btIniSesActionPerformed
 

@@ -1,1 +1,2 @@
 PHP;1234567A;Adrian;Mejia;Admin;Desconocido
+Adrian;1234567A;adrian;mejia;Normal;Desconocido
