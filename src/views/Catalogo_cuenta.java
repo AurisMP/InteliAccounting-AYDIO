@@ -1,4 +1,3 @@
-
 package views;
 
 import static controlador.CRUDcatalogo.Buscar;
@@ -31,8 +30,14 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         tffecha.setVisible(false);
         lblfecha.setVisible(false);
         lblhora.setVisible(false);
+        jSeparator10.setVisible(false);
+        jSeparator8.setVisible(false);
         tfhora.setVisible(false);
         lblnoedit.setVisible(false);
+        this.setLocationRelativeTo(null);
+        setTitle("InteliAccounting Catalogo de Cuentas");
+        setResizable(false);
+
     }
 
     /**
@@ -71,31 +76,89 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         tftipo = new javax.swing.JComboBox<>();
         lblnoedit = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 232, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Numero de cuenta");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 140, 20));
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Descripcion de la cuenta");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 190, -1));
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tipo de cuenta");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, -1, -1));
 
-        jLabel4.setText("Cuenta padre");
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Cuenta Padre");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, -1, -1));
 
-        jLabel5.setText("nivel de cuenta");
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Nivel de cuenta");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 120, -1));
 
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Grupo de cuenta");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, -1, -1));
 
+        lblfecha.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        lblfecha.setForeground(new java.awt.Color(0, 0, 0));
         lblfecha.setText("Fecha de creacion");
+        jPanel1.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 140, -1));
 
-        lblhora.setText("hora de creacion");
+        lblhora.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        lblhora.setForeground(new java.awt.Color(0, 0, 0));
+        lblhora.setText("Hora de creacion");
+        jPanel1.add(lblhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 130, -1));
 
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Debito acomulado de cuenta");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, -1, -1));
 
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Credito acomulado de cuenta");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, -1, -1));
 
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Balanse de cuenta");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 470, 140, -1));
 
+        tfnumeroc.setToolTipText("");
+        tfnumeroc.setBorder(null);
+        tfnumeroc.setOpaque(false);
         tfnumeroc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfnumerocFocusLost(evt);
@@ -114,13 +177,24 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
                 tfnumerocKeyTyped(evt);
             }
         });
+        jPanel1.add(tfnumeroc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 180, 30));
 
+        tfdescrip.setBorder(null);
+        tfdescrip.setOpaque(false);
         tfdescrip.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfdescripKeyReleased(evt);
             }
         });
+        jPanel1.add(tfdescrip, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 180, 30));
 
+        tfcuentapadre.setBorder(null);
+        tfcuentapadre.setOpaque(false);
+        tfcuentapadre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfcuentapadreActionPerformed(evt);
+            }
+        });
         tfcuentapadre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfcuentapadreKeyPressed(evt);
@@ -129,40 +203,68 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
                 tfcuentapadreKeyTyped(evt);
             }
         });
+        jPanel1.add(tfcuentapadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, 180, 30));
 
         tffecha.setEditable(false);
+        tffecha.setBorder(null);
+        tffecha.setOpaque(false);
+        jPanel1.add(tffecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 150, 30));
 
         tfhora.setEditable(false);
+        tfhora.setBorder(null);
+        tfhora.setOpaque(false);
+        jPanel1.add(tfhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 150, 30));
 
         tfdebito.setText("0");
+        tfdebito.setToolTipText("");
+        tfdebito.setBorder(null);
+        tfdebito.setOpaque(false);
+        tfdebito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdebitoActionPerformed(evt);
+            }
+        });
         tfdebito.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfdebitoKeyTyped(evt);
             }
         });
+        jPanel1.add(tfdebito, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 340, 180, 30));
 
         tfcredito.setText("0");
+        tfcredito.setBorder(null);
+        tfcredito.setOpaque(false);
         tfcredito.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfcreditoKeyTyped(evt);
             }
         });
+        jPanel1.add(tfcredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, 180, 30));
 
         tfbalance.setText("0");
+        tfbalance.setBorder(null);
+        tfbalance.setOpaque(false);
         tfbalance.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfbalanceKeyTyped(evt);
             }
         });
+        jPanel1.add(tfbalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, 180, 30));
 
-        jButton1.setText("Crear");
+        jButton1.setFont(new java.awt.Font("Yu Gothic", 2, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/examen.png"))); // NOI18N
+        jButton1.setText("Crear       ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 530, 120, 30));
 
+        titulo.setFont(new java.awt.Font("Yu Gothic", 2, 16)); // NOI18N
+        titulo.setForeground(new java.awt.Color(0, 0, 0));
         titulo.setText("Creando");
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 540, 70, -1));
 
         tfnivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
         tfnivel.addActionListener(new java.awt.event.ActionListener() {
@@ -175,238 +277,86 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
                 tfnivelKeyPressed(evt);
             }
         });
+        jPanel1.add(tfnivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 180, 30));
 
         tfgrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Pasivo", "Capital", "Ingresos", "Costos", "Gastos" }));
+        jPanel1.add(tfgrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 280, 180, 30));
 
         tftipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Detalles" }));
+        jPanel1.add(tftipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 180, 30));
 
+        lblnoedit.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        lblnoedit.setForeground(new java.awt.Color(0, 0, 0));
         lblnoedit.setText("Esta cuenta tiene balance no puede ser editada");
+        jPanel1.add(lblnoedit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, -1, 23));
 
+        jButton2.setFont(new java.awt.Font("Yu Gothic", 2, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/barriendo.png"))); // NOI18N
         jButton2.setText("Limpiar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 120, 30));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 180, 10));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 230, 180, 10));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 10));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 490, 180, 20));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 370, 180, 20));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 150, 20));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(lblfecha)
-                            .addComponent(lblhora)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tftipo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfnumeroc, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfdescrip, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfcredito, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfbalance, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfdebito, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfhora, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tffecha, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfgrupo, javax.swing.GroupLayout.Alignment.TRAILING, 0, 171, Short.MAX_VALUE)
-                            .addComponent(tfcuentapadre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfnivel, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(titulo)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(24, 24, 24)
-                .addComponent(jButton2)
-                .addGap(33, 33, 33))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(234, Short.MAX_VALUE)
-                .addComponent(lblnoedit)
-                .addGap(219, 219, 219))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfnumeroc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdescrip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tftipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(tfnivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfcuentapadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(tfgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblfecha)
-                    .addComponent(tffecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblhora)
-                    .addComponent(tfhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(tfdebito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(tfcredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(tfbalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(titulo)
-                    .addComponent(jButton2))
-                .addGap(5, 5, 5)
-                .addComponent(lblnoedit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/impuesto (1).png"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, 150));
+
+        jLabel8.setFont(new java.awt.Font("Gentium Basic", 2, 30)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Catalogo de Cuentas");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 240, 40));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/acerca-de.png"))); // NOI18N
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 40, 40));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/cobro.png"))); // NOI18N
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 460, 50, 40));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/expediente.png"))); // NOI18N
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 40, 40));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/extracto-bancario.png"))); // NOI18N
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 40, 40));
+        jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 420, 180, 20));
+        jPanel1.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, 150, 20));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/extracto-de-cuenta (1).png"))); // NOI18N
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 50, 30));
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/banca-de-dinero.png"))); // NOI18N
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 200, 50, 30));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/impuesto (2).png"))); // NOI18N
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 270, 50, 40));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/ahorro-de-dinero.png"))); // NOI18N
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 340, 50, 40));
+
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/examen.png"))); // NOI18N
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 390, 50, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1033, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 460, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        LocalDate fechaActual = LocalDate.now();
-        String fechaActualStr = fechaActual.toString();
-        LocalTime horaActual = LocalTime.now();
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm:ss"); // Define el formato deseado
-        String horaActualStr = horaActual.format(formato);
-        String[] crear = new String[campos];
-        crear[0] = tfnumeroc.getText();
-        crear[1] = tfdescrip.getText();
-        crear[2] = (String) tftipo.getSelectedItem();
-        crear[3] = (String) tfnivel.getSelectedItem();
-        crear[4] = tfcuentapadre.getText();
-        crear[5] = (String) tfgrupo.getSelectedItem();
-        crear[6] = fechaActualStr;
-        crear[7] = horaActualStr;
-        crear[8] = tfdebito.getText();
-        crear[9] = tfcredito.getText();
-        crear[10] = tfbalance.getText();
-
-        if ("".equals(crear[0])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[1])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[2])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[3])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[4])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[5])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[6])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[7])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[8])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[9])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else if ("".equals(crear[10])) {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
-        } else {
-            if (modi == false) {
-                try {
-                    Crear(crear, tabla);
-                    tffecha.setVisible(false);
-                    lblfecha.setVisible(false);
-                    lblhora.setVisible(false);
-                    tfhora.setVisible(false);
-                    JOptionPane.showMessageDialog(rootPane, "DATOS GUARDADOS");
-                    tfnumeroc.setText("");
-                    tfdescrip.setText("");
-                    tftipo.setSelectedItem(ABORT);
-                    tfnivel.setSelectedItem(ABORT);
-                    tfcuentapadre.setText("");
-                    tfgrupo.setSelectedItem(ABORT);
-                    tffecha.setText("");
-                    tfhora.setText("");
-                    tfdebito.setText("");
-                    tfcredito.setText("");
-                    tfbalance.setText("");
-                    tfdescrip.enable(true);
-                    tftipo.enable(true);
-                    tfnivel.enable(true);
-                    tfcuentapadre.enable(true);
-                    tfgrupo.enable(true);
-                    tfdebito.enable(true);
-                    tfcredito.enable(true);
-                    tfbalance.enable(true);
-                } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-                    Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                Modificar(crear, tabla);
-                tffecha.setVisible(false);
-                lblfecha.setVisible(false);
-                lblhora.setVisible(false);
-                tfhora.setVisible(false);
-                JOptionPane.showMessageDialog(rootPane, "DATOS GUARDADOS");
-                tfnumeroc.setText("");
-                tfdescrip.setText("");
-                tftipo.setSelectedItem(ABORT);
-                tfnivel.setSelectedItem(ABORT);
-                tfcuentapadre.setText("");
-                tfgrupo.setSelectedItem(ABORT);
-                tffecha.setText("");
-                tfhora.setText("");
-                tfdebito.setText("");
-                tfcredito.setText("");
-                tfbalance.setText("");
-                tfdescrip.enable(true);
-                tftipo.enable(true);
-                tfnivel.enable(true);
-                tfcuentapadre.enable(true);
-                tfgrupo.enable(true);
-                tfdebito.enable(true);
-                tfcredito.enable(true);
-                tfbalance.enable(true);
-            }
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tfnumerocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfnumerocActionPerformed
 
@@ -421,6 +371,8 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
             lblfecha.setVisible(false);
             lblhora.setVisible(false);
             tfhora.setVisible(false);
+            jSeparator10.setVisible(false);
+            jSeparator8.setVisible(false);
             tfdescrip.setText("");
             tftipo.setSelectedItem(ABORT);
             tfnivel.setSelectedItem(ABORT);
@@ -441,18 +393,20 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
             tfcredito.enable(true);
             tfbalance.enable(true);
         } else {
-                try {
-                    datos = Buscar(tfnumeroc.getText(), tabla, campos);
-                } catch (IOException ex) {
-                    System.err.println("Error al buscar en el archivo: " + ex.getMessage());
-                      ex.printStackTrace();
-                    }
-                }
+            try {
+                datos = Buscar(tfnumeroc.getText(), tabla, campos);
+            } catch (IOException ex) {
+                System.err.println("Error al buscar en el archivo: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
         if ("1".equals(datos[11])) {
             tffecha.setVisible(true);
             lblfecha.setVisible(true);
             lblhora.setVisible(true);
             tfhora.setVisible(true);
+            jSeparator10.setVisible(true);
+            jSeparator8.setVisible(true);
             tfdescrip.setText(datos[1]);
             tftipo.setSelectedItem(datos[2]);
             tfnivel.setSelectedItem(datos[3]);
@@ -479,6 +433,8 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
             titulo.setText("Modificando");
             modi = true;
         } else {
+            jSeparator10.setVisible(false);
+            jSeparator8.setVisible(false);
             tffecha.setVisible(false);
             lblfecha.setVisible(false);
             lblhora.setVisible(false);
@@ -600,44 +556,179 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         tffecha.setVisible(false);
-            lblfecha.setVisible(false);
-            lblhora.setVisible(false);
-            tfhora.setVisible(false);
-             tfnumeroc.setText("");
-            tfdescrip.setText("");
-            tftipo.setSelectedItem(ABORT);
-            tfnivel.setSelectedItem(ABORT);
-            tfcuentapadre.setText("");
-            tfgrupo.setSelectedItem(ABORT);
-            tffecha.setText("");
-            tfhora.setText("");
-            tfdebito.setText("");
-            tfcredito.setText("");
-            tfbalance.setText("");
-            tfdescrip.enable(true);
-            tftipo.enable(true);
-            tfnivel.enable(true);
-            tfcuentapadre.enable(true);
-            tfgrupo.enable(true);
-            tfdebito.enable(true);
-            tfcredito.enable(true);
-            tfbalance.enable(true);
+        lblfecha.setVisible(false);
+        lblhora.setVisible(false);
+        tfhora.setVisible(false);
+        jSeparator10.setVisible(false);
+        jSeparator8.setVisible(false);
+        tfnumeroc.setText("");
+        tfdescrip.setText("");
+        tftipo.setSelectedItem(ABORT);
+        tfnivel.setSelectedItem(ABORT);
+        tfcuentapadre.setText("");
+        tfgrupo.setSelectedItem(ABORT);
+        tffecha.setText("");
+        tfhora.setText("");
+        tfdebito.setText("");
+        tfcredito.setText("");
+        tfbalance.setText("");
+        tfdescrip.enable(true);
+        tftipo.enable(true);
+        tfnivel.enable(true);
+        tfcuentapadre.enable(true);
+        tfgrupo.enable(true);
+        tfdebito.enable(true);
+        tfcredito.enable(true);
+        tfbalance.enable(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-   
+    private void tfdebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdebitoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdebitoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        LocalDate fechaActual = LocalDate.now();
+        String fechaActualStr = fechaActual.toString();
+        LocalTime horaActual = LocalTime.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm:ss"); // Define el formato deseado
+        String horaActualStr = horaActual.format(formato);
+        String[] crear = new String[campos];
+        crear[0] = tfnumeroc.getText();
+        crear[1] = tfdescrip.getText();
+        crear[2] = (String) tftipo.getSelectedItem();
+        crear[3] = (String) tfnivel.getSelectedItem();
+        crear[4] = tfcuentapadre.getText();
+        crear[5] = (String) tfgrupo.getSelectedItem();
+        crear[6] = fechaActualStr;
+        crear[7] = horaActualStr;
+        crear[8] = tfdebito.getText();
+        crear[9] = tfcredito.getText();
+        crear[10] = tfbalance.getText();
+
+        if ("".equals(crear[0])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[1])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[2])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[3])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[4])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[5])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[6])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[7])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[8])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[9])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else if ("".equals(crear[10])) {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR DIGITAR");
+        } else {
+            if (modi == false) {
+                try {
+                    Crear(crear, tabla);
+                    tffecha.setVisible(false);
+                    lblfecha.setVisible(false);
+                    lblhora.setVisible(false);
+                    tfhora.setVisible(false);
+                    JOptionPane.showMessageDialog(rootPane, "DATOS GUARDADOS");
+                    tfnumeroc.setText("");
+                    tfdescrip.setText("");
+                    tftipo.setSelectedItem(ABORT);
+                    tfnivel.setSelectedItem(ABORT);
+                    tfcuentapadre.setText("");
+                    tfgrupo.setSelectedItem(ABORT);
+                    tffecha.setText("");
+                    tfhora.setText("");
+                    tfdebito.setText("");
+                    tfcredito.setText("");
+                    tfbalance.setText("");
+                    tfdescrip.enable(true);
+                    tftipo.enable(true);
+                    tfnivel.enable(true);
+                    tfcuentapadre.enable(true);
+                    tfgrupo.enable(true);
+                    tfdebito.enable(true);
+                    tfcredito.enable(true);
+                    tfbalance.enable(true);
+                } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+                    Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                Modificar(crear, tabla);
+                tffecha.setVisible(false);
+                lblfecha.setVisible(false);
+                lblhora.setVisible(false);
+                tfhora.setVisible(false);
+                jSeparator10.setVisible(false);
+                jSeparator8.setVisible(false);
+
+                JOptionPane.showMessageDialog(rootPane, "DATOS GUARDADOS");
+                tfnumeroc.setText("");
+                tfdescrip.setText("");
+                tftipo.setSelectedItem(ABORT);
+                tfnivel.setSelectedItem(ABORT);
+                tfcuentapadre.setText("");
+                tfgrupo.setSelectedItem(ABORT);
+                tffecha.setText("");
+                tfhora.setText("");
+                tfdebito.setText("");
+                tfcredito.setText("");
+                tfbalance.setText("");
+                tfdescrip.enable(true);
+                tftipo.enable(true);
+                tfnivel.enable(true);
+                tfcuentapadre.enable(true);
+                tfgrupo.enable(true);
+                tfdebito.enable(true);
+                tfcredito.enable(true);
+                tfbalance.enable(true);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tfcuentapadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfcuentapadreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfcuentapadreActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lblfecha;
     private javax.swing.JLabel lblhora;
     private javax.swing.JLabel lblnoedit;

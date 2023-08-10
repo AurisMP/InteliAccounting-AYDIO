@@ -26,7 +26,9 @@ import javax.swing.table.TableRowSorter;
  * @author matos
  */
 public class Usuarios extends javax.swing.JFrame {
+
     private String loginSeleccionado;
+
     public Usuarios() {
         initComponents();
         setTitle("InteliAccounting   Usuarios");
@@ -35,17 +37,17 @@ public class Usuarios extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         cargarDatosDesdeArchivo(); // Llama al método para cargar datos al iniciar la ventana
         jLabel12.setVisible(false);
-        
+
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            jTable1MouseClicked(evt);
-        }
-    });
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
 
     }
 
     //Validar si el usuario ya existe
-   /* private boolean validarUsuarioExistentePorNombreUsuario(String nuevoUsuario) {
+    /* private boolean validarUsuarioExistentePorNombreUsuario(String nuevoUsuario) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = 0; i < model.getRowCount(); i++) {
             String usuarioExistente = (String) model.getValueAt(i, 0); // Columna de Nombre de Usuario
@@ -55,7 +57,7 @@ public class Usuarios extends javax.swing.JFrame {
         }
         return false; // El usuario no existe
     }
-    */
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -95,6 +97,8 @@ public class Usuarios extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -114,7 +118,7 @@ public class Usuarios extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/LOGO_IA-removebg-preview.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 240, 180));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 230, 170));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 3, 12)); // NOI18N
         jLabel3.setText("Apellidos :");
@@ -284,6 +288,19 @@ public class Usuarios extends javax.swing.JFrame {
         jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 220, 20));
         jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 220, 20));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/personas.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 70, 40));
+
+        jButton1.setFont(new java.awt.Font("Dubai Medium", 3, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/salida.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,37 +314,33 @@ public class Usuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-   private boolean camposBloqueados = false;
+
+    private boolean camposBloqueados = false;
 
     private void bloquearCampos(boolean val) {
         opcNormal.setEnabled(val);
-    opcAdmin.setEnabled(val);
-    textApellidos.setEnabled(val);
-    textPass.setEnabled(val);
-    textPass2.setEnabled(val);
-    textEmail.setEnabled(val);
-    jLabel4.setVisible(!val);
-    jLabel12.setVisible(val);
-    
-    
-    
+        opcAdmin.setEnabled(val);
+        textApellidos.setEnabled(val);
+        textPass.setEnabled(val);
+        textPass2.setEnabled(val);
+        textEmail.setEnabled(val);
+        jLabel4.setVisible(!val);
+        jLabel12.setVisible(val);
 
-        
-}
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-           String filtroUsuario = textLoginUsr.getText().trim();
-    String filtroNombre = txtNom.getText().trim();
-    String filtroTipoAcceso = (opcNormal.isSelected()) ? opcNormal.getText() : (opcAdmin.isSelected()) ? opcAdmin.getText() : "";
-
-    filtrarDatos(filtroUsuario, filtroNombre, filtroTipoAcceso);
-
-    // Solo bloquear los campos si no se está realizando una búsqueda
-    if (!filtroUsuario.isEmpty() || !filtroNombre.isEmpty() || !filtroTipoAcceso.isEmpty()) {
-        bloquearCampos(false);
-    } else {
-        bloquearCampos(true);
     }
+    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
+        String filtroUsuario = textLoginUsr.getText().trim();
+        String filtroNombre = txtNom.getText().trim();
+        String filtroTipoAcceso = (opcNormal.isSelected()) ? opcNormal.getText() : (opcAdmin.isSelected()) ? opcAdmin.getText() : "";
+
+        filtrarDatos(filtroUsuario, filtroNombre, filtroTipoAcceso);
+
+        // Solo bloquear los campos si no se está realizando una búsqueda
+        if (!filtroUsuario.isEmpty() || !filtroNombre.isEmpty() || !filtroTipoAcceso.isEmpty()) {
+            bloquearCampos(false);
+        } else {
+            bloquearCampos(true);
+        }
     }//GEN-LAST:event_buscarButtonActionPerformed
     public void limpiar() {
 
@@ -346,16 +359,16 @@ public class Usuarios extends javax.swing.JFrame {
     private void btAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnadirActionPerformed
         jLabel4.setVisible(false);
         jLabel12.setVisible(false);
-        String contra="";
+        String contra = "";
 
         String nuevoUsuario = textLoginUsr.getText().trim();
 
-       /* if (validarUsuarioExistentePorNombreUsuario(nuevoUsuario)) {
+        /* if (validarUsuarioExistentePorNombreUsuario(nuevoUsuario)) {
             // Usuario ya existe, mostrar mensaje de error
             JOptionPane.showMessageDialog(null, "El nombre de usuario '" + nuevoUsuario + "' ya ha sido registrado anteriormente.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        */
+         */
         String email = "";
         boolean val = false;
         /*
@@ -396,34 +409,29 @@ public class Usuarios extends javax.swing.JFrame {
         for (int i = 0; i < listaUsr.length; i++) {
 
             if (listaUsr[i].isBlank()) {
-                
+
                 val = false;
                 limpiar();
                 break;
-                }
-            else{
-                val=true;
-                }
+            } else {
+                val = true;
             }
-           
-        
-    
-        if(val==false){
-            JOptionPane.showMessageDialog(null, "Dejo un campo vacio :c");
-                }
-        else {
-            
-            if (!pass1.equals(pass2) ) {
+        }
 
-            JOptionPane.showMessageDialog(null, "Contrasena no coinciden >:v");
-            
-            }
-            else{
-                
+        if (val == false) {
+            JOptionPane.showMessageDialog(null, "Dejo un campo vacio :c");
+        } else {
+
+            if (!pass1.equals(pass2)) {
+
+                JOptionPane.showMessageDialog(null, "Contrasena no coinciden >:v");
+
+            } else {
+
                 contra = pass1;
                 boolean tieneM = false;
                 boolean tieneD = false;
-                
+
                 for (int i = 0; i < contra.length(); i++) {
 
                     if (Character.isUpperCase(contra.charAt(i))) {
@@ -431,10 +439,10 @@ public class Usuarios extends javax.swing.JFrame {
                         tieneM = true;
                         val = true;
                         break;
-                        }
-
                     }
-                
+
+                }
+
                 for (int i = 0; i < contra.length(); i++) {
 
                     if (Character.isDigit(contra.charAt(i))) {
@@ -442,38 +450,34 @@ public class Usuarios extends javax.swing.JFrame {
                         tieneD = true;
                         val = true;
                         break;
-                        }
-
                     }
-                    
+
+                }
+
                 if ((contra.length() < 8 || tieneM == false || tieneD == false)) {
 
                     JOptionPane.showMessageDialog(null, "La contrasena debe tener como minimo 8 caracteres , una mayuscula y un numero como minimo :c");
                     limpiar();
-                    val=false;
+                    val = false;
 
-                    }
-                
-                else{
-                    
-                    if(textEmail.getText().isBlank()) {
+                } else {
+
+                    if (textEmail.getText().isBlank()) {
                         email = "Desconocido";
-                        } 
-                    else{
+                    } else {
                         email = textEmail.getText();
-                        }
-                    if(buscarUsuarios(listaUsr[0])){
-                        val=false;
-                        JOptionPane.showMessageDialog(rootPane, "El Nombre "+listaUsr[0]+" ya esta siendo usado");
-                        }
-                    else{
-                        val=true;
-                        }
+                    }
+                    if (buscarUsuarios(listaUsr[0])) {
+                        val = false;
+                        JOptionPane.showMessageDialog(rootPane, "El Nombre " + listaUsr[0] + " ya esta siendo usado");
+                    } else {
+                        val = true;
                     }
                 }
-        } 
-        
-        if (val){
+            }
+        }
+
+        if (val) {
 
             String[] crudUsr = new String[6];
             crudUsr[0] = textLoginUsr.getText();
@@ -486,7 +490,7 @@ public class Usuarios extends javax.swing.JFrame {
             for (int i = 0; i < crudUsr.length; i++) {
                 System.out.println(crudUsr[i]);
 
-                }
+            }
 
             JOptionPane.showMessageDialog(null, "El usuario ha sido creado exitosamente :D ");
             limpiar();
@@ -503,108 +507,106 @@ public class Usuarios extends javax.swing.JFrame {
         cargarDatosDesdeArchivo(); // Llama al método para cargar datos después de agregar un usuario
         filtrarDatos("", "", "");
 
-             
+
     }//GEN-LAST:event_btAnadirActionPerformed
 
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
         jLabel4.setVisible(false);
         jLabel12.setVisible(false);
-    
-    // Mostrar cuadro de diálogo para confirmar la eliminación
-    int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este usuario?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-    
-    if (confirmacion == JOptionPane.YES_OPTION) {
-        eliminarUsuario(textLoginUsr.getText());
-        cargarDatosDesdeArchivo();
-        limpiar();
-    }
+
+        // Mostrar cuadro de diálogo para confirmar la eliminación
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este usuario?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            eliminarUsuario(textLoginUsr.getText());
+            cargarDatosDesdeArchivo();
+            limpiar();
+        }
     }//GEN-LAST:event_eliminarBtnActionPerformed
 
     private void modifybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifybtnActionPerformed
-       jLabel4.setVisible(false);
+        jLabel4.setVisible(false);
         jLabel12.setVisible(false);
-        
-        
 
-    // Obtener el valor actual de Loginusr
-    String loginUsuarioOriginal = loginSeleccionado;
+        // Obtener el valor actual de Loginusr
+        String loginUsuarioOriginal = loginSeleccionado;
 
-    int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas modificar los datos de este usuario?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas modificar los datos de este usuario?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
 
-    if (confirmacion == JOptionPane.YES_OPTION) {
-        // Permitir la edición de todos los campos
-        textLoginUsr.setEnabled(true);
-        textPass.setEnabled(true);
-        textPass2.setEnabled(true);
-        txtNom.setEnabled(true);
-        textApellidos.setEnabled(true);
-        opcNormal.setEnabled(true);
-        opcAdmin.setEnabled(true);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Permitir la edición de todos los campos
+            textLoginUsr.setEnabled(true);
+            textPass.setEnabled(true);
+            textPass2.setEnabled(true);
+            txtNom.setEnabled(true);
+            textApellidos.setEnabled(true);
+            opcNormal.setEnabled(true);
+            opcAdmin.setEnabled(true);
 
-        // Obtén los nuevos datos del usuario (por ejemplo, de los campos de entrada)
-        String[] nuevoUsuarioData = new String[6];
-        nuevoUsuarioData[0] = textLoginUsr.getText().trim();
-        nuevoUsuarioData[1] = new String(textPass.getPassword());
-        nuevoUsuarioData[2] = txtNom.getText().trim();
-        nuevoUsuarioData[3] = textApellidos.getText().trim();
-        nuevoUsuarioData[4] = (opcNormal.isSelected()) ? opcNormal.getText() : opcAdmin.getText();
-        nuevoUsuarioData[5] = textEmail.getText().isEmpty() ? "Desconocido" : textEmail.getText();
-        
-        for (String dato : nuevoUsuarioData) {
-        if (dato.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
-            return; // Detener la actualización si hay campos vacíos
-        }
-        }
-        
-         String nuevaContrasena = nuevoUsuarioData[1];
+            // Obtén los nuevos datos del usuario (por ejemplo, de los campos de entrada)
+            String[] nuevoUsuarioData = new String[6];
+            nuevoUsuarioData[0] = textLoginUsr.getText().trim();
+            nuevoUsuarioData[1] = new String(textPass.getPassword());
+            nuevoUsuarioData[2] = txtNom.getText().trim();
+            nuevoUsuarioData[3] = textApellidos.getText().trim();
+            nuevoUsuarioData[4] = (opcNormal.isSelected()) ? opcNormal.getText() : opcAdmin.getText();
+            nuevoUsuarioData[5] = textEmail.getText().isEmpty() ? "Desconocido" : textEmail.getText();
+
+            for (String dato : nuevoUsuarioData) {
+                if (dato.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+                    return; // Detener la actualización si hay campos vacíos
+                }
+            }
+
+            String nuevaContrasena = nuevoUsuarioData[1];
             String confirmarContrasena = textPass2.getText();
-        if (!nuevaContrasena.equals(confirmarContrasena)) {
-            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
-            return; // Detener la actualización si las contraseñas no coinciden
-    }
-        
-        // Validar contraseña
-    if (nuevaContrasena.length() < 8 || !tieneMayusculaYNumeros(nuevaContrasena)) {
-        JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
-        return; // Detener la actualización si la contraseña no cumple los requisitos
-    }
-    
-    // Validar si el nuevo loginusr ya existe
-    String nuevoLoginUsr = nuevoUsuarioData[0];
-    if (!nuevoLoginUsr.equals(loginUsuarioOriginal) && CrudArchivos.buscarUsuarios(nuevoLoginUsr)) {
-        JOptionPane.showMessageDialog(null, "El nuevo Loginusr ya existe en la base de datos.");
-        return; // Detener la actualización si el nuevo Loginusr ya existe
-    }
-        // Llama al método de actualización
-        actualizarUsuario(loginUsuarioOriginal, nuevoUsuarioData);
+            if (!nuevaContrasena.equals(confirmarContrasena)) {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+                return; // Detener la actualización si las contraseñas no coinciden
+            }
 
-        JOptionPane.showMessageDialog(null, "El usuario ha sido actualizado exitosamente");
-        limpiar();
-        cargarDatosDesdeArchivo();
-        filtrarDatos("", "", "");
-        
-    }
+            // Validar contraseña
+            if (nuevaContrasena.length() < 8 || !tieneMayusculaYNumeros(nuevaContrasena)) {
+                JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
+                return; // Detener la actualización si la contraseña no cumple los requisitos
+            }
+
+            // Validar si el nuevo loginusr ya existe
+            String nuevoLoginUsr = nuevoUsuarioData[0];
+            if (!nuevoLoginUsr.equals(loginUsuarioOriginal) && CrudArchivos.buscarUsuarios(nuevoLoginUsr)) {
+                JOptionPane.showMessageDialog(null, "El nuevo Loginusr ya existe en la base de datos.");
+                return; // Detener la actualización si el nuevo Loginusr ya existe
+            }
+            // Llama al método de actualización
+            actualizarUsuario(loginUsuarioOriginal, nuevoUsuarioData);
+
+            JOptionPane.showMessageDialog(null, "El usuario ha sido actualizado exitosamente");
+            limpiar();
+            cargarDatosDesdeArchivo();
+            filtrarDatos("", "", "");
+
+        }
     }//GEN-LAST:event_modifybtnActionPerformed
 
     private boolean tieneMayusculaYNumeros(String texto) {
-    boolean tieneMayuscula = false;
-    boolean tieneNumero = false;
-    
-    for (char c : texto.toCharArray()) {
-        if (Character.isUpperCase(c)) {
-            tieneMayuscula = true;
-        } else if (Character.isDigit(c)) {
-            tieneNumero = true;
+        boolean tieneMayuscula = false;
+        boolean tieneNumero = false;
+
+        for (char c : texto.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                tieneMayuscula = true;
+            } else if (Character.isDigit(c)) {
+                tieneNumero = true;
+            }
+
+            if (tieneMayuscula && tieneNumero) {
+                return true;
+            }
         }
-        
-        if (tieneMayuscula && tieneNumero) {
-            return true;
-        }
+
+        return false;
     }
-    
-    return false;
-}
 
 
     private void opcAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcAdminActionPerformed
@@ -628,8 +630,7 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void textLoginUsrKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textLoginUsrKeyReleased
-        
-        
+
         String filtroUsuario = textLoginUsr.getText().trim();
         String filtroNombre = txtNom.getText().trim();
         String filtroTipoAcceso = (opcNormal.isSelected()) ? opcNormal.getText() : (opcAdmin.isSelected()) ? opcAdmin.getText() : "";
@@ -637,7 +638,7 @@ public class Usuarios extends javax.swing.JFrame {
         filtrarDatos(filtroUsuario, filtroNombre, filtroTipoAcceso);    }//GEN-LAST:event_textLoginUsrKeyReleased
 
     private void txtNomKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomKeyReleased
-      
+
         String filtroUsuario = textLoginUsr.getText().trim();
         String filtroNombre = txtNom.getText().trim();
         String filtroTipoAcceso = (opcNormal.isSelected()) ? opcNormal.getText() : (opcAdmin.isSelected()) ? opcAdmin.getText() : "";
@@ -647,89 +648,87 @@ public class Usuarios extends javax.swing.JFrame {
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
 
     }//GEN-LAST:event_formMouseEntered
-    
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+        dispose();
+            }//GEN-LAST:event_jButton1ActionPerformed
+
     private void cargarDatosDesdeArchivo() {
-        
+
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel(); // Obtén el modelo de la tabla
         modelo.setRowCount(0); // Limpia los datos existentes en la tabla
-        
-        
-        
+
         String[][] ListaUsr = buscarUsuarios();
-        
+
         for (int i = 0; i < cantidadRegistros(); i++) {
-            
+
             modelo.addRow(ListaUsr[i]);
         }
     }
 
 //-------------------------------------------------------------------------------- Filtro de datos
-
     private void filtrarDatos(String filtroUsuario, String filtroNombre, String filtroTipoAcceso) {
-     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    jTable1.setRowSorter(sorter);
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        jTable1.setRowSorter(sorter);
 
-    List<RowFilter<Object, Object>> filters = new ArrayList<>();
+        List<RowFilter<Object, Object>> filters = new ArrayList<>();
 
-    if (!filtroUsuario.isEmpty()) {
-        filters.add(RowFilter.regexFilter("(?i)" + filtroUsuario, 0)); // Filtrar por columna de Usuario
-    }
-
-    if (!filtroNombre.isEmpty()) {
-        filters.add(RowFilter.regexFilter("(?i)" + filtroNombre, 2)); // Filtrar por columna de Nombre
-    }
-
-    if (!filtroTipoAcceso.isEmpty()) {
-        filters.add(RowFilter.regexFilter("(?i)" + filtroTipoAcceso, 5)); // Filtrar por columna de Tipo de Acceso
-    }
-
-    sorter.setRowFilter(RowFilter.andFilter(filters));
-
-    cargarDatosDesdeArchivo();
-    }
-    
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                    
-          int selectedRow = jTable1.getSelectedRow();
-
-    if (selectedRow >= 0) {
-        if (camposBloqueados) {
-            bloquearCampos(false);
+        if (!filtroUsuario.isEmpty()) {
+            filters.add(RowFilter.regexFilter("(?i)" + filtroUsuario, 0)); // Filtrar por columna de Usuario
         }
 
-        // Obtener los valores de la fila seleccionada
-        String loginUsuario = jTable1.getValueAt(selectedRow, 0).toString();
-        String contrasena = jTable1.getValueAt(selectedRow, 1).toString();
-        String nombre = jTable1.getValueAt(selectedRow, 2).toString();
-        String apellidos = jTable1.getValueAt(selectedRow, 3).toString();
-        String tipoAcceso = jTable1.getValueAt(selectedRow, 4).toString();
-        String email = jTable1.getValueAt(selectedRow, 5).toString();
-
-        // Mostrar los valores en los campos correspondientes
-        textLoginUsr.setText(loginUsuario);
-        txtNom.setText(nombre);
-        textApellidos.setText(apellidos);
-        textPass.setText(contrasena);
-        textPass2.setText(contrasena);
-        textEmail.setText(email);
-
-        if (tipoAcceso.equals("Normal")) {
-            opcNormal.setSelected(true);
-            opcAdmin.setSelected(false);
-        } else if (tipoAcceso.equals("Admin")) {
-            opcNormal.setSelected(false);
-            opcAdmin.setSelected(true);
+        if (!filtroNombre.isEmpty()) {
+            filters.add(RowFilter.regexFilter("(?i)" + filtroNombre, 2)); // Filtrar por columna de Nombre
         }
 
-        // Almacenar el valor de loginusr en la variable global
-        loginSeleccionado = loginUsuario;
-    }
-    
-}
-    
+        if (!filtroTipoAcceso.isEmpty()) {
+            filters.add(RowFilter.regexFilter("(?i)" + filtroTipoAcceso, 5)); // Filtrar por columna de Tipo de Acceso
+        }
 
-    
-    
+        sorter.setRowFilter(RowFilter.andFilter(filters));
+
+        cargarDatosDesdeArchivo();
+    }
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            if (camposBloqueados) {
+                bloquearCampos(false);
+            }
+
+            // Obtener los valores de la fila seleccionada
+            String loginUsuario = jTable1.getValueAt(selectedRow, 0).toString();
+            String contrasena = jTable1.getValueAt(selectedRow, 1).toString();
+            String nombre = jTable1.getValueAt(selectedRow, 2).toString();
+            String apellidos = jTable1.getValueAt(selectedRow, 3).toString();
+            String tipoAcceso = jTable1.getValueAt(selectedRow, 4).toString();
+            String email = jTable1.getValueAt(selectedRow, 5).toString();
+
+            // Mostrar los valores en los campos correspondientes
+            textLoginUsr.setText(loginUsuario);
+            txtNom.setText(nombre);
+            textApellidos.setText(apellidos);
+            textPass.setText(contrasena);
+            textPass2.setText(contrasena);
+            textEmail.setText(email);
+
+            if (tipoAcceso.equals("Normal")) {
+                opcNormal.setSelected(true);
+                opcAdmin.setSelected(false);
+            } else if (tipoAcceso.equals("Admin")) {
+                opcNormal.setSelected(false);
+                opcAdmin.setSelected(true);
+            }
+
+            // Almacenar el valor de loginusr en la variable global
+            loginSeleccionado = loginUsuario;
+        }
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -737,10 +736,12 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JButton buscarButton;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton eliminarBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -1,5 +1,6 @@
 package controlador;
 
+import views.MantenimientoDoc;
 import views.PantallaLogin;
 import views.Usuarios;
 
@@ -9,10 +10,10 @@ public class Main {
     
     public static void main(String[] args) {
         
-       PantallaLogin pl = new PantallaLogin();
-       pl.setVisible(true);
+       PantallaLogin IP = new PantallaLogin();
+            IP.setVisible(true);
              
-          
+         
         
         
     }
