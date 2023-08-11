@@ -1,1 +1,5 @@
-1;aDRIAN EL LOCO;Detalles;1;12;Activo;2023-08-09;19:15:41;2.5;200;23
+
+1;Activos;General;1;0;Activo;2023-08-11;15:38:29;50;50;50
+11;Activos Circulantes;General;2;1;Activo;2023-08-11;15:56:55;0;0;0
+1101;Efectivo en Caja;General;3;11;Activo;2023-08-11;15:57:38;0;0;0
+11011;Caja Chica;General;4;1101;Activo;2023-08-11;16:00:11;0;0;0

@@ -208,11 +208,21 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         tffecha.setEditable(false);
         tffecha.setBorder(null);
         tffecha.setOpaque(false);
+        tffecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tffechaActionPerformed(evt);
+            }
+        });
         jPanel1.add(tffecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 150, 30));
 
         tfhora.setEditable(false);
         tfhora.setBorder(null);
         tfhora.setOpaque(false);
+        tfhora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfhoraActionPerformed(evt);
+            }
+        });
         jPanel1.add(tfhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 150, 30));
 
         tfdebito.setText("0");
@@ -695,6 +705,14 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
     private void tfcuentapadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfcuentapadreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfcuentapadreActionPerformed
+
+    private void tffechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tffechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tffechaActionPerformed
+
+    private void tfhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfhoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfhoraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

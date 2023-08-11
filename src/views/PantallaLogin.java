@@ -27,6 +27,7 @@ public class PantallaLogin extends javax.swing.JFrame {
     public PantallaLogin() {
         initComponents();
         this.interfazP = interfazP;
+        
         setTitle("InteliAccounting");
         setResizable(false);
 
@@ -234,21 +235,28 @@ public class PantallaLogin extends javax.swing.JFrame {
             // Verificar si el usuario tiene permisos normales
             boolean permisosNormales = CrudArchivos.permisosUsuarios(usuario);
 
-            if (CrudArchivos.buscarUsuarios(usuario, contra)) {
-                InterfazP ip = new InterfazP();
+            
+      if (CrudArchivos.buscarUsuarios(usuario, contra)) {
+        InterfazP ip = new InterfazP();
 
-                if (!permisosNormales) {
-                    ip.ocultarMenu(); // Llamar al método para ocultar el JMenu en InterfazP
-                }
-
-                ip.setWelcomeMessage("Welcome, " + usuario + "!"); // Mostrar el nombre de usuario
-                dispose();
-                ip.setVisible(true);
-
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Nombre o Contraseña no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+        if (!permisosNormales) {
+            ip.ocultarMenu();
         }
+
+        String[] userDetails = CrudArchivos.obtenerDetallesUsuario(usuario); // Agrega este método
+        if (userDetails != null && userDetails.length >= 4) {
+            String nombre = userDetails[2];
+            String apellido = userDetails[3];
+            ip.setWelcomeMessage("Bienvenido, " + nombre + " " + apellido + "!"); // Establecer mensaje de bienvenida con nombre y apellido
+
+        }
+
+        dispose();
+        ip.setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(rootPane, "Nombre o Contraseña no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
     }//GEN-LAST:event_btIniSesActionPerformed
 

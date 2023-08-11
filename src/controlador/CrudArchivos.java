@@ -291,4 +291,29 @@ public class CrudArchivos {
         e.printStackTrace();
     }
 }
+    public static String[] obtenerDetallesUsuario(String nombreUsuario) {
+        String[] userDetails = null;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("Usuarios.txt"));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length >= 4 && parts[0].equals(nombreUsuario)) {
+                    userDetails = parts;
+                    break;
+                }
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return userDetails;
+    }
+
+    
+    
 }

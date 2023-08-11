@@ -75,8 +75,8 @@ public class InterfazP extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/LOGO IA.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 741, 410));
 
-        AA.setFont(new java.awt.Font("Times New Roman", 2, 25)); // NOI18N
-        jPanel1.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 40));
+        AA.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
+        jPanel1.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 40));
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
