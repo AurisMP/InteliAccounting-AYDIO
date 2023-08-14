@@ -568,7 +568,7 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         tffecha.setVisible(false);
         lblfecha.setVisible(false);
         lblhora.setVisible(false);
-        tfhora.setVisible(false);
+        tfhora. setVisible(false);
         jSeparator10.setVisible(false);
         jSeparator8.setVisible(false);
         tfnumeroc.setText("");

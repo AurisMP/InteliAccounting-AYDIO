@@ -1,4 +1,3 @@
-
 1;Activos;General;1;0;Activo;2023-08-11;15:38:29;50;50;50
 11;Activos Circulantes;General;2;1;Activo;2023-08-11;15:56:55;0;0;0
 1101;Efectivo en Caja;General;3;11;Activo;2023-08-11;15:57:38;0;0;0

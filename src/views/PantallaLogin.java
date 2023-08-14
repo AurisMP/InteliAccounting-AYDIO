@@ -25,6 +25,7 @@ public class PantallaLogin extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public PantallaLogin() {
+        
         initComponents();
         this.interfazP = interfazP;
         
