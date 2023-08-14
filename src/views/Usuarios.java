@@ -713,7 +713,7 @@ public class Usuarios extends javax.swing.JFrame {
             txtNom.setText(nombre);
             textApellidos.setText(apellidos);
             textPass.setText(contrasena);
-            textPass2.setText(contrasena);
+            
             textEmail.setText(email);
 
             if (tipoAcceso.equals("Normal")) {

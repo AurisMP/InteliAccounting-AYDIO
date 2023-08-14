@@ -102,63 +102,51 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Numero de cuenta");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 140, 20));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Descripcion de la cuenta");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 190, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tipo de cuenta");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Cuenta Padre");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nivel de cuenta");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 120, -1));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Grupo de cuenta");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, -1, -1));
 
         lblfecha.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        lblfecha.setForeground(new java.awt.Color(0, 0, 0));
         lblfecha.setText("Fecha de creacion");
         jPanel1.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 140, -1));
 
         lblhora.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        lblhora.setForeground(new java.awt.Color(0, 0, 0));
         lblhora.setText("Hora de creacion");
         jPanel1.add(lblhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 130, -1));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Debito acomulado de cuenta");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Credito acomulado de cuenta");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Balanse de cuenta");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 470, 140, -1));
 
         tfnumeroc.setToolTipText("");
         tfnumeroc.setBorder(null);
-        tfnumeroc.setOpaque(false);
         tfnumeroc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfnumerocFocusLost(evt);
@@ -180,7 +168,6 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         jPanel1.add(tfnumeroc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 180, 30));
 
         tfdescrip.setBorder(null);
-        tfdescrip.setOpaque(false);
         tfdescrip.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfdescripKeyReleased(evt);
@@ -189,7 +176,6 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         jPanel1.add(tfdescrip, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 180, 30));
 
         tfcuentapadre.setBorder(null);
-        tfcuentapadre.setOpaque(false);
         tfcuentapadre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfcuentapadreActionPerformed(evt);
@@ -207,7 +193,6 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
 
         tffecha.setEditable(false);
         tffecha.setBorder(null);
-        tffecha.setOpaque(false);
         tffecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tffechaActionPerformed(evt);
@@ -217,7 +202,6 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
 
         tfhora.setEditable(false);
         tfhora.setBorder(null);
-        tfhora.setOpaque(false);
         tfhora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfhoraActionPerformed(evt);
@@ -225,10 +209,10 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         });
         jPanel1.add(tfhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 150, 30));
 
+        tfdebito.setEditable(false);
         tfdebito.setText("0");
         tfdebito.setToolTipText("");
         tfdebito.setBorder(null);
-        tfdebito.setOpaque(false);
         tfdebito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfdebitoActionPerformed(evt);
@@ -241,9 +225,9 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         });
         jPanel1.add(tfdebito, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 340, 180, 30));
 
+        tfcredito.setEditable(false);
         tfcredito.setText("0");
         tfcredito.setBorder(null);
-        tfcredito.setOpaque(false);
         tfcredito.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfcreditoKeyTyped(evt);
@@ -251,9 +235,9 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         });
         jPanel1.add(tfcredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, 180, 30));
 
+        tfbalance.setEditable(false);
         tfbalance.setText("0");
         tfbalance.setBorder(null);
-        tfbalance.setOpaque(false);
         tfbalance.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfbalanceKeyTyped(evt);
@@ -272,7 +256,6 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 530, 120, 30));
 
         titulo.setFont(new java.awt.Font("Yu Gothic", 2, 16)); // NOI18N
-        titulo.setForeground(new java.awt.Color(0, 0, 0));
         titulo.setText("Creando");
         jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 540, 70, -1));
 
@@ -296,7 +279,6 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         jPanel1.add(tftipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 180, 30));
 
         lblnoedit.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        lblnoedit.setForeground(new java.awt.Color(0, 0, 0));
         lblnoedit.setText("Esta cuenta tiene balance no puede ser editada");
         jPanel1.add(lblnoedit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, -1, 23));
 
@@ -316,12 +298,10 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 370, 180, 20));
         jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 150, 20));
 
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/impuesto (1).png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, 150));
 
         jLabel8.setFont(new java.awt.Font("Gentium Basic", 2, 30)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Catalogo de Cuentas");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 240, 40));
 
@@ -579,9 +559,9 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         tfgrupo.setSelectedItem(ABORT);
         tffecha.setText("");
         tfhora.setText("");
-        tfdebito.setText("");
-        tfcredito.setText("");
-        tfbalance.setText("");
+        tfdebito.setText("0");
+        tfcredito.setText("0");
+        tfbalance.setText("0");
         tfdescrip.enable(true);
         tftipo.enable(true);
         tfnivel.enable(true);
