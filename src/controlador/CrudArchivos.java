@@ -166,14 +166,19 @@ public class CrudArchivos {
         try {
             BufferedReader br = new BufferedReader(new FileReader("Usuarios.txt")); // Cambia el nombre del archivo
             String line;
-            
+            String ast="";
             while ((line = br.readLine()) != null) {
                 
                
                String[] datosUsuarios= line.split(";");
                listaUsr[cont]=datosUsuarios;
+                for (int i = 0; i < datosUsuarios[1].length(); i++) {
+                    ast=ast+"*";
+                    
+                }
+                listaUsr[cont][1]=ast;
                cont++;    
-                
+               ast="";
                 
                 
             }
