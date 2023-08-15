@@ -27,7 +27,6 @@ public class Transacciones extends javax.swing.JFrame {
 
     private Set<String> registrosActualizados = new HashSet<>();
 
-    
     private String usuarioLoggedIn; // Variable para guardar el nombre de usuario
 
     public Transacciones() {
@@ -86,6 +85,8 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        Comentarios = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -157,8 +158,8 @@ public class Transacciones extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
-        jLabel5.setText("Debito :");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jLabel5.setText("Comentarios");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
 
         Limpiar.setText("Limpiar");
         Limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -217,22 +218,22 @@ public class Transacciones extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "#", "Num. Documento", "Tipo Documento", "Fecha Documento", "Hecho por", "Credito", "Debito"
+                "#", "Num. Documento", "Tipo Documento", "Fecha Documento", "Hecho por", "Credito", "Debito", "Comentario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -241,7 +242,18 @@ public class Transacciones extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 830, 170));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 880, 170));
+
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel11.setText("Debito :");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+
+        Comentarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComentariosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Comentarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 260, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -279,46 +291,47 @@ private void cargarUsername() {
             e.printStackTrace();
         }
     }
-    
+
     public void setWelcomeMessage(String message) {
         AA.setText(message);
     }
 
     private void BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNActionPerformed
-           String nroDocu = Doc.getText();
-    String cuentaCont = CuentaCont.getText();
-    String transaccion = Trans.getText();
-    String tipoDoc = (String) TIpoDoc.getSelectedItem();
-    String fecha = FECHA.getText();
-    String usuario = usuarioLoggedIn; // Obtener el nombre de usuario
+        String nroDocu = Doc.getText();
+        String cuentaCont = CuentaCont.getText();
+        String transaccion = Trans.getText();
+        String tipoDoc = (String) TIpoDoc.getSelectedItem();
+        String fecha = FECHA.getText();
+        String usuario = usuarioLoggedIn; // Obtener el nombre de usuario
+        String comentario = Comentarios.getText(); // Obtener el comentario
 
-    if (nroDocu.isEmpty() || cuentaCont.isEmpty() || transaccion.isEmpty() || tipoDoc.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios. Complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
-    } else {
-        try {
-            if (registrosActualizados.contains(nroDocu)) {
-                JOptionPane.showMessageDialog(this, "Transacción ya ha sido actualizada.", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                BufferedWriter writer = new BufferedWriter(new FileWriter("Transaccion contable.txt", true));
-                String nuevoRegistro = nroDocu + ";" + cuentaCont + ";" + transaccion + ";" + tipoDoc + ";" + fecha + ";" + usuario + "\n";
-                writer.write(nuevoRegistro);
-                writer.close();
-                
-                JOptionPane.showMessageDialog(this, "Transacción guardada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                
-                // Si no ha sido actualizada previamente, permite modificarla
-                registrosActualizados.add(nroDocu); // Agregar al conjunto de registros actualizados
-                
-                // Realizar acciones adicionales si es necesario
-                
-                LimpiarCampos();
+        if (nroDocu.isEmpty() || cuentaCont.isEmpty() || transaccion.isEmpty() || tipoDoc.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios. Complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                if (validarNumeroEnTransacciones(nroDocu)) {
+                    JOptionPane.showMessageDialog(this, "Este registro ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                    LimpiarCampos();
+                } else {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("Transaccion contable.txt", true));
+                    String nuevoRegistro = nroDocu + ";" + cuentaCont + ";" + transaccion + ";" + tipoDoc + ";" + fecha + ";" + usuario + ";" + comentario + "\n";
+                    writer.write(nuevoRegistro);
+                    writer.close();
+
+                    JOptionPane.showMessageDialog(this, "Transacción guardada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Si no ha sido actualizada previamente, permite modificarla
+                    registrosActualizados.add(nroDocu); // Agregar al conjunto de registros actualizados
+                    
+                    LimpiarCampos();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al guardar la transacción.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al guardar la transacción.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    }
+
     private boolean validarNumeroEnCatalogo(String numero) {
         try {
             BufferedReader br = new BufferedReader(new FileReader("catalogo.txt"));
@@ -348,38 +361,38 @@ private void cargarUsername() {
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void DocFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocFocusLost
-         String nroDocu = Doc.getText();
+        String nroDocu = Doc.getText();
 
-    if (!nroDocu.isEmpty()) {
-        if (validarNumeroEnCatalogo(nroDocu)) {
-            try {
-                String[] datos = cargarDatosDesdeArchivo(nroDocu);
-                if (datos != null) {
-                    CuentaCont.setText(datos[1]);
-                    Trans.setText(datos[2]);
-                    TIpoDoc.setSelectedItem(datos[3]);
-                    FECHA.setText(datos[4]);
-                    // ... Continuar con los demás campos
-                    
-                    Object[] options = {"Crear nuevo", "Modificar"};
-                    int option = JOptionPane.showOptionDialog(this, "La transferencia existe. ¿Qué desea hacer?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (!nroDocu.isEmpty()) {
+            if (validarNumeroEnCatalogo(nroDocu)) {
+                try {
+                    String[] datos = cargarDatosDesdeArchivo(nroDocu);
+                    if (datos != null) {
+                        CuentaCont.setText(datos[1]);
+                        Trans.setText(datos[2]);
+                        TIpoDoc.setSelectedItem(datos[3]);
+                        FECHA.setText(datos[4]);
+                        // ... Continuar con los demás campos
 
-                    if (option == 1) {
-                        
-                        ModificacionForm modForm = new ModificacionForm(nroDocu, datos[1], datos[2], datos[3], datos[4]);
-                    modForm.setVisible(true);
-                    } else if (option == 0) {
-                        LimpiarCampos(); // Limpia los campos si se selecciona "Crear nuevo"
+                        Object[] options = {"Crear nuevo", "Modificar"};
+                        int option = JOptionPane.showOptionDialog(this, "La transferencia existe. ¿Qué desea hacer?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+                        if (option == 1) {
+
+                            ModificacionForm modForm = new ModificacionForm(nroDocu, datos[1], datos[2], datos[3], datos[4]);
+                            modForm.setVisible(true);
+                        } else if (option == 0) {
+                            LimpiarCampos(); // Limpia los campos si se selecciona "Crear nuevo"
+                        }
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                // El número de documento no existe en el catálogo
+                AA.setText("Documento no encontrado en el catálogo. Puede crearlo.");
             }
-        } else {
-            // El número de documento no existe en el catálogo
-            AA.setText("Documento no encontrado en el catálogo. Puede crearlo.");
         }
-    }
     }//GEN-LAST:event_DocFocusLost
 
     private void DocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocActionPerformed
@@ -431,7 +444,9 @@ private void cargarUsername() {
         }
 
         return false; // El número no existe en el archivo
-    }    private String[] cargarDatosDesdeArchivo(String numeroDocumento) throws IOException {
+    }
+
+    private String[] cargarDatosDesdeArchivo(String numeroDocumento) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("Transaccion contable.txt"));
         String line;
 
@@ -460,7 +475,7 @@ private void cargarUsername() {
         char caracter = evt.getKeyChar();
 
         if (((caracter < '0' || caracter > '9'))
-            && (caracter != KeyEvent.VK_BACK_SPACE)) {
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
         }
     }//GEN-LAST:event_CuentaContKeyTyped
@@ -484,6 +499,10 @@ private void cargarUsername() {
         // TODO add your handling code here:
     }//GEN-LAST:event_DebitoActionPerformed
 
+    private void ComentariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComentariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComentariosActionPerformed
+
     private void LimpiarCampos() {
         Doc.setText("");
         CuentaCont.setText("");
@@ -494,6 +513,7 @@ private void cargarUsername() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AA;
     private javax.swing.JButton BTN;
+    private javax.swing.JTextField Comentarios;
     private javax.swing.JTextField CuentaCont;
     private javax.swing.JTextField Debito;
     private javax.swing.JTextField Doc;
@@ -503,6 +523,7 @@ private void cargarUsername() {
     private javax.swing.JTextField Trans;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
