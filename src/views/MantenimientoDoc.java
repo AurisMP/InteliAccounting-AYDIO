@@ -70,6 +70,11 @@ public class MantenimientoDoc extends javax.swing.JFrame {
 
         Cod.setBorder(null);
         Cod.setOpaque(false);
+        Cod.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CodFocusLost(evt);
+            }
+        });
         jPanel1.add(Cod, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 240, 32));
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 20, -1, -1));
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 26, 108, 31));
@@ -130,7 +135,7 @@ public class MantenimientoDoc extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String codigo = Cod.getText();
         String desc = Des.getText();
-        boolean Modificar;
+
         if (!codigo.isEmpty() && !desc.isEmpty()) {
             try {
                 String filePath = "Mantenimiento de documento.txt";
@@ -140,49 +145,77 @@ public class MantenimientoDoc extends javax.swing.JFrame {
                 String contenidoArchivo = "";
                 if (archivo.exists()) {
                     contenidoArchivo = new String(Files.readAllBytes(archivo.toPath()));
-                    encontrado = contenidoArchivo.contains("Código: " + codigo);
+                    encontrado = contenidoArchivo.contains(codigo + ";");
                 }
-
-                FileWriter f = new FileWriter(filePath, true); // Usamos "true" para que agregue al final del archivo
-                BufferedWriter bw = new BufferedWriter(f);
 
                 if (encontrado) {
-                    // Modificar registro existente
-                    contenidoArchivo = contenidoArchivo.replaceAll("Código: " + codigo + ".*", "Modificando Código: " + codigo + ", Descripción: " + desc);
-                    bw.write(contenidoArchivo);
-                    jLabel4.setText("Modificando");
+                    JOptionPane.showMessageDialog(this, "El código ya existe en el archivo.", "Guardar", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    // Crear nuevo registro
-                    bw.write("Creando Código: " + codigo + ", Descripción: " + desc);
-                    jLabel4.setText("Creando");
+                    FileWriter f = new FileWriter(filePath, true); // Usamos "true" para que agregue al final del archivo
+                    BufferedWriter bw = new BufferedWriter(f);
+
+                    bw.write(codigo + ";" + desc);
+                    bw.newLine();
+                    bw.close();
+
+                    JOptionPane.showMessageDialog(this, "Datos guardados exitosamente.", "Guardar", JOptionPane.INFORMATION_MESSAGE);
                 }
-
-                bw.newLine();
-                bw.close();
-
-                JOptionPane.showMessageDialog(this, "Datos guardados exitosamente.", "Guardar", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Error al guardar los datos.", "Guardar", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese el código y la descripción.", "Guardar", JOptionPane.WARNING_MESSAGE);
         }
-
-        // Restaurar el estado a "Creando" para el próximo registro
-        Modificar = false;
-
+LimpiarCampos();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+     private void LimpiarCampos() {
+        Cod.setText("");
+        Des.setText("");
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Cod.setText("");
-        Des.setText("");
+        LimpiarCampos();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void CodFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CodFocusLost
+        String codigo = Cod.getText();
+
+        if (!codigo.isEmpty()) {
+            try {
+                String filePath = "Mantenimiento de documento.txt";
+                File archivo = new File(filePath);
+
+                boolean encontrado = false;
+                String contenidoArchivo = "";
+                if (archivo.exists()) {
+                    contenidoArchivo = new String(Files.readAllBytes(archivo.toPath()));
+                    String[] lineas = contenidoArchivo.split("\\n");
+                    for (String linea : lineas) {
+                        if (linea.startsWith(codigo + ";")) {
+                            String[] partes = linea.split(";");
+                            if (partes.length > 1) {
+                                Des.setText(partes[1]);
+                            }
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!encontrado) {
+                    Des.setText("");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_CodFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
