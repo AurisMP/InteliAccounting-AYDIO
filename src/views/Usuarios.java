@@ -6,6 +6,7 @@ package views;
 
 import controlador.CrudArchivos;
 import static controlador.CrudArchivos.actualizarUsuario;
+import static controlador.CrudArchivos.buscarUsr;
 import static controlador.CrudArchivos.eliminarUsuario;
 import static controlador.CrudArchivos.guardarUsuarios;
 import static controlador.CrudArchivos.buscarUsuarios;
@@ -694,6 +695,7 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
         int selectedRow = jTable1.getSelectedRow();
+        String[] listaUsr = new String[5];
 
         if (selectedRow >= 0) {
             if (camposBloqueados) {
@@ -702,30 +704,27 @@ public class Usuarios extends javax.swing.JFrame {
 
             // Obtener los valores de la fila seleccionada
             String loginUsuario = jTable1.getValueAt(selectedRow, 0).toString();
-            String contrasena = jTable1.getValueAt(selectedRow, 1).toString();
-            String nombre = jTable1.getValueAt(selectedRow, 2).toString();
-            String apellidos = jTable1.getValueAt(selectedRow, 3).toString();
-            String tipoAcceso = jTable1.getValueAt(selectedRow, 4).toString();
-            String email = jTable1.getValueAt(selectedRow, 5).toString();
-
-            // Mostrar los valores en los campos correspondientes
-            textLoginUsr.setText(loginUsuario);
-            txtNom.setText(nombre);
-            textApellidos.setText(apellidos);
-            textPass.setText(contrasena);
-            
-            textEmail.setText(email);
-
-            if (tipoAcceso.equals("Normal")) {
-                opcNormal.setSelected(true);
-                opcAdmin.setSelected(false);
-            } else if (tipoAcceso.equals("Admin")) {
-                opcNormal.setSelected(false);
-                opcAdmin.setSelected(true);
-            }
-
+           
             // Almacenar el valor de loginusr en la variable global
             loginSeleccionado = loginUsuario;
+
+            listaUsr = buscarUsr(loginUsuario);
+            
+            textLoginUsr.setText(listaUsr[0]);
+            textPass.setText(listaUsr[1]);
+            txtNom.setText(listaUsr[2]);
+            textApellidos.setText(listaUsr[3]);
+            
+            if(listaUsr[4].equals("Admin")){
+                
+                opcAdmin.setSelected(true);
+            
+            }
+            else{
+                opcNormal.setSelected(true);
+            }
+            
+            textEmail.setText(listaUsr[4]);
         }
 
     }

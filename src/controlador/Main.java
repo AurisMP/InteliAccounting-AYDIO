@@ -1,10 +1,8 @@
 package controlador;
 
-import views.Catalogo_cuenta;
-import views.MantenimientoDoc;
 import views.PantallaLogin;
-import views.Transacciones;
-import views.Usuarios;
+import views.PantallaRegistro;
+
 
 
 
@@ -12,8 +10,8 @@ public class Main {
     
     public static void main(String[] args) {
         
-       Catalogo_cuenta IP = new Catalogo_cuenta();
-            IP.setVisible(true);
+       PantallaLogin ip = new PantallaLogin();
+            ip.setVisible(true);
              
          
         

@@ -124,7 +124,37 @@ public class CrudArchivos {
         
         return encontrarUsr;
         }
-    
+    public static String[] buscarUsr(String loginUsr){
+        String[] listaUsr= new String[5];
+        
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("Usuarios.txt")); // Cambia el nombre del archivo
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                listaUsr = line.split(";");
+                
+                if(loginUsr.equals(listaUsr[0]) ){
+                    
+                    return listaUsr;
+                   
+                    }
+                
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < listaUsr.length; i++) {
+            System.out.println(listaUsr[i]);
+            
+        }
+        
+        return listaUsr;
+        
+        }
     
     
     public static boolean permisosUsuarios(String loginUsr){
