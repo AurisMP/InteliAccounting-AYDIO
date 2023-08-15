@@ -80,22 +80,33 @@ public class Transacciones extends javax.swing.JFrame {
         Doc = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         Debito = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 239, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
-        jLabel1.setText("Tipo Documento");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel1.setText("Tipo Documento :");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
-        labelFec.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
-        labelFec.setText("Fecha Documento");
-        jPanel1.add(labelFec, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, -1, -1));
+        labelFec.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        labelFec.setText("Fecha Documento :");
+        jPanel1.add(labelFec, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 30));
 
         TIpoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Ajuste", "Documento Interno", " " }));
-        jPanel1.add(TIpoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 244, 160, 30));
+        TIpoDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TIpoDocActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TIpoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 160, 30));
 
         AA.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         jPanel1.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 390, 60));
@@ -106,7 +117,7 @@ public class Transacciones extends javax.swing.JFrame {
                 BTNActionPerformed(evt);
             }
         });
-        jPanel1.add(BTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, -1, -1));
+        jPanel1.add(BTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
 
         CuentaCont.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -116,8 +127,13 @@ public class Transacciones extends javax.swing.JFrame {
                 CuentaContKeyTyped(evt);
             }
         });
-        jPanel1.add(CuentaCont, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, 160, 30));
+        jPanel1.add(CuentaCont, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 160, 30));
 
+        Trans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TransActionPerformed(evt);
+            }
+        });
         Trans.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TransKeyReleased(evt);
@@ -126,23 +142,23 @@ public class Transacciones extends javax.swing.JFrame {
                 TransKeyTyped(evt);
             }
         });
-        jPanel1.add(Trans, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 160, 30));
+        jPanel1.add(Trans, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 130, -1));
 
         FECHA.setEditable(false);
         FECHA.setEnabled(false);
-        jPanel1.add(FECHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 160, 30));
+        jPanel1.add(FECHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 150, 30));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
-        jLabel3.setText("Numero de Documento");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel3.setText("Numero de Documento:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
-        jLabel4.setText("Cuenta Contable");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel4.setText("Cuenta Contable :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
-        jLabel5.setText("Debito");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel5.setText("Debito :");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         Limpiar.setText("Limpiar");
         Limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +166,7 @@ public class Transacciones extends javax.swing.JFrame {
                 LimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+        jPanel1.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
         Doc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -170,12 +186,62 @@ public class Transacciones extends javax.swing.JFrame {
                 DocKeyTyped(evt);
             }
         });
-        jPanel1.add(Doc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 160, 30));
+        jPanel1.add(Doc, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 110, 30));
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
-        jLabel7.setText("Credito");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 280, -1, -1));
-        jPanel1.add(Debito, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 160, 30));
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel7.setText("Credito :");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        Debito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DebitoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Debito, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 130, -1));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel6.setText("Tipo Documento");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel8.setText("Tipo Documento");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel9.setText("Tipo Documento");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
+        jLabel10.setText("Tipo Documento");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "#", "Num. Documento", "Tipo Documento", "Fecha Documento", "Hecho por", "Credito", "Debito"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 830, 170));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -406,6 +472,18 @@ private void cargarUsername() {
         }
     }//GEN-LAST:event_CuentaContKeyReleased
 
+    private void TIpoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIpoDocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TIpoDocActionPerformed
+
+    private void TransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TransActionPerformed
+
+    private void DebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DebitoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DebitoActionPerformed
+
     private void LimpiarCampos() {
         Doc.setText("");
         CuentaCont.setText("");
@@ -424,11 +502,17 @@ private void cargarUsername() {
     private javax.swing.JComboBox<String> TIpoDoc;
     private javax.swing.JTextField Trans;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelFec;
     // End of variables declaration//GEN-END:variables
 
