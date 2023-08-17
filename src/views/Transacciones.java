@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,7 +33,7 @@ public class Transacciones extends javax.swing.JFrame {
     public Transacciones() {
         initComponents();
         cargarUsername();
-
+        actualizarTablaDesdeArchivo();
         setResizable(false);
         this.setLocationRelativeTo(null);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -198,6 +199,14 @@ public class Transacciones extends javax.swing.JFrame {
                 DebitoActionPerformed(evt);
             }
         });
+        Debito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DebitoKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DebitoKeyTyped(evt);
+            }
+        });
         jPanel1.add(Debito, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 130, -1));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
@@ -319,10 +328,11 @@ private void cargarUsername() {
                     writer.close();
 
                     JOptionPane.showMessageDialog(this, "Transacción guardada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    actualizarTablaDesdeArchivo();
 
                     // Si no ha sido actualizada previamente, permite modificarla
                     registrosActualizados.add(nroDocu); // Agregar al conjunto de registros actualizados
-                    
+
                     LimpiarCampos();
                 }
             } catch (IOException e) {
@@ -361,38 +371,7 @@ private void cargarUsername() {
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void DocFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocFocusLost
-        String nroDocu = Doc.getText();
 
-        if (!nroDocu.isEmpty()) {
-            if (validarNumeroEnCatalogo(nroDocu)) {
-                try {
-                    String[] datos = cargarDatosDesdeArchivo(nroDocu);
-                    if (datos != null) {
-                        CuentaCont.setText(datos[1]);
-                        Trans.setText(datos[2]);
-                        TIpoDoc.setSelectedItem(datos[3]);
-                        FECHA.setText(datos[4]);
-                        // ... Continuar con los demás campos
-
-                        Object[] options = {"Crear nuevo", "Modificar"};
-                        int option = JOptionPane.showOptionDialog(this, "La transferencia existe. ¿Qué desea hacer?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
-                        if (option == 1) {
-
-                            ModificacionForm modForm = new ModificacionForm(nroDocu, datos[1], datos[2], datos[3], datos[4]);
-                            modForm.setVisible(true);
-                        } else if (option == 0) {
-                            LimpiarCampos(); // Limpia los campos si se selecciona "Crear nuevo"
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                // El número de documento no existe en el catálogo
-                AA.setText("Documento no encontrado en el catálogo. Puede crearlo.");
-            }
-        }
     }//GEN-LAST:event_DocFocusLost
 
     private void DocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocActionPerformed
@@ -503,6 +482,19 @@ private void cargarUsername() {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComentariosActionPerformed
 
+    private void DebitoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DebitoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DebitoKeyPressed
+
+    private void DebitoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DebitoKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if (((caracter < '0' || caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_DebitoKeyTyped
+
     private void LimpiarCampos() {
         Doc.setText("");
         CuentaCont.setText("");
@@ -510,6 +502,43 @@ private void cargarUsername() {
         TIpoDoc.setSelectedIndex(0);
     }
 
+    private void actualizarTablaDesdeArchivo() {
+        DefaultTableModel model = new DefaultTableModel();
+        jTable1.setModel(model);
+        model.addColumn("#");
+        model.addColumn("Num. Documento");
+        model.addColumn("Tipo Documento");
+        model.addColumn("Fecha Documento");
+        model.addColumn("Hecho por");
+        model.addColumn("Credito");
+        model.addColumn("Debito");
+        model.addColumn("Comentario");
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("Transaccion contable.txt"));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length >= 7) {
+                    Object[] rowData = new Object[8];
+                    rowData[0] = model.getRowCount() + 1; // Número de fila
+                    rowData[1] = parts[0]; // Num. Documento
+                    rowData[2] = parts[3]; // Tipo Documento
+                    rowData[3] = parts[4]; // Fecha Documento
+                    rowData[4] = parts[5]; // Hecho por
+                    rowData[5] = parts[2]; // Credito
+                    rowData[6] = parts[1]; // Debito
+                    rowData[7] = parts[6]; // Comentario
+                    model.addRow(rowData);
+                }
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AA;
     private javax.swing.JButton BTN;

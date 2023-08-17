@@ -4,21 +4,16 @@
  */
 package views;
 
-import static controlador.CrudArchivos.buscarUsuarios;
-import static controlador.CrudArchivos.cantidadRegistros;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
-import static jdk.internal.org.jline.utils.Colors.s;
 
 /**
  *
@@ -35,8 +30,12 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         setTitle("InteliAccounting Documentos");
         setResizable(false);
         cargarDatosDesdeArchivo();
-        jTable1.getSelectionModel().addListSelectionListener(e -> tablaSeleccionada(e));
-        Modificar.setEnabled(false); // Inhabilitar el botón de modificar al inicio
+        jTable1.getSelectionModel().addListSelectionListener(e -> {
+            tablaSeleccionada(e);
+            Borrar.setEnabled(e.getFirstIndex() >= 0); // Habilitar el botón de borrar si hay una fila seleccionada
+        });
+        Modificar.setEnabled(false);
+        Borrar.setEnabled(false);
 
     }
 
@@ -65,7 +64,7 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         Borrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        Enviar = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
@@ -160,20 +159,21 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
         }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 730, 200));
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/enviar.png"))); // NOI18N
-        jButton1.setText("  Enviar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Enviar.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
+        Enviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/enviar.png"))); // NOI18N
+        Enviar.setText("  Enviar");
+        Enviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                EnviarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, 130, 40));
+        jPanel1.add(Enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, 130, 40));
 
         Modificar.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
         Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/editar.png"))); // NOI18N
@@ -191,8 +191,8 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void cargarDatosDesdeArchivo() {
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel(); // Obtén el modelo de la tabla
-        modelo.setRowCount(0); // Limpia los datos existentes en la tabla
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
 
         try {
             String filePath = "Mantenimiento de documento.txt";
@@ -221,7 +221,7 @@ public class MantenimientoDoc extends javax.swing.JFrame {
     }
 
     private void tablaSeleccionada(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting()) { // Evita ejecutar el código dos veces por un único evento
+        if (!e.getValueIsAdjusting()) {
             int selectedRow = jTable1.getSelectedRow();
             if (selectedRow >= 0) {
                 String codigo = jTable1.getValueAt(selectedRow, 0).toString();
@@ -229,13 +229,15 @@ public class MantenimientoDoc extends javax.swing.JFrame {
 
                 Cod.setText(codigo);
                 Des.setText(descripcion);
-                Modificar.setEnabled(true); // Habilitar el botón de modificar
+                Modificar.setEnabled(true);
+                Borrar.setEnabled(true); // Habilitar el botón de borrar
             } else {
-                Modificar.setEnabled(false); // Inhabilitar el botón de modificar si no hay fila seleccionada
+                Modificar.setEnabled(false);
+                Borrar.setEnabled(false); // Inhabilitar el botón de borrar si no hay fila seleccionada
             }
         }
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarActionPerformed
         String codigo = Cod.getText();
         String desc = Des.getText();
 
@@ -262,6 +264,7 @@ public class MantenimientoDoc extends javax.swing.JFrame {
                     bw.close();
 
                     JOptionPane.showMessageDialog(this, "Datos guardados exitosamente.", "Guardar", JOptionPane.INFORMATION_MESSAGE);
+                    LimpiarCampos();
 
                 }
             } catch (IOException e) {
@@ -270,10 +273,10 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese el código y la descripción.", "Guardar", JOptionPane.WARNING_MESSAGE);
         }
-        LimpiarCampos();
         cargarDatosDesdeArchivo();
+        Borrar.setEnabled(false);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_EnviarActionPerformed
 
     private void LimpiarCampos() {
         Cod.setText("");
@@ -286,50 +289,50 @@ public class MantenimientoDoc extends javax.swing.JFrame {
 
     private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(
-        this,
-        "¿Está seguro de que desea eliminar los datos?",
-        "Confirmar Borrado",
-        JOptionPane.YES_NO_OPTION
-    );
+                this,
+                "¿Está seguro de que desea eliminar los datos?",
+                "Confirmar Borrado",
+                JOptionPane.YES_NO_OPTION
+        );
 
-    if (confirmacion == JOptionPane.YES_OPTION) {
-        String codigo = Cod.getText();
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            String codigo = Cod.getText();
 
-        if (!codigo.isEmpty()) {
-            try {
-                String filePath = "Mantenimiento de documento.txt";
-                File archivo = new File(filePath);
+            if (!codigo.isEmpty()) {
+                try {
+                    String filePath = "Mantenimiento de documento.txt";
+                    File archivo = new File(filePath);
 
-                if (archivo.exists()) {
-                    String contenidoArchivo = new String(Files.readAllBytes(archivo.toPath()));
-                    String nuevoContenido = "";
+                    if (archivo.exists()) {
+                        String contenidoArchivo = new String(Files.readAllBytes(archivo.toPath()));
+                        String nuevoContenido = "";
 
-                    String[] lineas = contenidoArchivo.split("\\n");
-                    for (String linea : lineas) {
-                        if (!linea.startsWith(codigo + ";")) {
-                            nuevoContenido += linea + "\n";
+                        String[] lineas = contenidoArchivo.split("\\n");
+                        for (String linea : lineas) {
+                            if (!linea.startsWith(codigo + ";")) {
+                                nuevoContenido += linea + "\n";
+                            }
                         }
+
+                        FileWriter f = new FileWriter(filePath);
+                        BufferedWriter bw = new BufferedWriter(f);
+
+                        bw.write(nuevoContenido);
+                        bw.close();
+
+                        JOptionPane.showMessageDialog(this, "Datos borrados exitosamente.", "Borrar", JOptionPane.INFORMATION_MESSAGE);
+                        cargarDatosDesdeArchivo();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El archivo no existe.", "Borrar", JOptionPane.WARNING_MESSAGE);
                     }
-
-                    FileWriter f = new FileWriter(filePath);
-                    BufferedWriter bw = new BufferedWriter(f);
-
-                    bw.write(nuevoContenido);
-                    bw.close();
-
-                    JOptionPane.showMessageDialog(this, "Datos borrados exitosamente.", "Borrar", JOptionPane.INFORMATION_MESSAGE);
-                    cargarDatosDesdeArchivo();
-                } else {
-                    JOptionPane.showMessageDialog(this, "El archivo no existe.", "Borrar", JOptionPane.WARNING_MESSAGE);
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, "Error al borrar los datos.", "Borrar", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error al borrar los datos.", "Borrar", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese el código.", "Borrar", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese el código.", "Borrar", JOptionPane.WARNING_MESSAGE);
+            LimpiarCampos();
         }
-        LimpiarCampos();
-    }
 
     }//GEN-LAST:event_BorrarActionPerformed
 
@@ -412,7 +415,10 @@ public class MantenimientoDoc extends javax.swing.JFrame {
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        LimpiarCampos();
+        Modificar.setEnabled(false);
+        Borrar.setEnabled(false);
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
@@ -420,8 +426,8 @@ public class MantenimientoDoc extends javax.swing.JFrame {
     private javax.swing.JButton Borrar;
     private javax.swing.JTextField Cod;
     private javax.swing.JTextField Des;
+    private javax.swing.JButton Enviar;
     private javax.swing.JButton Modificar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
