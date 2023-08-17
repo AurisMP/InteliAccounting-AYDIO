@@ -4,14 +4,20 @@
  */
 package views;
 
+import static controlador.CrudArchivos.buscarUsuarios;
+import static controlador.CrudArchivos.cantidadRegistros;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
 import static jdk.internal.org.jline.utils.Colors.s;
 
 /**
@@ -28,6 +34,9 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setTitle("InteliAccounting Documentos");
         setResizable(false);
+        cargarDatosDesdeArchivo();
+        jTable1.getSelectionModel().addListSelectionListener(e -> tablaSeleccionada(e));
+        Modificar.setEnabled(false); // Inhabilitar el botón de modificar al inicio
 
     }
 
@@ -46,14 +55,18 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         Des = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        Borrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        Modificar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -75,7 +88,7 @@ public class MantenimientoDoc extends javax.swing.JFrame {
                 CodFocusLost(evt);
             }
         });
-        jPanel1.add(Cod, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 240, 32));
+        jPanel1.add(Cod, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 330, 32));
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 20, -1, -1));
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 26, 108, 31));
 
@@ -84,31 +97,21 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         jLabel2.setText("Descripcion");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/enviar.png"))); // NOI18N
-        jButton1.setText("Enviar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, -1, 36));
-
-        jButton2.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/borrar.png"))); // NOI18N
-        jButton2.setText("Limpiar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, 36));
-
         Des.setBorder(null);
         Des.setOpaque(false);
-        jPanel1.add(Des, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 235, 32));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 240, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 240, 20));
+        jPanel1.add(Des, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 320, 32));
+
+        jButton4.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/borrar.png"))); // NOI18N
+        jButton4.setText("Limpiar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 120, 40));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 320, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 320, 20));
 
         jButton3.setFont(new java.awt.Font("Dubai Medium", 3, 11)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/salida.png"))); // NOI18N
@@ -118,20 +121,120 @@ public class MantenimientoDoc extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 80, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 80, 40));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/examen.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 60, 50));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 60, 50));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/impuesto (2).png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 60, 50));
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 560, 40));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 60, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 380));
+        Borrar.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
+        Borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/desarrollo-de-producto.png"))); // NOI18N
+        Borrar.setText("Borrar");
+        Borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Borrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, 40));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Codigo", "Descripcion"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 730, 200));
+
+        jButton1.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/enviar.png"))); // NOI18N
+        jButton1.setText("  Enviar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, 130, 40));
+
+        Modificar.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
+        Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/editar.png"))); // NOI18N
+        Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, -1, 40));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 730, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void cargarDatosDesdeArchivo() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel(); // Obtén el modelo de la tabla
+        modelo.setRowCount(0); // Limpia los datos existentes en la tabla
 
+        try {
+            String filePath = "Mantenimiento de documento.txt";
+            File archivo = new File(filePath);
+
+            if (archivo.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(archivo));
+                String linea;
+
+                while ((linea = br.readLine()) != null) {
+                    String[] partes = linea.split(";");
+                    if (partes.length >= 2) {
+                        String codigo = partes[0];
+                        String descripcion = partes[1];
+                        modelo.addRow(new Object[]{codigo, descripcion});
+                    }
+                }
+
+                br.close();
+            } else {
+                System.out.println("El archivo no existe.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void tablaSeleccionada(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) { // Evita ejecutar el código dos veces por un único evento
+            int selectedRow = jTable1.getSelectedRow();
+            if (selectedRow >= 0) {
+                String codigo = jTable1.getValueAt(selectedRow, 0).toString();
+                String descripcion = jTable1.getValueAt(selectedRow, 1).toString();
+
+                Cod.setText(codigo);
+                Des.setText(descripcion);
+                Modificar.setEnabled(true); // Habilitar el botón de modificar
+            } else {
+                Modificar.setEnabled(false); // Inhabilitar el botón de modificar si no hay fila seleccionada
+            }
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String codigo = Cod.getText();
         String desc = Des.getText();
@@ -159,6 +262,7 @@ public class MantenimientoDoc extends javax.swing.JFrame {
                     bw.close();
 
                     JOptionPane.showMessageDialog(this, "Datos guardados exitosamente.", "Guardar", JOptionPane.INFORMATION_MESSAGE);
+
                 }
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Error al guardar los datos.", "Guardar", JOptionPane.ERROR_MESSAGE);
@@ -166,11 +270,12 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese el código y la descripción.", "Guardar", JOptionPane.WARNING_MESSAGE);
         }
-LimpiarCampos();
+        LimpiarCampos();
+        cargarDatosDesdeArchivo();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-     private void LimpiarCampos() {
+    private void LimpiarCampos() {
         Cod.setText("");
         Des.setText("");
     }
@@ -179,9 +284,54 @@ LimpiarCampos();
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
+        int confirmacion = JOptionPane.showConfirmDialog(
+        this,
+        "¿Está seguro de que desea eliminar los datos?",
+        "Confirmar Borrado",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        String codigo = Cod.getText();
+
+        if (!codigo.isEmpty()) {
+            try {
+                String filePath = "Mantenimiento de documento.txt";
+                File archivo = new File(filePath);
+
+                if (archivo.exists()) {
+                    String contenidoArchivo = new String(Files.readAllBytes(archivo.toPath()));
+                    String nuevoContenido = "";
+
+                    String[] lineas = contenidoArchivo.split("\\n");
+                    for (String linea : lineas) {
+                        if (!linea.startsWith(codigo + ";")) {
+                            nuevoContenido += linea + "\n";
+                        }
+                    }
+
+                    FileWriter f = new FileWriter(filePath);
+                    BufferedWriter bw = new BufferedWriter(f);
+
+                    bw.write(nuevoContenido);
+                    bw.close();
+
+                    JOptionPane.showMessageDialog(this, "Datos borrados exitosamente.", "Borrar", JOptionPane.INFORMATION_MESSAGE);
+                    cargarDatosDesdeArchivo();
+                } else {
+                    JOptionPane.showMessageDialog(this, "El archivo no existe.", "Borrar", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error al borrar los datos.", "Borrar", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el código.", "Borrar", JOptionPane.WARNING_MESSAGE);
+        }
         LimpiarCampos();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }
+
+    }//GEN-LAST:event_BorrarActionPerformed
 
     private void CodFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CodFocusLost
         String codigo = Cod.getText();
@@ -217,13 +367,63 @@ LimpiarCampos();
         }
     }//GEN-LAST:event_CodFocusLost
 
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        String codigo = Cod.getText();
+        String nuevaDescripcion = Des.getText();
+
+        if (!codigo.isEmpty() && !nuevaDescripcion.isEmpty()) {
+            try {
+                String filePath = "Mantenimiento de documento.txt";
+                File archivo = new File(filePath);
+
+                if (archivo.exists()) {
+                    String contenidoArchivo = new String(Files.readAllBytes(archivo.toPath()));
+                    String nuevoContenido = "";
+
+                    String[] lineas = contenidoArchivo.split("\\n");
+                    for (String linea : lineas) {
+                        if (linea.startsWith(codigo + ";")) {
+                            nuevoContenido += codigo + ";" + nuevaDescripcion + "\n";
+                        } else {
+                            nuevoContenido += linea + "\n";
+                        }
+                    }
+
+                    FileWriter f = new FileWriter(filePath);
+                    BufferedWriter bw = new BufferedWriter(f);
+
+                    bw.write(nuevoContenido);
+                    bw.close();
+
+                    JOptionPane.showMessageDialog(this, "Datos modificados exitosamente.", "Modificar", JOptionPane.INFORMATION_MESSAGE);
+                    cargarDatosDesdeArchivo();
+                } else {
+                    JOptionPane.showMessageDialog(this, "El archivo no existe.", "Modificar", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error al modificar los datos.", "Modificar", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el código y la nueva descripción.", "Modificar", JOptionPane.WARNING_MESSAGE);
+        }
+        LimpiarCampos();
+        cargarDatosDesdeArchivo();
+
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Borrar;
     private javax.swing.JTextField Cod;
     private javax.swing.JTextField Des;
+    private javax.swing.JButton Modificar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -232,7 +432,9 @@ LimpiarCampos();
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
