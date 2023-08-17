@@ -1,3 +1,3 @@
 PHP;1234567A;Adrian;Mejia;Admin;Desconocido
 AdriFS;123456789A;adrian;mejia;Admin;Desconocido
-AURIS;1234567A;PRUEBA;MATOS;Admin;Admin
+PHPA;1234567A;Adrian;Mejia;Admin;Admin
