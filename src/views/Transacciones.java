@@ -9,28 +9,19 @@ import static controlador.CRUDcatalogo.buscarCatalogo;
 import static controlador.CRUDcatalogo.buscarCuenta;
 import static controlador.CRUDdocumento.buscarDoc;
 import static controlador.CRUDdocumento.buscarDocumentos;
-import static controlador.CrudArchivos.buscarUsuarios;
+import static controlador.crudTablaTrans.buscarDebCretrans;
+import static controlador.crudTablaTrans.buscarTablaTrans;
+import static controlador.crudTablaTrans.buscarTipoCat;
+import static controlador.crudTablaTrans.buscartrans;
+import static controlador.crudTablaTrans.cantidadRegistrosTT;
 import static controlador.crudTablaTrans.guardarTablaTransacciones;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.lang.String;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Transacciones extends javax.swing.JFrame {
 
@@ -41,7 +32,9 @@ public class Transacciones extends javax.swing.JFrame {
     private String dbCuenta="catalogo.txt";
     public Transacciones() {
         initComponents();
-        
+        cargarDatosDesdeArchivo();
+        int debito=0;
+        int credito=0;
 
     }
 
@@ -304,6 +297,11 @@ public class Transacciones extends javax.swing.JFrame {
         jPanel1.add(Monto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 100, -1));
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, -1, -1));
 
         jButton2.setText("Salir");
@@ -342,34 +340,56 @@ private void cargarUsername() {
             limpiar();
         }
         else{
-            String[] crear = new String[5];
-            crear[0]=Cuenta.getText().trim();
-            crear[1]=desCuenta.getText();
-            crear[2]=Debito.getText();
-            crear[3]= credito.getText();
-            if(Comentarios.getText().equals("")){
-               crear[4]=comentario; 
-            }else{
-                crear[4]=Comentarios.getText().trim();
+            
+            if(buscarTipoCat(cuenta).equals("General")){
+                JOptionPane.showMessageDialog(rootPane, "No se pueden generar transacciones con cuentas tipo General");
+            }
+            else{
+                if(buscartrans(cuenta)){
+                    JOptionPane.showMessageDialog(rootPane, "Ya hay una transaccion con esa cuenta");
+                    limpiar();
+                    cargarDatosDesdeArchivo();
+                }
+                else{
+                    String[] crear = new String[5];
+                    crear[0]=Cuenta.getText().trim();
+                    crear[1]=desCuenta.getText();
+                    crear[2]=Debito.getText();
+                    crear[3]= credito.getText();
+                if(Comentarios.getText().equals("")){
+                    crear[4]=comentario; 
+                }else{
+                    crear[4]=Comentarios.getText().trim();
+                }
+            
+                try {
+                    guardarTablaTransacciones(crear);
+                    cargarDatosDesdeArchivo();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
             }
             
-            try {
-                guardarTablaTransacciones(crear);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            
         }
      }//GEN-LAST:event_btnAgregarActionPerformed
     
-    private void llenarTabla(){
-    
-    DefaultTableModel modelo = (DefaultTableModel) tablaTrans.getModel();
-    
-    
-    
-    
+     private void cargarDatosDesdeArchivo() {
+
+        DefaultTableModel modelo = (DefaultTableModel) tablaTrans.getModel(); // Obtén el modelo de la tabla
+        modelo.setRowCount(0); // Limpia los datos existentes en la tabla
+
+        String[][] ListaTrans = buscarTablaTrans();
+
+        for (int i = 0; i < cantidadRegistrosTT(); i++) {
+
+            modelo.addRow(ListaTrans[i]);
+        }
     }
     
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
@@ -425,7 +445,12 @@ private void cargarUsername() {
         }    }//GEN-LAST:event_DocKeyReleased
 
     private void creditoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyTyped
-    
+        char caracter = evt.getKeyChar();
+
+        if (((caracter < '0' || caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_creditoKeyTyped
 
     
@@ -540,7 +565,10 @@ private void cargarUsername() {
     }//GEN-LAST:event_creditoFocusGained
 
     private void creditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyPressed
-        Comentarios.requestFocus();
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        
+            Comentarios.requestFocus();
+        }
     }//GEN-LAST:event_creditoKeyPressed
 
     private void CuentaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuentaFocusLost
@@ -564,6 +592,19 @@ private void cargarUsername() {
             desCuenta.setText("");
         }
     }//GEN-LAST:event_CuentaFocusLost
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        System.out.println(buscarDebCretrans()[0]);
+        System.out.println(buscarDebCretrans()[1]);
+        if(buscarDebCretrans()[0].equals(buscarDebCretrans()[1])){
+            
+            JOptionPane.showMessageDialog(rootPane, "Transaccion guardada exitosamente");
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Credito y Debito con valores diferentes");
+        }
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     
     public void limpiar(){

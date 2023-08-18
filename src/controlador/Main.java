@@ -11,8 +11,8 @@ public class Main {
     
     public static void main(String[] args) {
         
-       PantallaLogin ip = new PantallaLogin();
-            ip.setVisible(true);
+       PantallaLogin pL = new PantallaLogin();
+            pL.setVisible(true);
              
          
         

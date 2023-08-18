@@ -8,7 +8,7 @@ import java.io.IOException;
 public class CRUDdocumento {
     
     public static void crearDBdocumentos(){
-        File crearArc = new File("Documentos.txt");
+        File crearArc = new File("Mantenimiento de documento.txt");
         
         try{
             
@@ -33,7 +33,7 @@ public class CRUDdocumento {
         boolean encontrarUsr= false;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("Documentos.txt")); // Cambia el nombre del archivo
+            BufferedReader br = new BufferedReader(new FileReader("Mantenimiento de documento.txt")); // Cambia el nombre del archivo
             String line;
 
             while ((line = br.readLine()) != null) {

@@ -1,2 +1,0 @@
-1;1;Activos;10000;0;Vacio
-2;1;Activos;1900;0;Vacio

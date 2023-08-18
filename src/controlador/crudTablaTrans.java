@@ -113,6 +113,32 @@ public class crudTablaTrans {
         return listaUsr;
         
         }
+        
+        public static String buscarTipoCat(String numCuenta){
+        String[] listaTran= new String[6];
+        String tipoCuenta= "";
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("catalogo.txt")); 
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                listaTran = line.split(";");
+                
+                if(listaTran[0].equals(numCuenta)){
+                
+                    tipoCuenta=listaTran[2];
+                }
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return tipoCuenta;
+        
+        }
     
     public static String[][] buscarTablaTrans(){
         String[][] tablaTrans= new String[cantidadRegistrosTT()][6];
@@ -162,5 +188,60 @@ public class crudTablaTrans {
        
         
         return cont;
+        }
+    public static boolean buscartrans(String numCuenta){
+        String[] listaTrans= new String[6];
+        boolean idCuenta=false;
+        
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("tablaTransacciones.txt")); // Cambia el nombre del archivo
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                listaTrans = line.split(";");
+                if(listaTrans[1].equals(numCuenta)){
+                    idCuenta=true;
+                }
+                
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return idCuenta;
+        
+        }
+    
+    public static String[] buscarDebCretrans(){
+        String[] listaTrans= new String[6];
+        String[] listaDebCre = new String[2];
+        int[] intDepCre= new int[2];
+        
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("tablaTransacciones.txt")); // Cambia el nombre del archivo
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                listaTrans = line.split(";");
+                
+                intDepCre[0]+=Integer.parseInt(listaTrans[3]);
+                intDepCre[1]+=Integer.parseInt(listaTrans[4]);
+                
+                
+                
+            }
+            listaDebCre[0]= String.valueOf(intDepCre[0]);
+            listaDebCre[1]= String.valueOf(intDepCre[1]);
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return listaDebCre;
+        
         }
 }
