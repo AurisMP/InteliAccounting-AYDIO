@@ -69,13 +69,10 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         tfdebito = new javax.swing.JTextField();
         tfcredito = new javax.swing.JTextField();
         tfbalance = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
         tfnivel = new javax.swing.JComboBox<>();
         tfgrupo = new javax.swing.JComboBox<>();
         tftipo = new javax.swing.JComboBox<>();
-        lblnoedit = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
@@ -96,6 +93,10 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        lblnoedit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -143,7 +144,7 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel11.setText("Balanse de cuenta");
+        jLabel11.setText("Balance de cuenta");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 470, 140, -1));
 
         tfnumeroc.setToolTipText("");
@@ -194,6 +195,7 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
 
         tffecha.setEditable(false);
         tffecha.setBorder(null);
+        tffecha.setOpaque(false);
         tffecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tffechaActionPerformed(evt);
@@ -203,6 +205,7 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
 
         tfhora.setEditable(false);
         tfhora.setBorder(null);
+        tfhora.setOpaque(false);
         tfhora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfhoraActionPerformed(evt);
@@ -246,19 +249,9 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
         });
         jPanel1.add(tfbalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, 180, 30));
 
-        jButton1.setFont(new java.awt.Font("Yu Gothic", 2, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/examen.png"))); // NOI18N
-        jButton1.setText("Crear       ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 530, 140, 30));
-
         titulo.setFont(new java.awt.Font("Yu Gothic", 2, 16)); // NOI18N
         titulo.setText("Creando");
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 540, 70, -1));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 70, -1));
 
         tfnivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
         tfnivel.addActionListener(new java.awt.event.ActionListener() {
@@ -278,20 +271,6 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
 
         tftipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Detalles" }));
         jPanel1.add(tftipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 180, 30));
-
-        lblnoedit.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        lblnoedit.setText("Esta cuenta tiene balance no puede ser editada");
-        jPanel1.add(lblnoedit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, -1, 23));
-
-        jButton2.setFont(new java.awt.Font("Yu Gothic", 2, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/barriendo.png"))); // NOI18N
-        jButton2.setText("Limpiar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 530, 140, 30));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 180, 10));
         jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 230, 180, 10));
         jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 10));
@@ -343,13 +322,64 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 80, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 100, 40));
+
+        jButton2.setFont(new java.awt.Font("Yu Gothic", 2, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/barriendo.png"))); // NOI18N
+        jButton2.setText("Limpiar");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Yu Gothic", 2, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/examen.png"))); // NOI18N
+        jButton1.setText("Crear       ");
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lblnoedit.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        lblnoedit.setText("Esta cuenta tiene balance no puede ser editada");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(325, Short.MAX_VALUE)
+                .addComponent(lblnoedit)
+                .addGap(56, 56, 56)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblnoedit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 1040, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1033, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1033, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -736,6 +766,7 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
