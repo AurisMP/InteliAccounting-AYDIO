@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/adrian/NetBeansProjects/InteliAccounting-AYDIO/src/controlador/crudTablaTrans.java</file>
             <file>file:/home/adrian/NetBeansProjects/InteliAccounting-AYDIO/src/controlador/CrudArchivos.java</file>
+            <file>file:/home/adrian/NetBeansProjects/InteliAccounting-AYDIO/src/controlador/Main.java</file>
             <file>file:/home/adrian/NetBeansProjects/InteliAccounting-AYDIO/src/views/Transacciones.java</file>
-            <file>file:/home/adrian/NetBeansProjects/InteliAccounting-AYDIO/src/controlador/CRUDcatalogo.java</file>
-            <file>file:/home/adrian/NetBeansProjects/InteliAccounting-AYDIO/src/controlador/CRUDdocumento.java</file>
+            <file>file:/home/adrian/NetBeansProjects/InteliAccounting-AYDIO/src/controlador/InicioSesion.java</file>
         </group>
     </open-files>
 </project-private>

@@ -11,7 +11,7 @@ public class Main {
     
     public static void main(String[] args) {
         
-       Transacciones ip = new Transacciones();
+       PantallaLogin ip = new PantallaLogin();
             ip.setVisible(true);
              
          

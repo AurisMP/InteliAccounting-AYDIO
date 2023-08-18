@@ -9,14 +9,18 @@ import static controlador.CRUDcatalogo.buscarCatalogo;
 import static controlador.CRUDcatalogo.buscarCuenta;
 import static controlador.CRUDdocumento.buscarDoc;
 import static controlador.CRUDdocumento.buscarDocumentos;
+import static controlador.CrudArchivos.buscarUsuarios;
+import static controlador.crudTablaTrans.guardarTablaTransacciones;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +28,9 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import java.lang.String;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Transacciones extends javax.swing.JFrame {
 
@@ -62,7 +68,7 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaTrans = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         Comentarios = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -74,7 +80,6 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         Monto = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -210,7 +215,7 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel10.setText("Tipo Documento");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTrans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -234,7 +239,7 @@ public class Transacciones extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaTrans);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 770, 120));
 
@@ -299,13 +304,10 @@ public class Transacciones extends javax.swing.JFrame {
         jPanel1.add(Monto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 100, -1));
 
         btnGuardar.setText("Guardar");
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, -1));
-
-        jButton1.setText("Limpiar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 500, -1, -1));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, -1, -1));
 
         jButton2.setText("Salir");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,14 +335,43 @@ private void cargarUsername() {
         String cuenta = Cuenta.getText().trim();
         String debito = Debito.getText().trim();
         String Credito= credito.getText().trim();
-        
+        String comentario = "Vacio";
         if(doc.equals("")|| cuenta.equals(" ")||(debito.equals("0") && Credito.equals("0")|| debito.equals("")||Credito.equals(""))){
         
             JOptionPane.showMessageDialog(rootPane, "Error se ha dejado algun campo vacio");
             limpiar();
         }
+        else{
+            String[] crear = new String[5];
+            crear[0]=Cuenta.getText().trim();
+            crear[1]=desCuenta.getText();
+            crear[2]=Debito.getText();
+            crear[3]= credito.getText();
+            if(Comentarios.getText().equals("")){
+               crear[4]=comentario; 
+            }else{
+                crear[4]=Comentarios.getText().trim();
+            }
+            
+            try {
+                guardarTablaTransacciones(crear);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
      }//GEN-LAST:event_btnAgregarActionPerformed
-
+    
+    private void llenarTabla(){
+    
+    DefaultTableModel modelo = (DefaultTableModel) tablaTrans.getModel();
+    
+    
+    
+    
+    }
+    
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
         
 
@@ -562,7 +593,6 @@ private void cargarUsername() {
     private javax.swing.JTextField credito;
     private javax.swing.JTextField desCuenta;
     private javax.swing.JTextField desDoc;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -579,7 +609,7 @@ private void cargarUsername() {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaTrans;
     // End of variables declaration//GEN-END:variables
 
 }
