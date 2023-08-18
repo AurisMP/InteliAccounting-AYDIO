@@ -40,7 +40,59 @@ public class CRUDcatalogo {
         }
 
     }
+    public static boolean buscarCatalogo(String numCuenta){
+        String[] listaUsr= new String[11];
+        boolean encontrarUsr= false;
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("catalogo.txt")); // Cambia el nombre del archivo
+            String line;
 
+            while ((line = br.readLine()) != null) {
+                listaUsr = line.split(";");
+                
+                if(numCuenta.equals(listaUsr[0])){
+            
+                    encontrarUsr =true;
+                    }
+                
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return encontrarUsr;
+        }
+    
+    public static String[] buscarCuenta(String dumCuenta,String dbCat){
+        String[] listaCuenta= new String[11];
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(dbCat)); // Cambia el nombre del archivo
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                listaCuenta = line.split(";");
+                
+                if(dumCuenta.equals(listaCuenta[0]) ){
+                    
+                    return listaCuenta;
+                   
+                    }
+                
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return listaCuenta;
+        
+        }
+    
     public static String[] Buscar(String codigo, String tabla, int campos) throws IOException {
         File F1 = new File(tabla);
         String[] ar = new String[campos + 1];

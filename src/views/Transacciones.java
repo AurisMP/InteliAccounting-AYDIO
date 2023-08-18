@@ -4,6 +4,11 @@
  */
 package views;
 
+
+import static controlador.CRUDcatalogo.buscarCatalogo;
+import static controlador.CRUDcatalogo.buscarCuenta;
+import static controlador.CRUDdocumento.buscarDoc;
+import static controlador.CRUDdocumento.buscarDocumentos;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -20,61 +25,33 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author amatos
- */
+
 public class Transacciones extends javax.swing.JFrame {
 
-    private Set<String> registrosActualizados = new HashSet<>();
+    
 
-    private String usuarioLoggedIn; // Variable para guardar el nombre de usuario
-
+    private String loginUsr; 
+    private String dbDoc="Documentos.txt";
+    private String dbCuenta="catalogo.txt";
     public Transacciones() {
         initComponents();
-        cargarUsername();
-        actualizarTablaDesdeArchivo();
-        setResizable(false);
-        this.setLocationRelativeTo(null);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String fechaActual = sdf.format(new Date());
-        FECHA.setText(fechaActual);
-        FECHA.setVisible(false);
-        setResizable(false);
-        this.setLocationRelativeTo(null);
-        Doc.setText("");
-        labelFec.setVisible(false);
-        CuentaCont.setText("");
-        Trans.setText("");
-        TIpoDoc.setSelectedIndex(0);
+        
 
     }
 
     @SuppressWarnings("unchecked")
-    private boolean validarAtributosObligatorios() {
-        String nroDocu = Doc.getText();
-        String tipoDoc = (String) TIpoDoc.getSelectedItem();
-
-        if (nroDocu.isEmpty() || tipoDoc.isEmpty()) {
-            return false;
-        }
-
-        return true;
-    }
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        labelFec = new javax.swing.JLabel();
         TIpoDoc = new javax.swing.JComboBox<>();
         AA = new javax.swing.JLabel();
-        BTN = new javax.swing.JButton();
-        CuentaCont = new javax.swing.JTextField();
-        Trans = new javax.swing.JTextField();
-        FECHA = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        credito = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Limpiar = new javax.swing.JButton();
         Doc = new javax.swing.JTextField();
@@ -88,6 +65,17 @@ public class Transacciones extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         Comentarios = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        desDoc = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        Cuenta = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        desCuenta = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        Monto = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,11 +84,7 @@ public class Transacciones extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel1.setText("Tipo Documento :");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
-
-        labelFec.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
-        labelFec.setText("Fecha Documento :");
-        jPanel1.add(labelFec, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         TIpoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Ajuste", "Documento Interno", " " }));
         TIpoDoc.addActionListener(new java.awt.event.ActionListener() {
@@ -108,59 +92,51 @@ public class Transacciones extends javax.swing.JFrame {
                 TIpoDocActionPerformed(evt);
             }
         });
-        jPanel1.add(TIpoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 160, 30));
+        jPanel1.add(TIpoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 160, 30));
 
         AA.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         jPanel1.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 390, 60));
 
-        BTN.setText("Guardar");
-        BTN.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(BTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
 
-        CuentaCont.addKeyListener(new java.awt.event.KeyAdapter() {
+        credito.setText("0");
+        credito.setToolTipText("");
+        credito.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                creditoFocusGained(evt);
+            }
+        });
+        credito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditoActionPerformed(evt);
+            }
+        });
+        credito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                creditoKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                CuentaContKeyReleased(evt);
+                creditoKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                CuentaContKeyTyped(evt);
+                creditoKeyTyped(evt);
             }
         });
-        jPanel1.add(CuentaCont, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 160, 30));
-
-        Trans.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TransActionPerformed(evt);
-            }
-        });
-        Trans.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                TransKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TransKeyTyped(evt);
-            }
-        });
-        jPanel1.add(Trans, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 130, -1));
-
-        FECHA.setEditable(false);
-        FECHA.setEnabled(false);
-        jPanel1.add(FECHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 150, 30));
+        jPanel1.add(credito, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 100, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel3.setText("Numero de Documento:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
-        jLabel4.setText("Cuenta Contable :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel5.setText("Comentarios");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
 
         Limpiar.setText("Limpiar");
         Limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +144,7 @@ public class Transacciones extends javax.swing.JFrame {
                 LimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+        jPanel1.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, -1));
 
         Doc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -181,6 +157,9 @@ public class Transacciones extends javax.swing.JFrame {
             }
         });
         Doc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DocKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 DocKeyReleased(evt);
             }
@@ -188,12 +167,18 @@ public class Transacciones extends javax.swing.JFrame {
                 DocKeyTyped(evt);
             }
         });
-        jPanel1.add(Doc, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 110, 30));
+        jPanel1.add(Doc, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 110, 30));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel7.setText("Credito :");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, -1));
 
+        Debito.setText("0");
+        Debito.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                DebitoFocusGained(evt);
+            }
+        });
         Debito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DebitoActionPerformed(evt);
@@ -207,42 +192,42 @@ public class Transacciones extends javax.swing.JFrame {
                 DebitoKeyTyped(evt);
             }
         });
-        jPanel1.add(Debito, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 130, -1));
+        jPanel1.add(Debito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 90, -1));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel6.setText("Tipo Documento");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel8.setText("Tipo Documento");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel9.setText("Tipo Documento");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel10.setText("Tipo Documento");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "#", "Num. Documento", "Tipo Documento", "Fecha Documento", "Hecho por", "Credito", "Debito", "Comentario"
+                "Sec", "Cuenta", "Descripcion", "Debito", "Credito", "Comentario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -251,24 +236,79 @@ public class Transacciones extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 880, 170));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 770, 120));
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel11.setText("Debito :");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         Comentarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComentariosActionPerformed(evt);
             }
         });
-        jPanel1.add(Comentarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 260, 30));
+        jPanel1.add(Comentarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 260, 30));
+
+        jLabel2.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
+        jLabel2.setText("Des. de Documento :");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        desDoc.setEditable(false);
+        jPanel1.add(desDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 160, -1));
+
+        jLabel4.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
+        jLabel4.setText("Cuenta :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        Cuenta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CuentaFocusGained(evt);
+            }
+        });
+        Cuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CuentaActionPerformed(evt);
+            }
+        });
+        Cuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CuentaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CuentaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(Cuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 100, -1));
+
+        jLabel12.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
+        jLabel12.setText("Des. de Cuenta :");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
+
+        desCuenta.setEditable(false);
+        jPanel1.add(desCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 180, -1));
+
+        jLabel13.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
+        jLabel13.setText("Monto :");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+
+        Monto.setEditable(false);
+        Monto.setText("0");
+        jPanel1.add(Monto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 100, -1));
+
+        btnGuardar.setText("Guardar");
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, -1));
+
+        jButton1.setText("Limpiar");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 500, -1, -1));
+
+        jButton2.setText("Salir");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,95 +318,19 @@ public class Transacciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 private void cargarUsername() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("Usuarios.txt"));
-            String line = br.readLine();
-            if (line != null) {
-                String[] parts = line.split(";");
-                if (parts.length >= 3) {
-                    String username;
-                    if (parts.length == 5) {
-                        // Si es un arreglo, el nombre de usuario está en la segunda posición
-                        username = parts[1];
-                    } else {
-                        // Si no es un arreglo, el nombre de usuario está en la tercera posición
-                        username = parts[2];
-                    }
-                    setWelcomeMessage("Bienvenido, " + username + "!");
-                }
-            }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
     }
 
     public void setWelcomeMessage(String message) {
         AA.setText(message);
     }
 
-    private void BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNActionPerformed
-        String nroDocu = Doc.getText();
-        String cuentaCont = CuentaCont.getText();
-        String transaccion = Trans.getText();
-        String tipoDoc = (String) TIpoDoc.getSelectedItem();
-        String fecha = FECHA.getText();
-        String usuario = usuarioLoggedIn; // Obtener el nombre de usuario
-        String comentario = Comentarios.getText(); // Obtener el comentario
-
-        if (nroDocu.isEmpty() || cuentaCont.isEmpty() || transaccion.isEmpty() || tipoDoc.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios. Complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                if (validarNumeroEnTransacciones(nroDocu)) {
-                    JOptionPane.showMessageDialog(this, "Este registro ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-                    LimpiarCampos();
-                } else {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("Transaccion contable.txt", true));
-                    String nuevoRegistro = nroDocu + ";" + cuentaCont + ";" + transaccion + ";" + tipoDoc + ";" + fecha + ";" + usuario + ";" + comentario + "\n";
-                    writer.write(nuevoRegistro);
-                    writer.close();
-
-                    JOptionPane.showMessageDialog(this, "Transacción guardada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    actualizarTablaDesdeArchivo();
-
-                    // Si no ha sido actualizada previamente, permite modificarla
-                    registrosActualizados.add(nroDocu); // Agregar al conjunto de registros actualizados
-
-                    LimpiarCampos();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Error al guardar la transacción.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-    private boolean validarNumeroEnCatalogo(String numero) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("catalogo.txt"));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(";");
-                if (parts.length >= 1 && parts[0].equals(numero)) {
-                    br.close();
-                    return true; // El número existe en el catálogo
-                }
-            }
-
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return false; // El número no existe en el catálogo
-
-
-     }//GEN-LAST:event_BTNActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        
+     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
-        LimpiarCampos();
+        
 
     }//GEN-LAST:event_LimpiarActionPerformed
 
@@ -388,91 +352,30 @@ private void cargarUsername() {
     }//GEN-LAST:event_DocKeyTyped
 
     private void DocKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DocKeyReleased
-// TODO add your handling code here:
+        
+        
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Doc.requestFocus();
+            Cuenta.requestFocus();
         }    }//GEN-LAST:event_DocKeyReleased
 
-    private void TransKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TransKeyTyped
-        //No permite que se introduzcan letras
-        char caracter = evt.getKeyChar();
+    private void creditoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyTyped
+    
+    }//GEN-LAST:event_creditoKeyTyped
 
-        if (((caracter < '0' || caracter > '9'))
-                && (caracter != KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-        }
+    
 
-    }//GEN-LAST:event_TransKeyTyped
-
-    private boolean validarNumeroEnTransacciones(String numero) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("Transaccion contable.txt"));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(";");
-                if (parts.length >= 1 && parts[0].equals(numero)) {
-                    br.close();
-                    return true; // El número existe en el archivo
-                }
-            }
-
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return false; // El número no existe en el archivo
-    }
-
-    private String[] cargarDatosDesdeArchivo(String numeroDocumento) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("Transaccion contable.txt"));
-        String line;
-
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split(";");
-            if (parts.length >= 5 && parts[0].equals(numeroDocumento)) {
-                br.close();
-                return parts; // Retorna los datos encontrados en el archivo
-            }
-        }
-
-        br.close();
-        return null; // No se encontraron datos para el número de documento dado
-    }
-    private void TransKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TransKeyReleased
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Trans.requestFocus();
-        }
-
-    }//GEN-LAST:event_TransKeyReleased
-
-    private void CuentaContKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuentaContKeyTyped
-        //No permite que se introduzca Letras
-
-        char caracter = evt.getKeyChar();
-
-        if (((caracter < '0' || caracter > '9'))
-                && (caracter != KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_CuentaContKeyTyped
-
-    private void CuentaContKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuentaContKeyReleased
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            CuentaCont.requestFocus();
-        }
-    }//GEN-LAST:event_CuentaContKeyReleased
+   
+    private void creditoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyReleased
+      
+    }//GEN-LAST:event_creditoKeyReleased
 
     private void TIpoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIpoDocActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TIpoDocActionPerformed
 
-    private void TransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransActionPerformed
+    private void creditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TransActionPerformed
+    }//GEN-LAST:event_creditoActionPerformed
 
     private void DebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DebitoActionPerformed
         // TODO add your handling code here:
@@ -483,7 +386,10 @@ private void cargarUsername() {
     }//GEN-LAST:event_ComentariosActionPerformed
 
     private void DebitoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DebitoKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        
+            Comentarios.requestFocus();
+        }
     }//GEN-LAST:event_DebitoKeyPressed
 
     private void DebitoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DebitoKeyTyped
@@ -495,64 +401,105 @@ private void cargarUsername() {
         }
     }//GEN-LAST:event_DebitoKeyTyped
 
-    private void LimpiarCampos() {
-        Doc.setText("");
-        CuentaCont.setText("");
-        Trans.setText("");
-        TIpoDoc.setSelectedIndex(0);
-    }
+    private void CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CuentaActionPerformed
 
-    private void actualizarTablaDesdeArchivo() {
-        DefaultTableModel model = new DefaultTableModel();
-        jTable1.setModel(model);
-        model.addColumn("#");
-        model.addColumn("Num. Documento");
-        model.addColumn("Tipo Documento");
-        model.addColumn("Fecha Documento");
-        model.addColumn("Hecho por");
-        model.addColumn("Credito");
-        model.addColumn("Debito");
-        model.addColumn("Comentario");
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("Transaccion contable.txt"));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(";");
-                if (parts.length >= 7) {
-                    Object[] rowData = new Object[8];
-                    rowData[0] = model.getRowCount() + 1; // Número de fila
-                    rowData[1] = parts[0]; // Num. Documento
-                    rowData[2] = parts[3]; // Tipo Documento
-                    rowData[3] = parts[4]; // Fecha Documento
-                    rowData[4] = parts[5]; // Hecho por
-                    rowData[5] = parts[2]; // Credito
-                    rowData[6] = parts[1]; // Debito
-                    rowData[7] = parts[6]; // Comentario
-                    model.addRow(rowData);
-                }
+    private void DocKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DocKeyPressed
+        String[] docEnc=new String[2];
+        String codDoc= Doc.getText().trim();
+        
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            if(buscarDoc(codDoc)){
+                docEnc=buscarDocumentos(codDoc,dbDoc);
+        
+                desDoc.setText(docEnc[1]);
+            
             }
-
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            else{
+                
+                JOptionPane.showMessageDialog(rootPane, "No se ha encontrado la Cuenta");
+                Doc.setText("0");
+            }
         }
-    }
+    }//GEN-LAST:event_DocKeyPressed
+
+    private void CuentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuentaKeyPressed
+       String[] cuentaEnc=new String[11];
+       String codCuenta= Cuenta.getText().trim();
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+          
+            if(buscarCatalogo(codCuenta)){
+            
+                cuentaEnc=buscarCuenta(codCuenta,dbCuenta);
+                desCuenta.setText(cuentaEnc[1]);
+                Debito.requestFocus();
+            }
+            else{
+            
+                JOptionPane.showMessageDialog(rootPane, "No se pudo encontrar el documento");
+                Cuenta.setText("0");
+            }
+          
+          
+          
+      }
+    }//GEN-LAST:event_CuentaKeyPressed
+
+    private void CuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuentaKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if (((caracter < '0' || caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_CuentaKeyTyped
+
+    private void CuentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuentaFocusGained
+       
+        
+        
+    }//GEN-LAST:event_CuentaFocusGained
+
+    private void DebitoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DebitoFocusGained
+        Debito.setText("");
+        credito.setText("0");
+    }//GEN-LAST:event_DebitoFocusGained
+
+    private void creditoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_creditoFocusGained
+        credito.setText("");
+        Debito.setText("0");
+    }//GEN-LAST:event_creditoFocusGained
+
+    private void creditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyPressed
+        Comentarios.requestFocus();
+    }//GEN-LAST:event_creditoKeyPressed
+
+   
+
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AA;
-    private javax.swing.JButton BTN;
     private javax.swing.JTextField Comentarios;
-    private javax.swing.JTextField CuentaCont;
+    private javax.swing.JTextField Cuenta;
     private javax.swing.JTextField Debito;
     private javax.swing.JTextField Doc;
-    private javax.swing.JTextField FECHA;
     private javax.swing.JButton Limpiar;
+    private javax.swing.JTextField Monto;
     private javax.swing.JComboBox<String> TIpoDoc;
-    private javax.swing.JTextField Trans;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JTextField credito;
+    private javax.swing.JTextField desCuenta;
+    private javax.swing.JTextField desDoc;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -563,7 +510,6 @@ private void cargarUsername() {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel labelFec;
     // End of variables declaration//GEN-END:variables
 
 }

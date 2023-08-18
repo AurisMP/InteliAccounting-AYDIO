@@ -2,6 +2,7 @@ package controlador;
 
 import views.PantallaLogin;
 import views.PantallaRegistro;
+import views.Transacciones;
 
 
 
@@ -10,7 +11,7 @@ public class Main {
     
     public static void main(String[] args) {
         
-       PantallaLogin ip = new PantallaLogin();
+       Transacciones ip = new Transacciones();
             ip.setVisible(true);
              
          

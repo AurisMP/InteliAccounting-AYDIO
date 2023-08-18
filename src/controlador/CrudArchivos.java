@@ -85,10 +85,8 @@ public class CrudArchivos {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < listaUsr.length; i++) {
-            System.out.println(listaUsr[i]);
-            
-        }
+        
+       
         
         
         return encontrarUsr;
@@ -146,10 +144,6 @@ public class CrudArchivos {
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        for (int i = 0; i < listaUsr.length; i++) {
-            System.out.println(listaUsr[i]);
-            
         }
         
         return listaUsr;
