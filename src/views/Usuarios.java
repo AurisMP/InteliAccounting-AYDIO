@@ -724,7 +724,7 @@ public class Usuarios extends javax.swing.JFrame {
                 opcNormal.setSelected(true);
             }
             
-            textEmail.setText(listaUsr[5]);
+            textEmail.setText(listaUsr[4]);
         }
 
     }
