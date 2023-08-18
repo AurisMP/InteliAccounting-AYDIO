@@ -264,6 +264,9 @@ public class Transacciones extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 CuentaFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CuentaFocusLost(evt);
+            }
         });
         Cuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,7 +329,16 @@ private void cargarUsername() {
     }
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        String doc=Doc.getText().trim();
+        String cuenta = Cuenta.getText().trim();
+        String debito = Debito.getText().trim();
+        String Credito= credito.getText().trim();
         
+        if(doc.equals("")|| cuenta.equals(" ")||(debito.equals("0") && Credito.equals("0")|| debito.equals("")||Credito.equals(""))){
+        
+            JOptionPane.showMessageDialog(rootPane, "Error se ha dejado algun campo vacio");
+            limpiar();
+        }
      }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
@@ -335,7 +347,30 @@ private void cargarUsername() {
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void DocFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocFocusLost
-
+        String codDoc= Doc.getText();
+        String[] docEnc= new String[2];
+        
+        
+        
+        
+        
+        if(buscarDoc(codDoc) && !"".equals(codDoc)){
+            docEnc=buscarDocumentos(codDoc,dbDoc);
+        
+            desDoc.setText(docEnc[1]);
+            
+            }
+        else{
+            if(!"".equals(codDoc)){
+                JOptionPane.showMessageDialog(rootPane, "No se ha encontrado la Cuenta");
+                Doc.setText("");
+                desDoc.setText("");
+            }
+            
+            Doc.setText("");
+            desDoc.setText("");
+            
+            }
     }//GEN-LAST:event_DocFocusLost
 
     private void DocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocActionPerformed
@@ -419,7 +454,8 @@ private void cargarUsername() {
             else{
                 
                 JOptionPane.showMessageDialog(rootPane, "No se ha encontrado la Cuenta");
-                Doc.setText("0");
+                Doc.setText("");
+                desDoc.setText("");
             }
         }
     }//GEN-LAST:event_DocKeyPressed
@@ -438,7 +474,8 @@ private void cargarUsername() {
             else{
             
                 JOptionPane.showMessageDialog(rootPane, "No se pudo encontrar el documento");
-                Cuenta.setText("0");
+                Cuenta.setText("");
+                desCuenta.setText("");
             }
           
           
@@ -475,6 +512,39 @@ private void cargarUsername() {
         Comentarios.requestFocus();
     }//GEN-LAST:event_creditoKeyPressed
 
+    private void CuentaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuentaFocusLost
+       String[] cuentaEnc=new String[11];
+       String codCuenta= Cuenta.getText().trim();
+       
+       if(buscarCatalogo(codCuenta) && !codCuenta.equals("")){
+            
+            cuentaEnc=buscarCuenta(codCuenta,dbCuenta);
+            desCuenta.setText(cuentaEnc[1]);
+                
+        }
+        else{
+            if(!codCuenta.equals("")){
+                JOptionPane.showMessageDialog(rootPane, "No se pudo encontrar el documento");
+                Cuenta.setText("");
+                desCuenta.setText("");
+            }
+            
+            Cuenta.setText("");
+            desCuenta.setText("");
+        }
+    }//GEN-LAST:event_CuentaFocusLost
+
+    
+    public void limpiar(){
+    
+        Doc.setText("");
+        desDoc.setText("");
+        Cuenta.setText("");
+        desCuenta.setText("");
+        Debito.setText("0");
+        credito.setText("0");
+        Comentarios.setText("");
+    }
    
 
    
