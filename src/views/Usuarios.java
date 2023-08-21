@@ -42,6 +42,8 @@ public class Usuarios extends javax.swing.JFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+                btAnadir.setEnabled(false);
+
             }
         });
 
@@ -75,7 +77,6 @@ public class Usuarios extends javax.swing.JFrame {
         txtNom = new javax.swing.JTextField();
         textEmail = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        buscarButton = new javax.swing.JButton();
         textLoginUsr = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -152,17 +153,6 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel8.setText("Confirmar Contraseña :");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, 160, 30));
 
-        buscarButton.setFont(new java.awt.Font("Dubai Medium", 2, 12)); // NOI18N
-        buscarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/comentario-usuario.png"))); // NOI18N
-        buscarButton.setText("Buscar");
-        buscarButton.setBorder(null);
-        buscarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buscarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 110, 30));
-
         textLoginUsr.setBorder(null);
         textLoginUsr.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -221,7 +211,7 @@ public class Usuarios extends javax.swing.JFrame {
                 eliminarBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(eliminarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 100, 30));
+        jPanel1.add(eliminarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 100, 30));
 
         modifybtn.setFont(new java.awt.Font("Dubai Medium", 2, 12)); // NOI18N
         modifybtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/lapiz-de-usuario.png"))); // NOI18N
@@ -329,20 +319,7 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel12.setVisible(val);
 
     }
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        String filtroUsuario = textLoginUsr.getText().trim();
-        String filtroNombre = txtNom.getText().trim();
-        String filtroTipoAcceso = (opcNormal.isSelected()) ? opcNormal.getText() : (opcAdmin.isSelected()) ? opcAdmin.getText() : "";
 
-        filtrarDatos(filtroUsuario, filtroNombre, filtroTipoAcceso);
-
-        // Solo bloquear los campos si no se está realizando una búsqueda
-        if (!filtroUsuario.isEmpty() || !filtroNombre.isEmpty() || !filtroTipoAcceso.isEmpty()) {
-            bloquearCampos(false);
-        } else {
-            bloquearCampos(true);
-        }
-    }//GEN-LAST:event_buscarButtonActionPerformed
     public void limpiar() {
 
         /*
@@ -458,7 +435,6 @@ public class Usuarios extends javax.swing.JFrame {
                 if ((contra.length() < 8 || tieneM == false || tieneD == false)) {
 
                     JOptionPane.showMessageDialog(null, "La contrasena debe tener como minimo 8 caracteres , una mayuscula y un numero como minimo :c");
-                    limpiar();
                     val = false;
 
                 } else {
@@ -528,7 +504,7 @@ public class Usuarios extends javax.swing.JFrame {
     private void modifybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifybtnActionPerformed
         jLabel4.setVisible(false);
         jLabel12.setVisible(false);
-
+        btAnadir.setEnabled(false);
         // Obtener el valor actual de Loginusr
         String loginUsuarioOriginal = loginSeleccionado;
 
@@ -543,6 +519,7 @@ public class Usuarios extends javax.swing.JFrame {
             textApellidos.setEnabled(true);
             opcNormal.setEnabled(true);
             opcAdmin.setEnabled(true);
+                    btAnadir.setEnabled(true);
 
             // Obtén los nuevos datos del usuario (por ejemplo, de los campos de entrada)
             String[] nuevoUsuarioData = new String[6];
@@ -564,12 +541,15 @@ public class Usuarios extends javax.swing.JFrame {
             String confirmarContrasena = textPass2.getText();
             if (!nuevaContrasena.equals(confirmarContrasena)) {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+
                 return; // Detener la actualización si las contraseñas no coinciden
             }
 
             // Validar contraseña
             if (nuevaContrasena.length() < 8 || !tieneMayusculaYNumeros(nuevaContrasena)) {
                 JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
+                btAnadir.setEnabled(true);
+
                 return; // Detener la actualización si la contraseña no cumple los requisitos
             }
 
@@ -583,11 +563,14 @@ public class Usuarios extends javax.swing.JFrame {
             actualizarUsuario(loginUsuarioOriginal, nuevoUsuarioData);
 
             JOptionPane.showMessageDialog(null, "El usuario ha sido actualizado exitosamente");
+            btAnadir.setEnabled(true);
             limpiar();
             cargarDatosDesdeArchivo();
             filtrarDatos("", "", "");
 
         }
+        cargarDatosDesdeArchivo();
+
     }//GEN-LAST:event_modifybtnActionPerformed
 
     private boolean tieneMayusculaYNumeros(String texto) {
@@ -704,35 +687,34 @@ public class Usuarios extends javax.swing.JFrame {
 
             // Obtener los valores de la fila seleccionada
             String loginUsuario = jTable1.getValueAt(selectedRow, 0).toString();
-           
+
             // Almacenar el valor de loginusr en la variable global
             loginSeleccionado = loginUsuario;
 
             listaUsr = buscarUsr(loginUsuario);
-            
+
             textLoginUsr.setText(listaUsr[0]);
             textPass.setText(listaUsr[1]);
             txtNom.setText(listaUsr[2]);
             textApellidos.setText(listaUsr[3]);
-            
-            if(listaUsr[4].equals("Admin")){
-                
+
+            if (listaUsr[4].equals("Admin")) {
+
                 opcAdmin.setSelected(true);
-            
-            }
-            else{
+
+            } else {
                 opcNormal.setSelected(true);
             }
-            
+
             textEmail.setText(listaUsr[4]);
         }
+        btAnadir.setEnabled(false);
 
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnadir;
-    private javax.swing.JButton buscarButton;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton eliminarBtn;
     private javax.swing.JButton jButton1;
