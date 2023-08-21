@@ -9,22 +9,19 @@ import static controlador.CRUDcatalogo.buscarCatalogo;
 import static controlador.CRUDcatalogo.buscarCuenta;
 import static controlador.CRUDdocumento.buscarDoc;
 import static controlador.CRUDdocumento.buscarDocumentos;
-import java.awt.event.KeyAdapter;
+import static controlador.crudTablaTrans.buscarDebCretrans;
+import static controlador.crudTablaTrans.buscarTablaTrans;
+import static controlador.crudTablaTrans.buscarTipoCat;
+import static controlador.crudTablaTrans.buscartrans;
+import static controlador.crudTablaTrans.cantidadRegistrosTT;
+import static controlador.crudTablaTrans.guardarTablaTransacciones;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.swing.JOptionPane;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import javax.swing.table.DefaultTableModel;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Transacciones extends javax.swing.JFrame {
 
@@ -35,7 +32,9 @@ public class Transacciones extends javax.swing.JFrame {
     private String dbCuenta="catalogo.txt";
     public Transacciones() {
         initComponents();
-        
+        cargarDatosDesdeArchivo();
+        int debito=0;
+        int credito=0;
 
     }
 
@@ -62,7 +61,7 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaTrans = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         Comentarios = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -74,7 +73,6 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         Monto = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -210,7 +208,7 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel10.setText("Tipo Documento");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTrans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -234,7 +232,7 @@ public class Transacciones extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaTrans);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 770, 120));
 
@@ -263,6 +261,9 @@ public class Transacciones extends javax.swing.JFrame {
         Cuenta.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 CuentaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CuentaFocusLost(evt);
             }
         });
         Cuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -296,13 +297,15 @@ public class Transacciones extends javax.swing.JFrame {
         jPanel1.add(Monto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 100, -1));
 
         btnGuardar.setText("Guardar");
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, -1));
-
-        jButton1.setText("Limpiar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 500, -1, -1));
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, -1, -1));
 
         jButton2.setText("Salir");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -326,16 +329,99 @@ private void cargarUsername() {
     }
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        String doc=Doc.getText().trim();
+        String cuenta = Cuenta.getText().trim();
+        String debito = Debito.getText().trim();
+        String Credito= credito.getText().trim();
+        String comentario = "Vacio";
+        if(doc.equals("")|| cuenta.equals(" ")||(debito.equals("0") && Credito.equals("0")|| debito.equals("")||Credito.equals(""))){
         
+            JOptionPane.showMessageDialog(rootPane, "Error se ha dejado algun campo vacio");
+            limpiar();
+        }
+        else{
+            
+            if(buscarTipoCat(cuenta).equals("General")){
+                JOptionPane.showMessageDialog(rootPane, "No se pueden generar transacciones con cuentas tipo General");
+            }
+            else{
+                if(buscartrans(cuenta)){
+                    JOptionPane.showMessageDialog(rootPane, "Ya hay una transaccion con esa cuenta");
+                    limpiar();
+                    cargarDatosDesdeArchivo();
+                }
+                else{
+                    String[] crear = new String[5];
+                    crear[0]=Cuenta.getText().trim();
+                    crear[1]=desCuenta.getText();
+                    crear[2]=Debito.getText();
+                    crear[3]= credito.getText();
+                if(Comentarios.getText().equals("")){
+                    crear[4]=comentario; 
+                }else{
+                    crear[4]=Comentarios.getText().trim();
+                }
+            
+                try {
+                    guardarTablaTransacciones(crear);
+                    cargarDatosDesdeArchivo();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+            
+            }
+            
+            
+        }
      }//GEN-LAST:event_btnAgregarActionPerformed
+    
+     private void cargarDatosDesdeArchivo() {
 
+        DefaultTableModel modelo = (DefaultTableModel) tablaTrans.getModel(); // Obtén el modelo de la tabla
+        modelo.setRowCount(0); // Limpia los datos existentes en la tabla
+
+        String[][] ListaTrans = buscarTablaTrans();
+
+        for (int i = 0; i < cantidadRegistrosTT(); i++) {
+
+            modelo.addRow(ListaTrans[i]);
+        }
+    }
+    
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
         
 
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void DocFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocFocusLost
-
+        String codDoc= Doc.getText();
+        String[] docEnc= new String[2];
+        
+        
+        
+        
+        
+        if(buscarDoc(codDoc) && !"".equals(codDoc)){
+            docEnc=buscarDocumentos(codDoc,dbDoc);
+        
+            desDoc.setText(docEnc[1]);
+            
+            }
+        else{
+            if(!"".equals(codDoc)){
+                JOptionPane.showMessageDialog(rootPane, "No se ha encontrado la Cuenta");
+                Doc.setText("");
+                desDoc.setText("");
+            }
+            
+            Doc.setText("");
+            desDoc.setText("");
+            
+            }
     }//GEN-LAST:event_DocFocusLost
 
     private void DocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocActionPerformed
@@ -359,7 +445,12 @@ private void cargarUsername() {
         }    }//GEN-LAST:event_DocKeyReleased
 
     private void creditoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyTyped
-    
+        char caracter = evt.getKeyChar();
+
+        if (((caracter < '0' || caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_creditoKeyTyped
 
     
@@ -419,7 +510,8 @@ private void cargarUsername() {
             else{
                 
                 JOptionPane.showMessageDialog(rootPane, "No se ha encontrado la Cuenta");
-                Doc.setText("0");
+                Doc.setText("");
+                desDoc.setText("");
             }
         }
     }//GEN-LAST:event_DocKeyPressed
@@ -438,7 +530,8 @@ private void cargarUsername() {
             else{
             
                 JOptionPane.showMessageDialog(rootPane, "No se pudo encontrar el documento");
-                Cuenta.setText("0");
+                Cuenta.setText("");
+                desCuenta.setText("");
             }
           
           
@@ -472,9 +565,58 @@ private void cargarUsername() {
     }//GEN-LAST:event_creditoFocusGained
 
     private void creditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyPressed
-        Comentarios.requestFocus();
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        
+            Comentarios.requestFocus();
+        }
     }//GEN-LAST:event_creditoKeyPressed
 
+    private void CuentaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuentaFocusLost
+       String[] cuentaEnc=new String[11];
+       String codCuenta= Cuenta.getText().trim();
+       
+       if(buscarCatalogo(codCuenta) && !codCuenta.equals("")){
+            
+            cuentaEnc=buscarCuenta(codCuenta,dbCuenta);
+            desCuenta.setText(cuentaEnc[1]);
+                
+        }
+        else{
+            if(!codCuenta.equals("")){
+                JOptionPane.showMessageDialog(rootPane, "No se pudo encontrar el documento");
+                Cuenta.setText("");
+                desCuenta.setText("");
+            }
+            
+            Cuenta.setText("");
+            desCuenta.setText("");
+        }
+    }//GEN-LAST:event_CuentaFocusLost
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        System.out.println(buscarDebCretrans()[0]);
+        System.out.println(buscarDebCretrans()[1]);
+        if(buscarDebCretrans()[0].equals(buscarDebCretrans()[1])){
+            
+            JOptionPane.showMessageDialog(rootPane, "Transaccion guardada exitosamente");
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Credito y Debito con valores diferentes");
+        }
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    
+    public void limpiar(){
+    
+        Doc.setText("");
+        desDoc.setText("");
+        Cuenta.setText("");
+        desCuenta.setText("");
+        Debito.setText("0");
+        credito.setText("0");
+        Comentarios.setText("");
+    }
    
 
    
@@ -492,7 +634,6 @@ private void cargarUsername() {
     private javax.swing.JTextField credito;
     private javax.swing.JTextField desCuenta;
     private javax.swing.JTextField desDoc;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -509,7 +650,7 @@ private void cargarUsername() {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaTrans;
     // End of variables declaration//GEN-END:variables
 
 }

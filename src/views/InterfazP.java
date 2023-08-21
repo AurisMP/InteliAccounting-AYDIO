@@ -53,30 +53,20 @@ public class InterfazP extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        AgregarUsBTN1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
-        jMenu9 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
-        jMenu11 = new javax.swing.JMenu();
-        jMenu12 = new javax.swing.JMenu();
-        jMenu13 = new javax.swing.JMenu();
-        jMenu14 = new javax.swing.JMenu();
-        jMenu15 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(204, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/LOGO IA.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 741, 410));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 741, 410));
 
         AA.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
-        jPanel1.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 40));
+        jPanel1.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, 290, 40));
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -142,15 +132,16 @@ public class InterfazP extends javax.swing.JFrame {
         jMenu2.setText("Procesos              ");
         jMenu2.setFont(new java.awt.Font("Gentium Basic", 3, 14)); // NOI18N
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/inventario (1).png"))); // NOI18N
-        jMenu4.setText("Cierre diario por Fechas");
-        jMenu4.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu2.add(jMenu4);
-
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/reserva.png"))); // NOI18N
-        jMenu5.setText("Cierre de año Fiscal ");
-        jMenu5.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu2.add(jMenu5);
+        AgregarUsBTN1.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
+        AgregarUsBTN1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/inventario (1).png"))); // NOI18N
+        AgregarUsBTN1.setText("Cierre Diario por Fechas");
+        AgregarUsBTN1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        AgregarUsBTN1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarUsBTN1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(AgregarUsBTN1);
 
         jMenuBar1.add(jMenu2);
 
@@ -158,61 +149,6 @@ public class InterfazP extends javax.swing.JFrame {
         jMenu6.setText("Consultas");
         jMenu6.setToolTipText("");
         jMenu6.setFont(new java.awt.Font("Gentium Basic", 3, 14)); // NOI18N
-
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/desarrollo-de-producto.png"))); // NOI18N
-        jMenu7.setText("Catalogo de Cuentas");
-        jMenu7.setActionCommand("");
-        jMenu7.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu7);
-
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/transaccion.png"))); // NOI18N
-        jMenu8.setText("Transacciones por Fecha");
-        jMenu8.setActionCommand("");
-        jMenu8.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu8);
-
-        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/calendario.png"))); // NOI18N
-        jMenu9.setText("Transacciones por Rango de Fechas");
-        jMenu9.setActionCommand("");
-        jMenu9.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu9);
-
-        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/contrato-inteligente.png"))); // NOI18N
-        jMenu10.setText("Transacciones por Documento");
-        jMenu10.setActionCommand("");
-        jMenu10.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu10);
-
-        jMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/nube.png"))); // NOI18N
-        jMenu11.setText("Transacciones por Tipo de Documento");
-        jMenu11.setActionCommand("");
-        jMenu11.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu11);
-
-        jMenu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/red-en-la-nube.png"))); // NOI18N
-        jMenu12.setText("Balanza General");
-        jMenu12.setActionCommand("");
-        jMenu12.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu12);
-
-        jMenu13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/balanza.png"))); // NOI18N
-        jMenu13.setText("Balanza de Comprobacion ");
-        jMenu13.setActionCommand("");
-        jMenu13.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu13);
-
-        jMenu14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/bolsa-de-dinero.png"))); // NOI18N
-        jMenu14.setText("Resumen de Gastos Generales");
-        jMenu14.setActionCommand("");
-        jMenu14.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu14);
-
-        jMenu15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/mas-menos.png"))); // NOI18N
-        jMenu15.setText("Estado de Ganacias y Perdidas ");
-        jMenu15.setActionCommand("");
-        jMenu15.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu6.add(jMenu15);
-
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -221,7 +157,7 @@ public class InterfazP extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1316, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,6 +186,10 @@ public class InterfazP extends javax.swing.JFrame {
         Tra.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void AgregarUsBTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsBTN1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AgregarUsBTN1ActionPerformed
     private void manteniminetoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {
         Catalogo_cuenta catalogo = new Catalogo_cuenta();
         catalogo.setVisible(true);
@@ -273,7 +213,7 @@ public class InterfazP extends javax.swing.JFrame {
                         // Si no es un arreglo, el nombre de usuario está en la tercera posición
                         username = parts[2];
                     }
-                    setWelcomeMessage("Bienvenido, " + username + "!");
+                    setWelcomeMessage("Usuario, " + username + "!");
                 }
             }
             br.close();
@@ -289,22 +229,12 @@ public class InterfazP extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AA;
     private javax.swing.JMenuItem AgregarUsBTN;
+    private javax.swing.JMenuItem AgregarUsBTN1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu12;
-    private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu14;
-    private javax.swing.JMenu jMenu15;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

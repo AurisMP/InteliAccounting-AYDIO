@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 1;AFP
 2;SADFSAD
 3;SDASD
+=======
+1;SADASD
+>>>>>>> Conclucion

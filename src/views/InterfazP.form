@@ -124,28 +124,25 @@
             </Property>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu4">
+            <MenuItem class="javax.swing.JMenuItem" name="AgregarUsBTN1">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Gentium Basic" size="12" style="2"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img3/inventario (1).png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cierre diario por Fechas"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
+                <Property name="text" type="java.lang.String" value="Cierre Diario por Fechas"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder/>
+                  </Border>
                 </Property>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu5">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/reserva.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cierre de a&#xf1;o Fiscal "/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AgregarUsBTN1ActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu6">
@@ -159,116 +156,6 @@
               <Font name="Gentium Basic" size="14" style="3"/>
             </Property>
           </Properties>
-          <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu7">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/desarrollo-de-producto.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Catalogo de Cuentas"/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu8">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/transaccion.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Transacciones por Fecha"/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu9">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/calendario.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Transacciones por Rango de Fechas"/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu10">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/contrato-inteligente.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Transacciones por Documento"/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu11">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/nube.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Transacciones por Tipo de Documento"/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu12">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/red-en-la-nube.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Balanza General"/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu13">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/balanza.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Balanza de Comprobacion "/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu14">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/bolsa-de-dinero.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Resumen de Gastos Generales"/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu15">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/mas-menos.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Estado de Ganacias y Perdidas "/>
-                <Property name="actionCommand" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
-                </Property>
-              </Properties>
-            </Menu>
-          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
@@ -296,7 +183,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="1316" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -309,7 +196,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -328,7 +215,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="390" y="110" width="741" height="410"/>
+              <AbsoluteConstraints x="430" y="160" width="741" height="410"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -340,7 +227,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="0" width="360" height="40"/>
+              <AbsoluteConstraints x="1030" y="0" width="290" height="40"/>
             </Constraint>
           </Constraints>
         </Component>

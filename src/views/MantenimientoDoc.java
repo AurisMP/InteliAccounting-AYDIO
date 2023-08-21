@@ -76,12 +76,10 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Codigo");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 123, 32));
 
         Cod.setBorder(null);
-        Cod.setOpaque(false);
         Cod.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 CodFocusLost(evt);
@@ -92,12 +90,10 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 26, 108, 31));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Descripcion");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
         Des.setBorder(null);
-        Des.setOpaque(false);
         jPanel1.add(Des, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 320, 32));
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N

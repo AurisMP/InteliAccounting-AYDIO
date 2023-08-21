@@ -1,4 +1,20 @@
-1;Activos;General;1;0;Activo;2023-08-11;15:38:29;50;50;50
+1;Activos;General;1;0;Activo;2023-08-11;15:38:29;0;0;0
 11;Activos Circulantes;General;2;1;Activo;2023-08-11;15:56:55;0;0;0
 1101;Efectivo en Caja;General;3;11;Activo;2023-08-11;15:57:38;0;0;0
 11011;Caja Chica;General;4;1101;Activo;2023-08-11;16:00:11;0;0;0
+1102;Efectivo en bancos;General;3;11;Activo;2023-08-16;18:35:40;0;0;0
+11021;Banco Popular Dominicano;Detalles;4;1102;Activo;2023-08-16;18:42:28;0;0;0
+11022;Banco BHD;Detalles;4;1102;Activo;2023-08-16;18:43:19;0;0;0
+11023;Banco Santa Cruz;Detalles;4;1102;Activo;2023-08-16;18:43:58;0;0;0
+11025;Cuenta Nomina;Detalles;4;1102;Activo;2023-08-16;18:44:52;0;0;0
+11026;Cuenta Ahorros;Detalles;4;1102;Activo;2023-08-16;18:46:27;0;0;0
+1103;Fondo de Cajas;General;3;11;Activo;2023-08-16;18:48:26;0;0;0
+11031;Fonfo para caja Registradora;Detalles;4;1103;Activo;2023-08-16;18:49:26;0;0;0
+1104;Valores Negociables;General;3;11;Activo;2023-08-16;18:50:36;0;0;0
+11041;Deposito de plazo fijo;Detalles;4;1104;Activo;2023-08-16;18:51:41;0;0;0
+11042;Interes por cobrar;Detalles;4;1104;Activo;2023-08-16;18:53:12;0;0;0
+1105;Cuentas por cobrar;General;3;11;Activo;2023-08-16;20:08:39;0;0;0
+11051;Cuentas por Cobrar (Interfaz);Detalles;4;1105;Activo;2023-08-16;20:13:59;0;0;0
+11052;Cuentas por Cobrar Clientes;Detalles;4;1105;Activo;2023-08-16;20:15:33;0;0;0
+11053;Cuentas por Cobrar Empleados;Detalles;4;1105;Activo;2023-08-16;20:22:02;0;0;0
+11054;Cuentas por cobrar Funcionarios;Detalles;4;1105;Activo;2023-08-16;20:23:11;0;0;0

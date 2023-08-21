@@ -411,9 +411,9 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
             tfgrupo.setSelectedItem(ABORT);
             tffecha.setText("");
             tfhora.setText("");
-            tfdebito.setText("");
-            tfcredito.setText("");
-            tfbalance.setText("");
+            tfdebito.setText("0");
+            tfcredito.setText("0");
+            tfbalance.setText("0");
             modi = false;
             tfdescrip.enable(true);
             tftipo.enable(true);
@@ -477,9 +477,9 @@ public class Catalogo_cuenta extends javax.swing.JFrame {
             tfgrupo.setSelectedItem(ABORT);
             tffecha.setText("");
             tfhora.setText("");
-            tfdebito.setText("");
-            tfcredito.setText("");
-            tfbalance.setText("");
+            tfdebito.setText("0");
+            tfcredito.setText("0");
+            tfbalance.setText("0");
             tfdescrip.enable(true);
             tftipo.enable(true);
             tfnivel.enable(true);
