@@ -1,3 +1,2 @@
 PHP;1234567A;Adrian;Mejia;Admin;Desconocido
-AdriFS;123456789A;adrian;mejia;Admin;Desconocido
-PHPA;1234567A;Adrian;Mejia;Admin;Admin
+AdriF;1234567A;adrian;mejia;Admin;Desconocido

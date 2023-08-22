@@ -121,33 +121,33 @@ public class PantallaLogin extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         textPass = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         textName = new javax.swing.JTextField();
         btIniSes = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 370, 30));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 310, 30));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 370, 30));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 310, 30));
 
-        textPass.setFont(new java.awt.Font("Linux Libertine Display G", 2, 16)); // NOI18N
+        textPass.setFont(new java.awt.Font("Linux Libertine Display G", 2, 12)); // NOI18N
         textPass.setForeground(new java.awt.Color(204, 204, 204));
         textPass.setText("jPasswordField1");
         textPass.setBorder(null);
@@ -156,16 +156,13 @@ public class PantallaLogin extends javax.swing.JFrame {
                 textPassActionPerformed(evt);
             }
         });
-        jPanel2.add(textPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 299, 390, 40));
+        jPanel2.add(textPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 290, 40));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/LOGO IA.png"))); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 650, 150));
-
-        jLabel6.setFont(new java.awt.Font("Gentium Basic", 2, 22)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Gentium Basic", 2, 16)); // NOI18N
         jLabel6.setText("Usuario");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
-        textName.setFont(new java.awt.Font("Linux Libertine Display G", 2, 16)); // NOI18N
+        textName.setFont(new java.awt.Font("Linux Libertine Display G", 2, 12)); // NOI18N
         textName.setForeground(new java.awt.Color(204, 204, 204));
         textName.setText("Ingrese su nombre de usuario");
         textName.setBorder(null);
@@ -174,7 +171,7 @@ public class PantallaLogin extends javax.swing.JFrame {
                 textNameActionPerformed(evt);
             }
         });
-        jPanel2.add(textName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 390, 40));
+        jPanel2.add(textName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 290, 40));
 
         btIniSes.setBackground(new java.awt.Color(204, 255, 255));
         btIniSes.setForeground(new java.awt.Color(94, 174, 253));
@@ -185,38 +182,32 @@ public class PantallaLogin extends javax.swing.JFrame {
                 btIniSesActionPerformed(evt);
             }
         });
-        jPanel2.add(btIniSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 390, 40));
+        jPanel2.add(btIniSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 320, 40));
 
-        jLabel7.setFont(new java.awt.Font("Gentium Basic", 2, 22)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Gentium Basic", 2, 16)); // NOI18N
         jLabel7.setText("Contraseña");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Lock.png"))); // NOI18N
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 20, -1));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/bloqueado.png"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 20));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Card_Content.png"))); // NOI18N
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 450, 380));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/comentario-usuario.png"))); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 20, 20));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 20, 10));
 
-        jLabel5.setBackground(new java.awt.Color(204, 255, 255));
-        jLabel5.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel5.setText("jLabel5");
-        jLabel5.setOpaque(true);
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 110));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/LOGO_IA-removebg-preview.png"))); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, -20, 280, 160));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 450, 490));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 410, 380));
 
         jPanel1.setBackground(new java.awt.Color(244, 243, 243));
         jPanel1.setForeground(new java.awt.Color(60, 63, 65));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/Ellipse 209.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 450, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img2/london-business-meeting-in-progress.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1260, 720));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/Union.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -276,7 +267,6 @@ public class PantallaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
