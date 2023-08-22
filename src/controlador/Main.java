@@ -1,7 +1,7 @@
 package controlador;
 
 import views.PantallaLogin;
-import views.PantallaRegistro;
+
 import views.Transacciones;
 
 

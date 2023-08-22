@@ -31,9 +31,10 @@ public class CRUDdocumento {
     public static boolean buscarDoc(String numDoc){
         String[] listaUsr= new String[2];
         boolean encontrarUsr= false;
+        crearDBdocumentos();
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("Mantenimiento de documento.txt")); // Cambia el nombre del archivo
+            BufferedReader br = new BufferedReader(new FileReader("Mantenimiento de documento.txt"));
             String line;
 
             while ((line = br.readLine()) != null) {

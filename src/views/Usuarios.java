@@ -488,11 +488,6 @@ public class Usuarios extends javax.swing.JFrame {
             crudUsr[4] = tipoAcc;
             crudUsr[5] = email;
 
-            for (int i = 0; i < crudUsr.length; i++) {
-                System.out.println(crudUsr[i]);
-
-            }
-
             JOptionPane.showMessageDialog(null, "El usuario ha sido creado exitosamente :D ");
             limpiar();
 
@@ -573,13 +568,28 @@ public class Usuarios extends javax.swing.JFrame {
                 return; // Detener la actualización si la contraseña no cumple los requisitos
             }
 
-            // Validar si el nuevo loginusr ya existe
+            
             String nuevoLoginUsr = nuevoUsuarioData[0];
             if (!nuevoLoginUsr.equals(loginUsuarioOriginal) && CrudArchivos.buscarUsuarios(nuevoLoginUsr)) {
                 JOptionPane.showMessageDialog(null, "El nuevo Loginusr ya existe en la base de datos.");
                 return; // Detener la actualización si el nuevo Loginusr ya existe
             }
-            // Llama al método de actualización
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             actualizarUsuario(loginUsuarioOriginal, nuevoUsuarioData);
 
             JOptionPane.showMessageDialog(null, "El usuario ha sido actualizado exitosamente");
@@ -590,6 +600,28 @@ public class Usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_modifybtnActionPerformed
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private boolean tieneMayusculaYNumeros(String texto) {
         boolean tieneMayuscula = false;
         boolean tieneNumero = false;
@@ -655,6 +687,14 @@ public class Usuarios extends javax.swing.JFrame {
         dispose();
             }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    
+    
+    
+    
+    
+    
+    
     private void cargarDatosDesdeArchivo() {
 
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel(); // Obtén el modelo de la tabla
@@ -668,6 +708,32 @@ public class Usuarios extends javax.swing.JFrame {
         }
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //-------------------------------------------------------------------------------- Filtro de datos
     private void filtrarDatos(String filtroUsuario, String filtroNombre, String filtroTipoAcceso) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();

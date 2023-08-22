@@ -6,8 +6,7 @@
 package views;
 
 import controlador.CrudArchivos;
-import static controlador.CrudArchivos.buscarUsuarios;
-import static controlador.CrudArchivos.permisosUsuarios;
+import controlador.DatosGlobales;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import javax.swing.event.DocumentEvent;
@@ -20,7 +19,7 @@ import javax.swing.event.DocumentListener;
 public class PantallaLogin extends javax.swing.JFrame {
 
     private InterfazP interfazP;
-
+    String loginUsr;
     /**
      * Creates new form NewJFrame
      */
@@ -239,7 +238,7 @@ public class PantallaLogin extends javax.swing.JFrame {
             
       if (CrudArchivos.buscarUsuarios(usuario, contra)) {
         InterfazP ip = new InterfazP();
-
+        
         if (!permisosNormales) {
             ip.ocultarMenu();
         }
@@ -254,6 +253,7 @@ public class PantallaLogin extends javax.swing.JFrame {
 
         dispose();
         ip.setVisible(true);
+        DatosGlobales.setLoginUsr(usuario);
     } else {
         JOptionPane.showMessageDialog(rootPane, "Nombre o Contraseña no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
     }

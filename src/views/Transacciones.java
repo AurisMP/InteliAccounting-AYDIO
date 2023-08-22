@@ -9,15 +9,19 @@ import static controlador.CRUDcatalogo.buscarCatalogo;
 import static controlador.CRUDcatalogo.buscarCuenta;
 import static controlador.CRUDdocumento.buscarDoc;
 import static controlador.CRUDdocumento.buscarDocumentos;
+import controlador.DatosGlobales;
+import static controlador.crudCabezeraTransaccionContable.guardarCabeTranCont;
 import static controlador.crudTablaTrans.buscarDebCretrans;
 import static controlador.crudTablaTrans.buscarTablaTrans;
 import static controlador.crudTablaTrans.buscarTipoCat;
 import static controlador.crudTablaTrans.buscartrans;
 import static controlador.crudTablaTrans.cantidadRegistrosTT;
 import static controlador.crudTablaTrans.guardarTablaTransacciones;
+import static controlador.crudTransaccionContable.guardarTranCont;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +32,7 @@ public class Transacciones extends javax.swing.JFrame {
     
 
     private String loginUsr; 
-    private String dbDoc="Documentos.txt";
+    private String dbDoc="Mantenimiento de documento.txt";
     private String dbCuenta="catalogo.txt";
     public Transacciones() {
         initComponents();
@@ -101,7 +105,7 @@ public class Transacciones extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, -1, -1));
 
         credito.setText("0");
         credito.setToolTipText("");
@@ -134,7 +138,7 @@ public class Transacciones extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 17)); // NOI18N
         jLabel5.setText("Comentarios");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, -1, -1));
 
         Limpiar.setText("Limpiar");
         Limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +146,7 @@ public class Transacciones extends javax.swing.JFrame {
                 LimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, -1));
+        jPanel1.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
 
         Doc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -245,13 +249,18 @@ public class Transacciones extends javax.swing.JFrame {
                 ComentariosActionPerformed(evt);
             }
         });
-        jPanel1.add(Comentarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 260, 30));
+        jPanel1.add(Comentarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 260, 30));
 
         jLabel2.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
         jLabel2.setText("Des. de Documento :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         desDoc.setEditable(false);
+        desDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desDocActionPerformed(evt);
+            }
+        });
         jPanel1.add(desDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 160, -1));
 
         jLabel4.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
@@ -333,7 +342,12 @@ private void cargarUsername() {
         String cuenta = Cuenta.getText().trim();
         String debito = Debito.getText().trim();
         String Credito= credito.getText().trim();
-        String comentario = "Vacio";
+        String comentario = "-----";
+        String tipoDoc = TIpoDoc.getSelectedItem().toString();
+        String descDoc = desDoc.getText();
+        String monto = Monto.toString().trim();
+        String descCuenta = desCuenta.getText().trim();
+        
         if(doc.equals("")|| cuenta.equals(" ")||(debito.equals("0") && Credito.equals("0")|| debito.equals("")||Credito.equals(""))){
         
             JOptionPane.showMessageDialog(rootPane, "Error se ha dejado algun campo vacio");
@@ -351,16 +365,23 @@ private void cargarUsername() {
                     cargarDatosDesdeArchivo();
                 }
                 else{
-                    String[] crear = new String[5];
+                    String[] crear = new String[9];
                     crear[0]=Cuenta.getText().trim();
                     crear[1]=desCuenta.getText();
                     crear[2]=Debito.getText();
                     crear[3]= credito.getText();
-                if(Comentarios.getText().equals("")){
-                    crear[4]=comentario; 
-                }else{
-                    crear[4]=Comentarios.getText().trim();
-                }
+                    if(Comentarios.getText().equals("")){
+                        crear[4]=comentario; 
+                    }else{
+                        crear[4]=Comentarios.getText().trim();
+                    }
+                    crear[5]= doc;
+                    crear[6]= tipoDoc;
+                    
+                    crear[7] = descDoc;
+                    crear[8] = "0";
+                    
+                
             
                 try {
                     guardarTablaTransacciones(crear);
@@ -381,8 +402,8 @@ private void cargarUsername() {
     
      private void cargarDatosDesdeArchivo() {
 
-        DefaultTableModel modelo = (DefaultTableModel) tablaTrans.getModel(); // Obtén el modelo de la tabla
-        modelo.setRowCount(0); // Limpia los datos existentes en la tabla
+        DefaultTableModel modelo = (DefaultTableModel) tablaTrans.getModel(); 
+        modelo.setRowCount(0); 
 
         String[][] ListaTrans = buscarTablaTrans();
 
@@ -594,17 +615,84 @@ private void cargarUsername() {
     }//GEN-LAST:event_CuentaFocusLost
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        System.out.println(buscarDebCretrans()[0]);
-        System.out.println(buscarDebCretrans()[1]);
+        String[] TranContable= new String[6];
+        String[] CabeTranContable = new String[8];
+        
+        
+        
+        int cont=0;
         if(buscarDebCretrans()[0].equals(buscarDebCretrans()[1])){
             
             JOptionPane.showMessageDialog(rootPane, "Transaccion guardada exitosamente");
+            
+            String[][] registros = buscarTablaTrans();
+            for (int i = 0; i < registros.length; i++) {
+                for (int a = 0; a < registros[i].length; a++) {
+                    
+                    if (a == 6) {
+                        TranContable[0] = registros[i][a];
+                        CabeTranContable[0] = registros[i][a];
+                    }
+                    if (a == 0) {
+                         TranContable[1] = registros[i][a];
+                         
+                    }
+                    if (a == 1) {
+                        TranContable[2] = registros[i][a];
+                    }
+                    if (a == 3) {
+                        TranContable[3] = registros[i][a];
+                    }
+                    if (a == 4) {
+                        TranContable[4] = registros[i][a];
+                    }
+                    if (a == 5) {
+                        TranContable[5] = registros[i][a];
+                    }
+                    if(a==7){
+                        CabeTranContable[2] = registros[i][a];
+                    }
+                    if(a==8){
+                        CabeTranContable[3] = registros[i][a];
+                    }
+                    if(a==9){
+                        CabeTranContable[5] = registros[i][a];
+                    }
+                    
+                }
+                
+                try {
+                    
+                    guardarTranCont(TranContable);
+                    
+                    CabeTranContable[6]="0";
+                    CabeTranContable[7]="No Actualizado";
+                    CabeTranContable[4]=DatosGlobales.getLoginUsr();
+                    CabeTranContable[1]= LocalDate.now().toString();
+                    for (int j = 0; j < CabeTranContable.length; j++) {
+                        System.out.println(CabeTranContable[j]);
+                        
+                    }
+                    guardarCabeTranCont(CabeTranContable);
+                    
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            
         }
         else{
             JOptionPane.showMessageDialog(rootPane, "Credito y Debito con valores diferentes");
         }
         
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void desDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desDocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desDocActionPerformed
 
     
     public void limpiar(){

@@ -1,0 +1,2 @@
+1;2023-08-22;Factura;1;PHP;0;0;No Actualizado
+1;2023-08-22;Ajuste;1;PHP;0;0;No Actualizado
