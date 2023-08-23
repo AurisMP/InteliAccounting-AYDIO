@@ -1,5 +1,7 @@
 package controlador;
 
+import views.CierreDiario;
+import views.MantenimientoDoc;
 import views.PantallaLogin;
 
 import views.Transacciones;
@@ -11,7 +13,7 @@ public class Main {
     
     public static void main(String[] args) {
         
-       PantallaLogin pL = new PantallaLogin();
+       MantenimientoDoc pL = new MantenimientoDoc();
             pL.setVisible(true);
              
          

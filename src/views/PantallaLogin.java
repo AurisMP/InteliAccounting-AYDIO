@@ -12,10 +12,6 @@ import java.awt.Color;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class PantallaLogin extends javax.swing.JFrame {
 
     private InterfazP interfazP;
