@@ -63,10 +63,10 @@ public class InterfazP extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/LOGO IA.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 741, 410));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 741, 410));
 
         AA.setFont(new java.awt.Font("Times New Roman", 2, 20)); // NOI18N
-        jPanel1.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, 290, 40));
+        jPanel1.add(AA, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 40));
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -133,8 +133,8 @@ public class InterfazP extends javax.swing.JFrame {
         jMenu2.setFont(new java.awt.Font("Gentium Basic", 3, 14)); // NOI18N
 
         AgregarUsBTN1.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        AgregarUsBTN1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/inventario (1).png"))); // NOI18N
-        AgregarUsBTN1.setText("Cierre Diario por Fechas");
+        AgregarUsBTN1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/reporte.png"))); // NOI18N
+        AgregarUsBTN1.setText("Ciuerre Diario");
         AgregarUsBTN1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         AgregarUsBTN1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +188,9 @@ public class InterfazP extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void AgregarUsBTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsBTN1ActionPerformed
-        // TODO add your handling code here:
+        Cierre c = new Cierre();
+        c.setVisible(true);
+
     }//GEN-LAST:event_AgregarUsBTN1ActionPerformed
     private void manteniminetoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {
         Catalogo_cuenta catalogo = new Catalogo_cuenta();

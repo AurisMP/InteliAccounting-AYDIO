@@ -1,7 +1,9 @@
 package views;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +21,10 @@ public class Cierre extends javax.swing.JFrame {
      */
     public Cierre() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        setTitle("InteliAccounting Catalogo de Cuentas");
+        setResizable(false);
+        jButton2.setEnabled(false);
     }
 
     /**
@@ -40,7 +46,7 @@ public class Cierre extends javax.swing.JFrame {
         Tabla = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabel1.setText("Desde");
@@ -69,7 +75,15 @@ public class Cierre extends javax.swing.JFrame {
             new String [] {
                 "Numero Documento", "Fecha de Documento", "Tipo de Documento", "Descripcion", "Hecho por", "Monto Transaccion", "Fecha", "Estatus"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(Tabla);
 
         jButton2.setText("Cierre");
@@ -149,11 +163,82 @@ public class Cierre extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Cuando se precione cierre 
+        realizarCierre();
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
-     private void buscarRegistros() {
+    private void realizarCierre() {
+        DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
+
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(Cierre.this, "No hay datos para hacer el cierre.", "No hay datos", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaActualizacion = dateFormat.format(new Date()); // Obtiene la fecha actual
+
+        String direccion = "C:\\Users\\amatos\\Desktop\\New folder (3)\\A\\InteliAccounting-AYDIO\\Cabezera Transaccion Contable.txt";
+
+        ArrayList<String> lines = new ArrayList<>();
+        try ( BufferedReader br = new BufferedReader(new FileReader(direccion))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return;
+        }
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object[] rowData = new Object[model.getColumnCount()];
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                rowData[j] = model.getValueAt(i, j);
+            }
+
+            Date currentDate;
+            try {
+                currentDate = dateFormat.parse((String) rowData[1]);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                continue;
+            }
+
+            for (int j = 0; j < lines.size(); j++) {
+                String[] parts = lines.get(j).split(";");
+                Date existingDate;
+                try {
+                    existingDate = dateFormat.parse(parts[1]);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    continue;
+                }
+
+                if (currentDate.equals(existingDate) && parts[7].equals("No Actualizado")) {
+                    parts[7] = "Actualizado";
+                    parts[6] = fechaActualizacion; // Actualiza la fecha de la última modificación
+                    lines.set(j, String.join(";", parts));
+                    break;
+                }
+            }
+        }
+
+        try ( BufferedWriter bw = new BufferedWriter(new FileWriter(direccion))) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        model.setRowCount(0);
+        jButton2.setEnabled(false);
+        JOptionPane.showMessageDialog(Cierre.this, "Cierre realizado correctamente.", "Cierre Exitoso", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void buscarRegistros() {
         Date fromDate = DesdeF.getDate();
         Date toDate = DesdeF1.getDate();
 
@@ -168,15 +253,15 @@ public class Cierre extends javax.swing.JFrame {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        String direccion = "C:\\Users\\matos\\Desktop\\Proyecto\\InteliAccounting-AYDIO\\Cabezera Transaccion Contable.txt"; // Cambiar la ruta a tu archivo de catálogo
+        String direccion = "C:\\Users\\amatos\\Desktop\\New folder (3)\\A\\InteliAccounting-AYDIO\\Cabezera Transaccion Contable.txt";
 
         ArrayList<String[]> filteredData = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(direccion))) {
+        try ( BufferedReader br = new BufferedReader(new FileReader(direccion))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(";");
-                Date currentDate = dateFormat.parse(parts[1]); // Cambiar el índice a 6 para la fecha en el archivo
-                if (!currentDate.before(fromDate) && !currentDate.after(toDate)) {
+                Date currentDate = dateFormat.parse(parts[1]);
+                if (!currentDate.before(fromDate) && !currentDate.after(toDate) && parts[7].equals("No Actualizado")) {
                     filteredData.add(parts);
                 }
             }
@@ -189,7 +274,7 @@ public class Cierre extends javax.swing.JFrame {
         for (String[] parts : filteredData) {
             Object[] rowData = new Object[parts.length];
             for (int i = 0; i < parts.length; i++) {
-                if (i == 1) { // Format date column
+                if (i == 1) {
                     try {
                         rowData[i] = dateFormat.format(dateFormat.parse(parts[i]));
                     } catch (Exception ex) {
@@ -202,8 +287,9 @@ public class Cierre extends javax.swing.JFrame {
             }
             model.addRow(rowData);
         }
-    }
 
+        jButton2.setEnabled(filteredData.size() > 0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DesdeF;
