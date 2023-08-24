@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         
 
-       Cierre pL = new Cierre();
+       PantallaLogin pL = new PantallaLogin();
             pL.setVisible(true);
              
          

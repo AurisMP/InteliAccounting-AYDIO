@@ -6,10 +6,13 @@ package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +34,26 @@ public class InterfazP extends javax.swing.JFrame {
                 manteniminetoCatalogoActionPerformed(evt);
             }
         });
+   addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        int confirm = JOptionPane.showOptionDialog(
+            InterfazP.this,
+            "¿Está seguro que desea salir?",
+            "Confirmar salida",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            new Object[]{"Cerrar", "Cancelar"},
+            "Cerrar"
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            dispose();
+        }else {
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
+        }
+    }
+});
     }
 
     /**
@@ -199,6 +222,7 @@ public class InterfazP extends javax.swing.JFrame {
 
     public void ocultarMenu() {
         jMenu1.setVisible(false);
+        jMenu3.setVisible(false);
     }
      private void cargarUsername() {
         try {

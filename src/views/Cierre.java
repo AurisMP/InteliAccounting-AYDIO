@@ -21,10 +21,12 @@ public class Cierre extends javax.swing.JFrame {
      */
     public Cierre() {
         initComponents();
+        setTitle("InteliAccounting Cierre Diario");
         this.setLocationRelativeTo(null);
-        setTitle("InteliAccounting Catalogo de Cuentas");
+
         setResizable(false);
         jButton2.setEnabled(false);
+
     }
 
     /**

@@ -33,9 +33,13 @@ public class Transacciones extends javax.swing.JFrame {
     private String dbCuenta = "catalogo.txt";
 
     public Transacciones() {
-        setTitle("InteliAccounting Transacciones");
-
         initComponents();
+
+        setTitle("InteliAccounting Transacciones");
+        this.setLocationRelativeTo(null);
+
+        setResizable(false);
+
         cargarDatosDesdeArchivo();
         int debito = 0;
         int credito = 0;
