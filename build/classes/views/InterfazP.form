@@ -124,28 +124,25 @@
             </Property>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu4">
+            <MenuItem class="javax.swing.JMenuItem" name="AgregarUsBTN1">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/inventario (1).png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cierre diario por Fechas"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Gentium Basic" size="12" style="2"/>
                 </Property>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu5">
-              <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img3/reserva.png"/>
+                  <Image iconType="3" name="/img3/reporte.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cierre de a&#xf1;o Fiscal "/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gentium Basic" size="12" style="2"/>
+                <Property name="text" type="java.lang.String" value="Ciuerre Diario"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder/>
+                  </Border>
                 </Property>
               </Properties>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AgregarUsBTN1ActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu6">

@@ -53,8 +53,7 @@ public class InterfazP extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        AgregarUsBTN1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
@@ -142,15 +141,16 @@ public class InterfazP extends javax.swing.JFrame {
         jMenu2.setText("Procesos              ");
         jMenu2.setFont(new java.awt.Font("Gentium Basic", 3, 14)); // NOI18N
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/inventario (1).png"))); // NOI18N
-        jMenu4.setText("Cierre diario por Fechas");
-        jMenu4.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu2.add(jMenu4);
-
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/reserva.png"))); // NOI18N
-        jMenu5.setText("Cierre de año Fiscal ");
-        jMenu5.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
-        jMenu2.add(jMenu5);
+        AgregarUsBTN1.setFont(new java.awt.Font("Gentium Basic", 2, 12)); // NOI18N
+        AgregarUsBTN1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/reporte.png"))); // NOI18N
+        AgregarUsBTN1.setText("Ciuerre Diario");
+        AgregarUsBTN1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        AgregarUsBTN1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarUsBTN1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(AgregarUsBTN1);
 
         jMenuBar1.add(jMenu2);
 
@@ -250,6 +250,12 @@ public class InterfazP extends javax.swing.JFrame {
         Tra.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void AgregarUsBTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsBTN1ActionPerformed
+        Cierre pl = new Cierre();
+        pl.setVisible(true);
+
+    }//GEN-LAST:event_AgregarUsBTN1ActionPerformed
     private void manteniminetoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {
         Catalogo_cuenta catalogo = new Catalogo_cuenta();
         catalogo.setVisible(true);
@@ -289,6 +295,7 @@ public class InterfazP extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AA;
     private javax.swing.JMenuItem AgregarUsBTN;
+    private javax.swing.JMenuItem AgregarUsBTN1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
@@ -299,8 +306,6 @@ public class InterfazP extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu15;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;

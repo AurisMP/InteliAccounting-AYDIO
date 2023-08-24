@@ -4,7 +4,6 @@
  */
 package views;
 
-
 import static controlador.CRUDcatalogo.buscarCatalogo;
 import static controlador.CRUDcatalogo.buscarCuenta;
 import static controlador.CRUDdocumento.buscarDoc;
@@ -29,22 +28,23 @@ import javax.swing.JOptionPane;
 
 public class Transacciones extends javax.swing.JFrame {
 
-    
+    private String loginUsr;
+    private String dbDoc = "Mantenimiento de documento.txt";
+    private String dbCuenta = "catalogo.txt";
 
-    private String loginUsr; 
-    private String dbDoc="Mantenimiento de documento.txt";
-    private String dbCuenta="catalogo.txt";
     public Transacciones() {
+        setTitle("InteliAccounting Transacciones");
+
         initComponents();
         cargarDatosDesdeArchivo();
-        int debito=0;
-        int credito=0;
+        int debito = 0;
+        int credito = 0;
 
     }
 
     @SuppressWarnings("unchecked")
-    
-    
+
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -330,7 +330,7 @@ public class Transacciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 private void cargarUsername() {
-        
+
     }
 
     public void setWelcomeMessage(String message) {
@@ -338,72 +338,66 @@ private void cargarUsername() {
     }
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String doc=Doc.getText().trim();
+        String doc = Doc.getText().trim();
         String cuenta = Cuenta.getText().trim();
         String debito = Debito.getText().trim();
-        String Credito= credito.getText().trim();
+        String Credito = credito.getText().trim();
         String comentario = "-----";
         String tipoDoc = TIpoDoc.getSelectedItem().toString();
         String descDoc = desDoc.getText();
         String monto = Monto.toString().trim();
         String descCuenta = desCuenta.getText().trim();
-        
-        if(doc.equals("")|| cuenta.equals(" ")||(debito.equals("0") && Credito.equals("0")|| debito.equals("")||Credito.equals(""))){
-        
+
+        if (doc.equals("") || cuenta.equals(" ") || (debito.equals("0") && Credito.equals("0") || debito.equals("") || Credito.equals(""))) {
+
             JOptionPane.showMessageDialog(rootPane, "Error se ha dejado algun campo vacio");
             limpiar();
-        }
-        else{
-            
-            if(buscarTipoCat(cuenta).equals("General")){
+        } else {
+
+            if (buscarTipoCat(cuenta).equals("General")) {
                 JOptionPane.showMessageDialog(rootPane, "No se pueden generar transacciones con cuentas tipo General");
-            }
-            else{
-                if(buscartrans(cuenta)){
+            } else {
+                if (buscartrans(cuenta)) {
                     JOptionPane.showMessageDialog(rootPane, "Ya hay una transaccion con esa cuenta");
                     limpiar();
                     cargarDatosDesdeArchivo();
-                }
-                else{
+                } else {
                     String[] crear = new String[9];
-                    crear[0]=Cuenta.getText().trim();
-                    crear[1]=desCuenta.getText();
-                    crear[2]=Debito.getText();
-                    crear[3]= credito.getText();
-                    if(Comentarios.getText().equals("")){
-                        crear[4]=comentario; 
-                    }else{
-                        crear[4]=Comentarios.getText().trim();
+                    crear[0] = Cuenta.getText().trim();
+                    crear[1] = desCuenta.getText();
+                    crear[2] = Debito.getText();
+                    crear[3] = credito.getText();
+                    if (Comentarios.getText().equals("")) {
+                        crear[4] = comentario;
+                    } else {
+                        crear[4] = Comentarios.getText().trim();
                     }
-                    crear[5]= doc;
-                    crear[6]= tipoDoc;
-                    
+                    crear[5] = doc;
+                    crear[6] = tipoDoc;
+
                     crear[7] = descDoc;
                     crear[8] = "0";
-                    
-                
-            
-                try {
-                    guardarTablaTransacciones(crear);
-                    cargarDatosDesdeArchivo();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+
+                    try {
+                        guardarTablaTransacciones(crear);
+                        cargarDatosDesdeArchivo();
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (UnsupportedEncodingException ex) {
+                        Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
-            
+
             }
-            
-            }
-            
-            
+
         }
      }//GEN-LAST:event_btnAgregarActionPerformed
-    
-     private void cargarDatosDesdeArchivo() {
 
-        DefaultTableModel modelo = (DefaultTableModel) tablaTrans.getModel(); 
-        modelo.setRowCount(0); 
+    private void cargarDatosDesdeArchivo() {
+
+        DefaultTableModel modelo = (DefaultTableModel) tablaTrans.getModel();
+        modelo.setRowCount(0);
 
         String[][] ListaTrans = buscarTablaTrans();
 
@@ -412,37 +406,32 @@ private void cargarUsername() {
             modelo.addRow(ListaTrans[i]);
         }
     }
-    
+
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
-        
+
 
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void DocFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocFocusLost
-        String codDoc= Doc.getText();
-        String[] docEnc= new String[2];
-        
-        
-        
-        
-        
-        if(buscarDoc(codDoc) && !"".equals(codDoc)){
-            docEnc=buscarDocumentos(codDoc,dbDoc);
-        
+        String codDoc = Doc.getText();
+        String[] docEnc = new String[2];
+
+        if (buscarDoc(codDoc) && !"".equals(codDoc)) {
+            docEnc = buscarDocumentos(codDoc, dbDoc);
+
             desDoc.setText(docEnc[1]);
-            
-            }
-        else{
-            if(!"".equals(codDoc)){
+
+        } else {
+            if (!"".equals(codDoc)) {
                 JOptionPane.showMessageDialog(rootPane, "No se ha encontrado la Cuenta");
                 Doc.setText("");
                 desDoc.setText("");
             }
-            
+
             Doc.setText("");
             desDoc.setText("");
-            
-            }
+
+        }
     }//GEN-LAST:event_DocFocusLost
 
     private void DocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocActionPerformed
@@ -459,8 +448,7 @@ private void cargarUsername() {
     }//GEN-LAST:event_DocKeyTyped
 
     private void DocKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DocKeyReleased
-        
-        
+
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             Cuenta.requestFocus();
         }    }//GEN-LAST:event_DocKeyReleased
@@ -474,11 +462,9 @@ private void cargarUsername() {
         }
     }//GEN-LAST:event_creditoKeyTyped
 
-    
 
-   
     private void creditoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyReleased
-      
+
     }//GEN-LAST:event_creditoKeyReleased
 
     private void TIpoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIpoDocActionPerformed
@@ -498,8 +484,8 @@ private void cargarUsername() {
     }//GEN-LAST:event_ComentariosActionPerformed
 
     private void DebitoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DebitoKeyPressed
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
-        
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+
             Comentarios.requestFocus();
         }
     }//GEN-LAST:event_DebitoKeyPressed
@@ -518,18 +504,17 @@ private void cargarUsername() {
     }//GEN-LAST:event_CuentaActionPerformed
 
     private void DocKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DocKeyPressed
-        String[] docEnc=new String[2];
-        String codDoc= Doc.getText().trim();
-        
+        String[] docEnc = new String[2];
+        String codDoc = Doc.getText().trim();
+
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            if(buscarDoc(codDoc)){
-                docEnc=buscarDocumentos(codDoc,dbDoc);
-        
+            if (buscarDoc(codDoc)) {
+                docEnc = buscarDocumentos(codDoc, dbDoc);
+
                 desDoc.setText(docEnc[1]);
-            
-            }
-            else{
-                
+
+            } else {
+
                 JOptionPane.showMessageDialog(rootPane, "No se ha encontrado la Cuenta");
                 Doc.setText("");
                 desDoc.setText("");
@@ -538,26 +523,23 @@ private void cargarUsername() {
     }//GEN-LAST:event_DocKeyPressed
 
     private void CuentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuentaKeyPressed
-       String[] cuentaEnc=new String[11];
-       String codCuenta= Cuenta.getText().trim();
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
-          
-            if(buscarCatalogo(codCuenta)){
-            
-                cuentaEnc=buscarCuenta(codCuenta,dbCuenta);
+        String[] cuentaEnc = new String[11];
+        String codCuenta = Cuenta.getText().trim();
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+
+            if (buscarCatalogo(codCuenta)) {
+
+                cuentaEnc = buscarCuenta(codCuenta, dbCuenta);
                 desCuenta.setText(cuentaEnc[1]);
                 Debito.requestFocus();
-            }
-            else{
-            
+            } else {
+
                 JOptionPane.showMessageDialog(rootPane, "No se pudo encontrar el documento");
                 Cuenta.setText("");
                 desCuenta.setText("");
             }
-          
-          
-          
-      }
+
+        }
     }//GEN-LAST:event_CuentaKeyPressed
 
     private void CuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuentaKeyTyped
@@ -570,9 +552,8 @@ private void cargarUsername() {
     }//GEN-LAST:event_CuentaKeyTyped
 
     private void CuentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuentaFocusGained
-       
-        
-        
+
+
     }//GEN-LAST:event_CuentaFocusGained
 
     private void DebitoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DebitoFocusGained
@@ -586,56 +567,53 @@ private void cargarUsername() {
     }//GEN-LAST:event_creditoFocusGained
 
     private void creditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creditoKeyPressed
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
-        
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+
             Comentarios.requestFocus();
         }
     }//GEN-LAST:event_creditoKeyPressed
 
     private void CuentaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuentaFocusLost
-       String[] cuentaEnc=new String[11];
-       String codCuenta= Cuenta.getText().trim();
-       
-       if(buscarCatalogo(codCuenta) && !codCuenta.equals("")){
-            
-            cuentaEnc=buscarCuenta(codCuenta,dbCuenta);
+        String[] cuentaEnc = new String[11];
+        String codCuenta = Cuenta.getText().trim();
+
+        if (buscarCatalogo(codCuenta) && !codCuenta.equals("")) {
+
+            cuentaEnc = buscarCuenta(codCuenta, dbCuenta);
             desCuenta.setText(cuentaEnc[1]);
-                
-        }
-        else{
-            if(!codCuenta.equals("")){
+
+        } else {
+            if (!codCuenta.equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "No se pudo encontrar el documento");
                 Cuenta.setText("");
                 desCuenta.setText("");
             }
-            
+
             Cuenta.setText("");
             desCuenta.setText("");
         }
     }//GEN-LAST:event_CuentaFocusLost
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String[] TranContable= new String[6];
+        String[] TranContable = new String[6];
         String[] CabeTranContable = new String[8];
-        
-        
-        
-        int cont=0;
-        if(buscarDebCretrans()[0].equals(buscarDebCretrans()[1])){
-            
+
+        int cont = 0;
+        if (buscarDebCretrans()[0].equals(buscarDebCretrans()[1])) {
+
             JOptionPane.showMessageDialog(rootPane, "Transaccion guardada exitosamente");
-            
+
             String[][] registros = buscarTablaTrans();
             for (int i = 0; i < registros.length; i++) {
                 for (int a = 0; a < registros[i].length; a++) {
-                    
+
                     if (a == 6) {
                         TranContable[0] = registros[i][a];
                         CabeTranContable[0] = registros[i][a];
                     }
                     if (a == 0) {
-                         TranContable[1] = registros[i][a];
-                         
+                        TranContable[1] = registros[i][a];
+
                     }
                     if (a == 1) {
                         TranContable[2] = registros[i][a];
@@ -649,54 +627,51 @@ private void cargarUsername() {
                     if (a == 5) {
                         TranContable[5] = registros[i][a];
                     }
-                    if(a==7){
+                    if (a == 7) {
                         CabeTranContable[2] = registros[i][a];
                     }
-                    if(a==8){
+                    if (a == 8) {
                         CabeTranContable[3] = registros[i][a];
                     }
-                    if(a==9){
+                    if (a == 9) {
                         CabeTranContable[5] = registros[i][a];
                     }
-                    
+
                 }
-                
+
                 try {
-                    
+
                     guardarTranCont(TranContable);
-                    
-                    CabeTranContable[6]="0";
-                    CabeTranContable[7]="No Actualizado";
-                    CabeTranContable[4]=DatosGlobales.getLoginUsr();
-                    CabeTranContable[1]= LocalDate.now().toString();
+
+                    CabeTranContable[6] = "0";
+                    CabeTranContable[7] = "No Actualizado";
+                    CabeTranContable[4] = DatosGlobales.getLoginUsr();
+                    CabeTranContable[1] = LocalDate.now().toString();
                     for (int j = 0; j < CabeTranContable.length; j++) {
                         System.out.println(CabeTranContable[j]);
-                        
+
                     }
                     guardarCabeTranCont(CabeTranContable);
-                    
+
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (UnsupportedEncodingException ex) {
                     Logger.getLogger(Transacciones.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
-            
-        }
-        else{
+
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Credito y Debito con valores diferentes");
         }
-        
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void desDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desDocActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_desDocActionPerformed
 
-    
-    public void limpiar(){
-    
+    public void limpiar() {
+
         Doc.setText("");
         desDoc.setText("");
         Cuenta.setText("");
@@ -705,9 +680,8 @@ private void cargarUsername() {
         credito.setText("0");
         Comentarios.setText("");
     }
-   
 
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AA;
     private javax.swing.JTextField Comentarios;

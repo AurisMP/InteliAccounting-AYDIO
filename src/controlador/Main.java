@@ -1,6 +1,6 @@
 package controlador;
 
-import views.CierreDiario;
+import views.Cierre;
 import views.MantenimientoDoc;
 import views.PantallaLogin;
 
@@ -13,7 +13,7 @@ public class Main {
     
     public static void main(String[] args) {
         
-       MantenimientoDoc pL = new MantenimientoDoc();
+       PantallaLogin pL = new PantallaLogin();
             pL.setVisible(true);
              
          
