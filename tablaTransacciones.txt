@@ -1,0 +1,2 @@
+1;11052;Cuentas por Cobrar Clientes;600;0;-----;1;Factura;1;0
+2;11053;Cuentas por Cobrar Empleados;0;600;-----;1;Ajuste;1;0

@@ -51,7 +51,7 @@ public class crudTablaTrans {
                 
             }
             
-            else if(i>=1 && i <6){
+            else if(i>=1 && i <10){
                     tablaTras[i]=crear[i-1];
                 }
             else{
@@ -62,7 +62,7 @@ public class crudTablaTrans {
                         tablaTras[0]=num;
                         
                     }
-                    else if(i>=1 && i <6){
+                    else if(i>=1 && i <10){
                         tablaTras[i]=crear[i-1];
                     }
                 }
@@ -195,7 +195,7 @@ public class crudTablaTrans {
         
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("tablaTransacciones.txt")); // Cambia el nombre del archivo
+            BufferedReader br = new BufferedReader(new FileReader("tablaTransacciones.txt")); 
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -222,7 +222,7 @@ public class crudTablaTrans {
         
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("tablaTransacciones.txt")); // Cambia el nombre del archivo
+            BufferedReader br = new BufferedReader(new FileReader("tablaTransacciones.txt")); 
             String line;
 
             while ((line = br.readLine()) != null) {

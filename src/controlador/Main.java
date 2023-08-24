@@ -1,6 +1,9 @@
 package controlador;
 
+import views.Cierre;
+import views.MantenimientoDoc;
 import views.PantallaLogin;
+
 import views.Transacciones;
 
 

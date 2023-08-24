@@ -4,6 +4,7 @@
  */
 package views;
 
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -37,6 +38,15 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         Modificar.setEnabled(false);
         Borrar.setEnabled(false);
 
+         Des.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            char caracter = evt.getKeyChar();
+            if (!Character.isLetter(caracter) && caracter != KeyEvent.VK_BACK_SPACE) {
+                evt.consume();
+            }
+        }
+    });
+
     }
 
     /**
@@ -56,8 +66,6 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         Des = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -79,13 +87,21 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         jLabel1.setText("Codigo");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 123, 32));
 
-        Cod.setBorder(null);
+        Cod.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Cod.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 CodFocusLost(evt);
             }
         });
-        jPanel1.add(Cod, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 330, 32));
+        Cod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CodKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CodKeyTyped(evt);
+            }
+        });
+        jPanel1.add(Cod, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 320, 32));
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 20, -1, -1));
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 26, 108, 31));
 
@@ -93,7 +109,7 @@ public class MantenimientoDoc extends javax.swing.JFrame {
         jLabel2.setText("Descripcion");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
-        Des.setBorder(null);
+        Des.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(Des, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 320, 32));
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 2, 15)); // NOI18N
@@ -105,8 +121,6 @@ public class MantenimientoDoc extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 120, 40));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 320, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 320, 20));
 
         jButton3.setFont(new java.awt.Font("Dubai Medium", 3, 11)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img3/salida.png"))); // NOI18N
@@ -417,6 +431,18 @@ public class MantenimientoDoc extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void CodKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CodKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CodKeyReleased
+
+    private void CodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CodKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if (((caracter < '0' || caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }    }//GEN-LAST:event_CodKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Borrar;
@@ -435,8 +461,6 @@ public class MantenimientoDoc extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,3 +1,3 @@
 PHP;1234567A;Adrian;Mejia;Admin;Desconocido
-PHPF;1234567A;Adrian;Mejia;Admin;Desconocido
-Normal;1234567A;Prueba;Prueba;Normal;Desconocido
+AdriFS;1234567A;adrian;mejia;Admin;Admin
+FDSFDS;1234567A;DSFSDF;SDFDS;Normal;Desconocido
